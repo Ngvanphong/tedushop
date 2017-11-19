@@ -12,6 +12,7 @@ namespace TeduShop.Model.Models
   public  class PostTag
     {
         [Key]
+        [MaxLength(50)]
         public int PostID { get; set; }
         [ForeignKey("PostID")]
         public virtual Post Post { get; set; }

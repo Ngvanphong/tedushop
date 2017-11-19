@@ -12,6 +12,7 @@ namespace TeduShop.Model.Models
    public class ProductTag
     {
         [Key]
+        [MaxLength(50)]
         public int ProductID { get; set; }
         [ForeignKey("ProductID")]
         public virtual Product Product { get; set; }
