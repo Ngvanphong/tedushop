@@ -30,6 +30,6 @@ namespace TeduShop.Model.Models
         public bool? HomeFlag { get; set; }
         public bool? HotFlag { get; set; }
         public int? ViewCount { get; set; }
-
+        public virtual IEnumerable<PostTag> PostTag { get; set; }
     }
 }

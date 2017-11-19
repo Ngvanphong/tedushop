@@ -5,11 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeduShop.Model.Abstract;
 
 namespace TeduShop.Model.Models
 {
     [Table("PostCategories")]
-    public class PostCategory
+    public class PostCategory:TableCommon
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
