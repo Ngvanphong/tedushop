@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TeduShop.Model.Abstract
 {
-    public class TableCommon : ISeotable, IAuditable, ISwitchtable
+    public abstract class TableCommon : ISeotable, IAuditable, ISwitchtable
     {
         public string MetaKeyword { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string MetaDiscription { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
