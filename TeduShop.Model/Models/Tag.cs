@@ -14,6 +14,7 @@ namespace TeduShop.Model.Models
         [Key]
         public string ID { get; set; }
         [Required]
+        [MaxLength(256)]
         public string Name { set; get; }
         public string Type { set; get; }
         public virtual IEnumerable<ProductTag> ProductTag { get; set; }

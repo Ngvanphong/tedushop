@@ -15,14 +15,17 @@ namespace TeduShop.Model.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { set; get; }
         [Required]
+        [MaxLength(256)]
         public string Name { set; get; }
         [Required]
+        [MaxLength(256)]
         public string URL { set; get; }
         [Required]
         public int GroupID { set; get; }
         [ForeignKey("GroupID")]
         public virtual MenuGroup MenuGroup { set; get; }
         public int? DisplayOrder { set; get; }
+        [MaxLength(50)]
         public string Target { set; get; }
         [Required]
         public bool Status { get; set; }

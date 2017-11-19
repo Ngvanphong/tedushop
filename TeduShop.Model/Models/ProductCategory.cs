@@ -16,12 +16,16 @@ namespace TeduShop.Model.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         [Required]
+        [MaxLength(50)]
         public string Name { get; set; }
         [Required]
+        [MaxLength(50)]
         public string Alias { get; set; }
         public int? ParentID { get; set; }
+        [MaxLength(256)]
         public string Description { set; get; }
         public int? DisplayOrder { get; set; }
+        [MaxLength(256)]
         public string Image { get; set; }
         public bool? HomeFlag { set; get; }
         public virtual IEnumerable<Product> Product { set; get; }

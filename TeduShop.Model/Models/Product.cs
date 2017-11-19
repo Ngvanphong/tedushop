@@ -17,19 +17,23 @@ namespace TeduShop.Model.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         [Required]
+        [MaxLength(50)]
         public string Name { set; get; }
         [Required]
+        [MaxLength(50)]
         public string Alias { set; get; }
         [Required]
         public int CategoryID { set; get; }
         [ForeignKey("CategoryID")]
         public virtual ProductCategory ProductCategory { set; get; }
         public int? DisplayOrder { set; get; }
+        [MaxLength(256)]
         public string Image { set; get; }
         public XElement MoreImage { set; get; }
         public Decimal Price { get; set; }
         public Decimal? PromotionPrice { set; get; }
         public int? Warranty { set; get; }
+        [MaxLength(256)]
         public string Description { set; get; }
         public string Content { set; get; }
         public bool? HomeFlag { set; get; }
