@@ -17,6 +17,10 @@ namespace TeduShop.Model.Models
         [Required]
         public string Name { set; get; }
         [Required]
+        [MaxLength(256)]
+        [Column(TypeName="varchar")]
+        public string Alias { get; set; }
+        [Required]
         public string Content { set; get; }
         [MaxLength(50)]
         public string MetaKeyword { set; get; }
