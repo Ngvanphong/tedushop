@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TeduShop.Data.Inframestructure
 {
-    public interface IDbFactory
+    public interface IDbFactory:IDisposable
     {
         TeduShopDbContext Init();
     }

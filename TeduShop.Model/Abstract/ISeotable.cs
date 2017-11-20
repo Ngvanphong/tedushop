@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;[MaxLength(250)]
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 

@@ -12,11 +12,12 @@ namespace TeduShop.Model.Models
   public  class PostTag
     {
         [Key]
-        [MaxLength(50)]
+        [Column(Order=1)]
         public int PostID { get; set; }
         [ForeignKey("PostID")]
         public virtual Post Post { get; set; }
         [Key]
+        [Column(Order = 2)]
         public string TagID { get; set; }
         [ForeignKey("TagID")]
         public virtual Tag Tag { set; get; }
