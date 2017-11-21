@@ -8,16 +8,15 @@ using TeduShop.Model.Models;
 
 namespace TeduShop.Data.Reponsitories
 {
-    public interface IProductRepository: IRepository<Product>
+    public interface ISlideRepository: IRepository<Slide>
     {
 
     }
-    public class ProductRepository:RepositoryBase<Product>,IProductRepository
+   public class SlideRepository:RepositoryBase<Slide>,ISlideRepository
     {
-        public ProductRepository(IDbFactory dbFactory):base(dbFactory)
+        public SlideRepository(IDbFactory dbFactory):base(dbFactory)
         {
-           
-        }
 
+        }
     }
 }
