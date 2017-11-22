@@ -24,9 +24,13 @@ namespace TeduShop.Service
 
     public class PostCategoryService : IPostCategoryService
     {
-        private IPostCategoryRepository _postCategoryRepository;
-        private IUnitOfWork _unitOfWork;
-
+        IPostCategoryRepository _postCategoryRepository;
+        IUnitOfWork _unitOfWork;
+        public PostCategoryService(IPostCategoryRepository postCategoryRepository, IUnitOfWork unitOfWork)
+        {
+            this._postCategoryRepository = postCategoryRepository;
+            this._unitOfWork = unitOfWork;
+        }
         public void Add(PostCategory postCategory)
         {
             this._postCategoryRepository.Add(postCategory);
