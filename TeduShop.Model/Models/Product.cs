@@ -41,6 +41,7 @@ namespace TeduShop.Model.Models
         public bool? HomeFlag { set; get; }
         public bool? HotFlag { get; set; }
         public int? ViewCount { set; get; }
+        
         public virtual IEnumerable<OrderDetail> OrderDetail { get; set; }
         public virtual IEnumerable<ProductTag>ProductTag { set; get; }
     }

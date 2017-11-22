@@ -10,6 +10,7 @@ namespace TeduShop.Data.Reponsitories
 {
     public interface IPostCategoryRepository: IRepository<PostCategory>
     {
+        
 
     }
     public class PostCategotyRepository:RepositoryBase<PostCategory>,IPostCategoryRepository
@@ -18,5 +19,7 @@ namespace TeduShop.Data.Reponsitories
         {
 
         }
+
+       
     }
 }

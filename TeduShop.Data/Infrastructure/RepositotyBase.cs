@@ -44,10 +44,16 @@ namespace TeduShop.Data.Inframestructure
             dataContext.Entry(entity).State = EntityState.Modified;
         }
 
+        public virtual void Delete(int id)
+        {
+            var entity = dbSet.Find(id);
+            dbSet.Remove(entity);
+        }
         public virtual void Delete(T entity)
         {
             dbSet.Remove(entity);
         }
+
 
         public virtual void DeleteMulti(Expression<Func<T, bool>> where)
         {
