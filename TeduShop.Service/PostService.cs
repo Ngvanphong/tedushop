@@ -72,7 +72,7 @@ namespace TeduShop.Service
 
         public void Update(Post post)
         {
-            _postRepository.Update(post);
+           this._postRepository.Update(post);
         }
     }
 }
