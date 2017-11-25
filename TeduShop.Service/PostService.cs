@@ -7,7 +7,7 @@ namespace TeduShop.Service
 {
     public interface IPostService
     {
-        void Add(Post post);
+        int Add(Post post);
 
         void Update(Post post);
 
@@ -35,9 +35,10 @@ namespace TeduShop.Service
             this._unitOfWork = unitOfWork;
         }
 
-        public void Add(Post post)
+        public int Add(Post post)
         {
-            this._postRepository.Add(post);
+          var query= this._postRepository.Add(post);
+            return query.ID;
         }
 
         public void Delete(int id)

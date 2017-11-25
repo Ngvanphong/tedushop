@@ -45,6 +45,22 @@ namespace TeduShop.UnitTest.ServiceTest
         [TestMethod]
         public void PostCategoryService_Create()
         {
+            PostCategory postCategory = new PostCategory();
+            postCategory.Name = "Post1";
+            postCategory.Alias = "post1";
+            postCategory.Status = true;
+
+            _mockRepository.Setup(m => m.Add(postCategory)).Returns((PostCategory p) =>
+            {
+                p.ID = 1;
+                return p;
+            });
+                
+
+            var retult = _postCategoryService.Add(postCategory);
+            Assert.IsNotNull(retult);
+            Assert.AreEqual(1, retult);
+
         }
     }
 }

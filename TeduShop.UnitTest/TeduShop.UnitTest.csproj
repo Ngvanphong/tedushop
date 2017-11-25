@@ -66,6 +66,7 @@
     <Compile Include="RepositoryTest\ProductCategoryRepositoryTest.cs" />
     <Compile Include="RepositoryTest\ProductRepositoryTest.cs" />
     <Compile Include="ServiceTest\PostCategoryServiceTest.cs" />
+    <Compile Include="ServiceTest\PostServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

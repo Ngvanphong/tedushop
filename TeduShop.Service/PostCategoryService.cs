@@ -7,7 +7,7 @@ namespace TeduShop.Service
 {
     public interface IPostCategoryService
     {
-        void Add(PostCategory postCategory);
+        int Add(PostCategory postCategory);
 
         void Delete(int id);
 
@@ -31,9 +31,10 @@ namespace TeduShop.Service
             this._postCategoryRepository = postCategoryRepository;
             this._unitOfWork = unitOfWork;
         }
-        public void Add(PostCategory postCategory)
+        public int Add(PostCategory postCategory)
         {
-            this._postCategoryRepository.Add(postCategory);
+           var query= this._postCategoryRepository.Add(postCategory);
+            return query.ID;
         }
 
         public void Delete(int id)
