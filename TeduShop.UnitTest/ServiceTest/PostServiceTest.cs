@@ -16,6 +16,7 @@ namespace TeduShop.UnitTest.ServiceTest
         private Mock<IUnitOfWork> _mockUnitOfWork;
         private IPostService _postService;
         private List<Post> _listPost;
+        private List<PostCategory> _listPostCategory;
 
         [TestInitialize]
         public void Initialize()
@@ -25,9 +26,13 @@ namespace TeduShop.UnitTest.ServiceTest
             _postService = new PostService(_mockRepository.Object, _mockUnitOfWork.Object);
             _listPost = new List<Post>()
             {
-                new Post(){ID=1,Name="Post 1",Alias="post1",Status=true,CreateDate=DateTime.Now,CategoryID=1 },
+                new Post(){ID=1,Name="Post 1",Alias="post1",Status=true,CreateDate=DateTime.Now,CategoryID=1, },
                 new Post(){ID=2, Name="Post 2", Alias="post2", Status=true,CreateDate=DateTime.Now,CategoryID=1},
                 new Post(){ID=3, Name="Post 3", Alias="post3",Status=true,CreateDate=DateTime.Now,CategoryID=1},
+            };
+            _listPostCategory = new List<PostCategory>()
+            {
+                new PostCategory(){ID=1,Name="Post Category 1", Alias="postcategory1", Status=true, CreateDate=DateTime.Now},
             };
         }
 
