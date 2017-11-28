@@ -13,9 +13,9 @@ namespace TeduShop.Data.Reponsitories
         
 
     }
-    public class PostCategotyRepository:RepositoryBase<PostCategory>,IPostCategoryRepository
+    public class PostCategoryRepository:RepositoryBase<PostCategory>,IPostCategoryRepository
     {
-        public PostCategotyRepository(IDbFactory dbFactory):base(dbFactory)
+        public PostCategoryRepository(IDbFactory dbFactory):base(dbFactory)
         {
 
         }
