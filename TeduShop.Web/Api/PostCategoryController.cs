@@ -1,15 +1,18 @@
-﻿using System.Net;
+﻿using AutoMapper;
+using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using TeduShop.Model.Models;
 using TeduShop.Service;
 using TeduShop.Web.Infrastructure.Core;
-
 namespace TeduShop.Web.Api
 {
+
     [RoutePrefix("api/postcategory")]
     public class PostCategoryController : ApiControllerBase
     {
+        
         private IPostCategoryService _postCategorySevice;
 
         public PostCategoryController(IErrorService errorService, IPostCategoryService postCategoryService) : base(errorService)
@@ -20,10 +23,13 @@ namespace TeduShop.Web.Api
         [Route("getall")]
         public HttpResponseMessage Get(HttpRequestMessage request)
         {
+           
             return CreateHttpResponse(request, () =>
             {
                 var listCategory = _postCategorySevice.GetAll();
-                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, listCategory);
+                var lisatCategoryVm = Mapper.Map<List<PostCategory>>(listCategory);
+
+                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, lisatCategoryVm);
 
                 return response;
             });

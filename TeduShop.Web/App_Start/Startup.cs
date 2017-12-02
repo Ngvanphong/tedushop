@@ -12,6 +12,9 @@ using TeduShop.Data.Reponsitories;
 using TeduShop.Service;
 using System.Web.Mvc;
 using System.Web.Http;
+using AutoMapper;
+using TeduShop.Model.Models;
+using TeduShop.Web.Models;
 
 [assembly: OwinStartup(typeof(TeduShop.Web.App_Start.Startup))]
 
@@ -23,7 +26,9 @@ namespace TeduShop.Web.App_Start
         {
             // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=316888
             ConfigAutofac(app);
+
         }
+    
         private void ConfigAutofac(IAppBuilder app)
         {
             var builder = new ContainerBuilder();
@@ -52,5 +57,6 @@ namespace TeduShop.Web.App_Start
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver((IContainer)container); //Set the WebApi DependencyResolver
 
         }
+      
     }
 }

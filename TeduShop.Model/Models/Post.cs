@@ -31,6 +31,8 @@ namespace TeduShop.Model.Models
 
         [MaxLength(256)]
         public string Description { set; get; }
+        [MaxLength(256)]
+        public string Image { get; set; }
 
         public string Content { set; get; }
         public bool? HomeFlag { get; set; }
