@@ -6,6 +6,9 @@ using System.Web.Http;
 using TeduShop.Model.Models;
 using TeduShop.Service;
 using TeduShop.Web.Infrastructure.Core;
+using TeduShop.Web.Infrastructure.Extensions;
+using TeduShop.Web.Models;
+
 namespace TeduShop.Web.Api
 {
 
@@ -34,15 +37,18 @@ namespace TeduShop.Web.Api
                 return response;
             });
         }
-
-        public HttpResponseMessage Post(HttpRequestMessage request, PostCategory postCategory)
+        [Route("add")]
+        public HttpResponseMessage Post(HttpRequestMessage request, PostCategoryViewModel postCategoryVm)
         {
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
                 if (ModelState.IsValid)
                 {
-                    var category = _postCategorySevice.Add(postCategory);
+                    PostCategory newpostCategory = new PostCategory();
+                    newpostCategory.UpdatePostCategory(postCategoryVm);
+
+                    var category = _postCategorySevice.Add(newpostCategory);
                     _postCategorySevice.SaveChange();
                     response = request.CreateResponse(HttpStatusCode.Created, category);
                 }
@@ -53,15 +59,17 @@ namespace TeduShop.Web.Api
                 return response;
             });
         }
-
-        public HttpResponseMessage Put(HttpRequestMessage request, PostCategory postCategory)
+        [Route("update")]
+        public HttpResponseMessage Put(HttpRequestMessage request, PostCategoryViewModel postCategoryVm)
         {
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
                 if (ModelState.IsValid)
                 {
-                    _postCategorySevice.Update(postCategory);
+                    var postCategoryDb = _postCategorySevice.GetByID(postCategoryVm.ID);
+                    postCategoryDb.UpdatePostCategory(postCategoryVm);
+                    _postCategorySevice.Update(postCategoryDb);
                     _postCategorySevice.SaveChange();
                     response = request.CreateResponse(HttpStatusCode.OK);
                 }

@@ -6,7 +6,7 @@ namespace TeduShop.Web.Mappings
 {
     public class AutoMapperConfiguration
     {
-        public static IMapper Mapping;
+   
         public static void ConfigureMapping()
         {
            Mapper.Initialize(cfg =>
