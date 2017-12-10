@@ -52,7 +52,7 @@ namespace TeduShop.Service
 
         public IEnumerable<Product> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow)
         {
-          return  _productRepository.Get(x => x.Status&&, out totalRow,page, pageSize);
+            return _productRepository.GetAllByTag(tag, page, pageSize, out totalRow);
         }
 
         public IEnumerable<Product> GetAllPaging(int page, int pageSize, out int totalRow)

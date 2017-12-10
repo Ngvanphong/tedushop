@@ -1,26 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TeduShop.Data.Inframestructure;
 using TeduShop.Model.Models;
 
 namespace TeduShop.Data.Reponsitories
 {
-    public interface IProductRepository: IRepository<Product>
+    public interface IProductRepository : IRepository<Product>
     {
-        IEnumerable<Product> GetAllByTag(string tag,int pageIndex, int pageSize, out int totalRow);
+        IEnumerable<Product> GetAllByTag(string tag, int pageIndex, int pageSize, out int totalRow);
     }
-    public class ProductRepository:RepositoryBase<Product>,IProductRepository
+
+    public class ProductRepository : RepositoryBase<Product>, IProductRepository
     {
-        public ProductRepository(IDbFactory dbFactory):base(dbFactory)
+        public ProductRepository(IDbFactory dbFactory) : base(dbFactory)
         {
-           
         }
 
         public IEnumerable<Product> GetAllByTag(string tag, int pageIndex, int pageSize, out int totalRow)
         {
+            var query = from p in DbContext.Products
+                        join
+                        pt in DbContext.ProductTags
+                        on p.ID equals pt.ProductID
+                        where p.Status && pt.TagID == tag
+                        select p;
+            totalRow = query.Count();
+            return query.Skip((pageIndex - 1) * pageSize).Take(pageSize);
             
         }
     }
