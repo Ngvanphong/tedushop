@@ -46,5 +46,53 @@ namespace TeduShop.Web.Infrastructure.Extensions
             postCategory.UpdatedDate = postCategoryVm.UpdatedDate;
             postCategory.Status = postCategoryVm.Status;
         }
+
+        public static void UpdateProduct(this Product product, ProductViewModel productVm)
+        {
+
+            product.ID = productVm.ID;
+            product.Name = productVm.Name;
+            product.Alias = productVm.Alias;
+            product.CategoryID = productVm.CategoryID;
+            product.DisplayOrder = productVm.DisplayOrder;
+            product.Description = productVm.Description;
+            product.Content = productVm.Content;
+            product.Image = productVm.Image;
+            product.HomeFlag = productVm.HomeFlag;
+            product.HotFlag = productVm.HotFlag;
+            product.ViewCount = productVm.ViewCount;
+            product.MetaKeyword = productVm.MetaKeyword;
+            product.MetaDiscription = productVm.MetaDiscription;
+            product.CreateDate = productVm.CreateDate;
+            product.CreateBy = productVm.CreateBy;
+            product.UpdatedBy = productVm.UpdatedBy;
+            product.UpdatedDate = productVm.UpdatedDate;
+            product.Status = productVm.Status;
+            product.MoreImage = productVm.MoreImage;
+            product.Price = productVm.Price;
+            product.PromotionPrice = productVm.PromotionPrice;
+            product.Warranty = productVm.Warranty;
+
+        }
+        public static void UpdateProductCategory(this ProductCategory productCategory, ProductCategoryViewModel productCategoryVm)
+        {
+            productCategory.ID = productCategoryVm.ID;
+            productCategory.Name = productCategoryVm.Name;
+            productCategory.Alias = productCategoryVm.Alias;
+            productCategory.ParentID = productCategoryVm.ParentID;
+            productCategory.DisplayOrder = productCategoryVm.DisplayOrder;
+            productCategory.Description = productCategoryVm.Description;
+            productCategory.DisplayOrder = productCategoryVm.DisplayOrder;
+            productCategory.Image = productCategoryVm.Image;
+            productCategory.HomeFlag = productCategoryVm.HomeFlag;
+            productCategory.MetaKeyword = productCategoryVm.MetaKeyword;
+            productCategory.MetaDiscription = productCategoryVm.MetaDiscription;
+            productCategory.CreateDate = productCategoryVm.CreateDate;
+            productCategory.CreateBy = productCategoryVm.CreateBy;
+            productCategory.UpdatedBy = productCategoryVm.UpdatedBy;
+            productCategory.UpdatedDate = productCategoryVm.UpdatedDate;
+            productCategory.Status = productCategoryVm.Status;
+        }
+
     }
 }

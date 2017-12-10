@@ -11,10 +11,15 @@ namespace TeduShop.Web.Mappings
         {
            Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Post, PostCategory>();
+                cfg.CreateMap<Post, PostViewModel>();
                 cfg.CreateMap<PostCategory, PostCategoryViewModel>();
                 cfg.CreateMap<PostTag, PostTagViewModel>();
                 cfg.CreateMap<Tag, TagViewModel>();
+                cfg.CreateMap<Product, ProductViewModel>();
+                cfg.CreateMap<ProductCategory, ProductCategoryViewModel>();
+                cfg.CreateMap<ProductTag, ProductTagViewModel>();
+                cfg.CreateMap<Order, OrderViewModel>();
+                cfg.CreateMap<OrderDetail, OrderDetailViewModel>();
             });
         }
     }
