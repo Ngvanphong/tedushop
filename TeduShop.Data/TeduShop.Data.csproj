@@ -80,6 +80,10 @@
     <Compile Include="Migrations\201712020942178_addidentity.Designer.cs">
       <DependentUpon>201712020942178_addidentity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803301551383_continueWebApi.cs" />
+    <Compile Include="Migrations\201803301551383_continueWebApi.Designer.cs">
+      <DependentUpon>201803301551383_continueWebApi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reponsitories\ErrorRepository.cs" />
@@ -131,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712020942178_addidentity.resx">
       <DependentUpon>201712020942178_addidentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803301551383_continueWebApi.resx">
+      <DependentUpon>201803301551383_continueWebApi.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
