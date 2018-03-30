@@ -19,7 +19,7 @@ namespace TeduShop.Service
 
         PostCategory GetByID(int id);
 
-        void SaveChange();
+        void SaveChanges();
     }
 
     public class PostCategoryService : IPostCategoryService
@@ -57,7 +57,7 @@ namespace TeduShop.Service
             return this._postCategoryRepository.GetSingleById(id);
         }
 
-        public void SaveChange()
+        public void SaveChanges()
         {
             this._unitOfWork.Commit();
         }
