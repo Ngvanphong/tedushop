@@ -25,7 +25,7 @@ namespace TeduShop.Data.Migrations
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new TeduShopDbContext()));
             var user = new ApplicationUser()
             {
-                UserName = "vanphhong",
+                UserName = "vanphong",
                 Email = "ngvanphong2012@gmail.com",
                 EmailConfirmed = true,
                 BirthDay = DateTime.Now,
