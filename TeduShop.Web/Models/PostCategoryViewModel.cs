@@ -18,12 +18,12 @@ namespace TeduShop.Web.Models
 
         public string Image { get; set; }
         public bool? HomeFlag { set; get; }
-        public virtual IEnumerable<PostViewModel> Post { get; set; }
+        public virtual List<PostViewModel> Post { get; set; }
 
         public string MetaKeyword { get; set; }
  
         public string MetaDiscription { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
    
         public string CreateBy { get; set; }
         public DateTime? UpdatedDate { get; set; }

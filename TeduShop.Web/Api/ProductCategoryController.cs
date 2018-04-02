@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -26,9 +28,9 @@ namespace TeduShop.Web.Api
         {
             return CreateHttpResponse(request, () =>
             {
-                var listProductCategoryDb = _productCategoryService.GetAll();
-                var listProductCategoryVm = Mapper.Map<List<ProductCategoryViewModel>>(listProductCategoryDb);
-                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, listProductCategoryVm);
+                var listProductCategoryDb = _productCategoryService.GetAll().ToList();
+                var listProductCategoryVm = Mapper.Map<List<ProductCategory>, List<ProductCategoryViewModel>>(listProductCategoryDb);
+                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, listProductCategoryDb);
                 return response;
             });
         }

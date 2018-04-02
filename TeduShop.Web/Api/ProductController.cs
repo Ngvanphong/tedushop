@@ -28,8 +28,8 @@ namespace TeduShop.Web.Api
             {
                 IEnumerable<Product> listProductDb = _productService.GetAll();
                 List<ProductViewModel> listProductVm = Mapper.Map<List<ProductViewModel>>(listProductDb);
-                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.Created, listProductVm);
-                return response;
+                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.Created, listProductVm);             
+                return response;               
             });
         }
 

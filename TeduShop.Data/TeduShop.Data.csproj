@@ -88,6 +88,10 @@
     <Compile Include="Migrations\201804010932087_changeapplication-user.Designer.cs">
       <DependentUpon>201804010932087_changeapplication-user.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804011448234_changeDate.cs" />
+    <Compile Include="Migrations\201804011448234_changeDate.Designer.cs">
+      <DependentUpon>201804011448234_changeDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reponsitories\ErrorRepository.cs" />
@@ -145,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804010932087_changeapplication-user.resx">
       <DependentUpon>201804010932087_changeapplication-user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804011448234_changeDate.resx">
+      <DependentUpon>201804011448234_changeDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

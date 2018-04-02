@@ -21,13 +21,14 @@ namespace TeduShop.Web.Models
         public string MetaKeyword { get; set; }
 
         public string MetaDiscription { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
 
         public string CreateBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
 
         public string UpdatedBy { get; set; }
         public bool Status { get; set; }
-        public virtual IEnumerable<ProductViewModel> Product { set; get; }
+        public virtual List<ProductViewModel> Product { set; get; }
+
     }
 }

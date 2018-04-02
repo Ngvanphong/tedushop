@@ -25,12 +25,12 @@ namespace TeduShop.Web.Models
         public int? ViewCount { get; set; }
         public string Image { get; set; }
 
-        public virtual IEnumerable<PostTagViewModel> PostTag { get; set; }
+        public virtual List<PostTagViewModel> PostTag { get; set; }
 
         public string MetaKeyword { get; set; }
 
         public string MetaDiscription { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
 
         public string CreateBy { get; set; }
         public DateTime? UpdatedDate { get; set; }

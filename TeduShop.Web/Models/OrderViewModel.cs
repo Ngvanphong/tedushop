@@ -17,9 +17,10 @@ namespace TeduShop.Web.Models
         public string CustomerMobile { set; get; }
    
         public string CustomerEmail { set; get; }
+
         public string CustomerMessage { set; get; }
   
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
   
         public string CreateBy { get; set; }
  
@@ -27,6 +28,6 @@ namespace TeduShop.Web.Models
 
         public string PaymentStatus { set; get; }
         public bool Status { get; set; }
-        public virtual IEnumerable<OrderDetailViewModel> OrderDetail { set; get; }
+        public virtual List<OrderDetailViewModel> OrderDetail { set; get; }
     }
 }

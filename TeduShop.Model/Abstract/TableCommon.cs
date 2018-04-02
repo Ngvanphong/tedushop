@@ -13,7 +13,7 @@ namespace TeduShop.Model.Abstract
         public string MetaKeyword { get; set; }
         [MaxLength(250)]
         public string MetaDiscription { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
         [MaxLength(250)]
         public string CreateBy { get; set; }
         public DateTime? UpdatedDate { get; set; }

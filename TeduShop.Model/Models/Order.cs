@@ -28,7 +28,7 @@ namespace TeduShop.Model.Models
         public string CustomerEmail { set; get; }
         public string CustomerMessage { set; get; }
         [Required]
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
         [MaxLength(256)]
         public string CreateBy { get; set; }
         [MaxLength(256)]

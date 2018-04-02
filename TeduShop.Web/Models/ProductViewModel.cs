@@ -34,7 +34,7 @@ namespace TeduShop.Web.Models
         public string MetaKeyword { get; set; }
 
         public string MetaDiscription { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
 
         public string CreateBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
@@ -42,7 +42,7 @@ namespace TeduShop.Web.Models
         public string UpdatedBy { get; set; }
         public bool Status { get; set; }
 
-        public virtual IEnumerable<OrderDetailViewModel> OrderDetail { get; set; }
-        public virtual IEnumerable<ProductTagViewModel> ProductTag { set; get; }
+        public virtual List<OrderDetailViewModel> OrderDetail { get; set; }
+        public virtual List<ProductTagViewModel> ProductTag { set; get; }
     }
 }

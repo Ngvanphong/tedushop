@@ -9,7 +9,7 @@ namespace TeduShop.Model.Abstract
     interface IAuditable
     {
        
-        DateTime CreateDate { set; get; }
+        DateTime? CreateDate { set; get; }
         String CreateBy { get; set; }
         DateTime? UpdatedDate { set; get; }
         String UpdatedBy { set; get; }
