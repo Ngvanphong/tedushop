@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TeduShop.Data.Inframestructure;
 using TeduShop.Data.Reponsitories;
 using TeduShop.Model.Models;
@@ -14,6 +15,8 @@ namespace TeduShop.Service
         void Delete(int id);
 
         IEnumerable<Product> GetAll();
+
+        IEnumerable<Product> GetAll(int? categoryId, string keywords);
 
         IEnumerable<Product> GetAllPaging(int page, int pageSize, out int totalRow);
 
@@ -48,7 +51,21 @@ namespace TeduShop.Service
 
         public IEnumerable<Product> GetAll()
         {
-            return _productRepository.GetAll(new string[] { "ProductCategory" });
+            return _productRepository.GetAll(new string[] { "ProductCategory", "ProductTag" });
+        }
+
+        public IEnumerable<Product> GetAll(int? categoryId, string keywords)
+        {
+            var query = _productRepository.GetAll(new string[] { "ProductCategory", "ProductTag" });
+            if (!string.IsNullOrEmpty(keywords))
+            {
+                query = query.Where(x => (x.Name.Contains(keywords) || x.Alias.Contains(keywords) && x.Status));
+            };
+            if (categoryId.HasValue)
+            {
+                query = query.Where(x => x.CategoryID == categoryId);
+            };
+            return query;
         }
 
         public IEnumerable<Product> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow)

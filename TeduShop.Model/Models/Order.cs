@@ -36,7 +36,7 @@ namespace TeduShop.Model.Models
         [MaxLength(256)]
         public string PaymentStatus { set; get; }
         public bool Status { get; set; }
-        public virtual IEnumerable<OrderDetail> OrderDetail { set; get; }
+        public virtual ICollection<OrderDetail> OrderDetail { set; get; }
         
     }
 }

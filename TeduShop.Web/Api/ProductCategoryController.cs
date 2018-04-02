@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -18,19 +19,33 @@ namespace TeduShop.Web.Api
     {
         private IProductCategoryService _productCategoryService;
 
+
         public ProductCategoryController(IErrorService errorService, IProductCategoryService productCategoryService) : base(errorService)
         {
             this._productCategoryService = productCategoryService;
         }
 
         [Route("getall")]
-        public HttpResponseMessage Get(HttpRequestMessage request)
+        public HttpResponseMessage Get(HttpRequestMessage request, int page, int pageSize=20)
         {
             return CreateHttpResponse(request, () =>
             {
-                var listProductCategoryDb = _productCategoryService.GetAll().ToList();
-                var listProductCategoryVm = Mapper.Map<List<ProductCategory>, List<ProductCategoryViewModel>>(listProductCategoryDb);
-                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, listProductCategoryDb);
+                int totalRows = 0;
+                var listProductCategoryDb = _productCategoryService.GetAll();
+                totalRows = listProductCategoryDb.Count();
+                var query = listProductCategoryDb.OrderByDescending(x => x.CreateDate).Skip((page - 1) * pageSize).Take(pageSize);
+                var listProductCategoryVm = Mapper.Map<List<ProductCategoryViewModel>>(query);
+                PaginationSet<ProductCategoryViewModel> pagination = new PaginationSet<ProductCategoryViewModel>()
+                {
+                    TotalRows = totalRows,
+                    PageIndex = page,
+                    PageSize = pageSize,              
+                    Items = listProductCategoryVm,
+
+                };
+                             
+                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK,pagination);
+
                 return response;
             });
         }

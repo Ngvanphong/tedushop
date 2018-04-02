@@ -92,6 +92,14 @@
     <Compile Include="Migrations\201804011448234_changeDate.Designer.cs">
       <DependentUpon>201804011448234_changeDate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804021625509_changeIcollection.cs" />
+    <Compile Include="Migrations\201804021625509_changeIcollection.Designer.cs">
+      <DependentUpon>201804021625509_changeIcollection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804021631036_updateICollection.cs" />
+    <Compile Include="Migrations\201804021631036_updateICollection.Designer.cs">
+      <DependentUpon>201804021631036_updateICollection.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reponsitories\ErrorRepository.cs" />
@@ -152,6 +160,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804011448234_changeDate.resx">
       <DependentUpon>201804011448234_changeDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804021625509_changeIcollection.resx">
+      <DependentUpon>201804021625509_changeIcollection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804021631036_updateICollection.resx">
+      <DependentUpon>201804021631036_updateICollection.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

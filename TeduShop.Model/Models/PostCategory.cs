@@ -29,7 +29,7 @@ namespace TeduShop.Model.Models
         [MaxLength(256)]
         public string Image { get; set; }
         public bool? HomeFlag { set; get; }
-        public virtual IEnumerable<Post> Post { get; set; }
+        public virtual ICollection<Post> Post { get; set; }
        
     }
 }

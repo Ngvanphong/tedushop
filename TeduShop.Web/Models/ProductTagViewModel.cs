@@ -18,5 +18,6 @@ namespace TeduShop.Web.Models
 
  
         public virtual TagViewModel Tag { get; set; }
+      
     }
 }
