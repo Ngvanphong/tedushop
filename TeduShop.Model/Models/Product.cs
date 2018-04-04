@@ -44,5 +44,7 @@ namespace TeduShop.Model.Models
         
         public virtual ICollection<ProductTag> OrderDetail { get; set; }
         public virtual ICollection<ProductTag> ProductTag { set; get; }
+        [MaxLength(256)]
+        public string Tags { set; get; }
     }
 }

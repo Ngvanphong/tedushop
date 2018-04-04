@@ -72,6 +72,7 @@ namespace TeduShop.Web.Infrastructure.Extensions
             product.Price = productVm.Price;
             product.PromotionPrice = productVm.PromotionPrice;
             product.Warranty = productVm.Warranty;
+            product.Tags = productVm.Tags;
 
         }
         public static void UpdateProductCategory(this ProductCategory productCategory, ProductCategoryViewModel productCategoryVm)
@@ -92,6 +93,7 @@ namespace TeduShop.Web.Infrastructure.Extensions
             productCategory.UpdatedBy = productCategoryVm.UpdatedBy;
             productCategory.UpdatedDate = productCategoryVm.UpdatedDate;
             productCategory.Status = productCategoryVm.Status;
+            
         }
 
     }

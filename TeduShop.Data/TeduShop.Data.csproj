@@ -100,6 +100,10 @@
     <Compile Include="Migrations\201804021631036_updateICollection.Designer.cs">
       <DependentUpon>201804021631036_updateICollection.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804041532287_addTagForProduct.cs" />
+    <Compile Include="Migrations\201804041532287_addTagForProduct.Designer.cs">
+      <DependentUpon>201804041532287_addTagForProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reponsitories\ErrorRepository.cs" />
@@ -166,6 +170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804021631036_updateICollection.resx">
       <DependentUpon>201804021631036_updateICollection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804041532287_addTagForProduct.resx">
+      <DependentUpon>201804041532287_addTagForProduct.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

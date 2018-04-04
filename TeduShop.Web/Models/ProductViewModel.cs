@@ -44,5 +44,6 @@ namespace TeduShop.Web.Models
 
         public virtual List<OrderDetailViewModel> OrderDetail { get; set; }
         public virtual List<ProductTagViewModel> ProductTag { set; get; }
+        public string Tags { set; get; }
     }
 }
