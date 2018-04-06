@@ -1,28 +1,44 @@
-﻿using AutoMapper;
+﻿using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
-using System.Net;
+using System.Web;
 using System.Net.Http;
 using System.Web.Http;
 using TeduShop.Model.Models;
 using TeduShop.Service;
-using TeduShop.Web.Mappings;
-using TeduShop.Web.Models;
+using TeduShop.Web.App_Start;
+using System.Net;
 
 namespace TeduShop.Web.Infrastructure.Core
 {
     public class ApiControllerBase : ApiController
     {
         //
-       
+
         //
         private IErrorService _errorService;
 
         public ApiControllerBase(IErrorService errorService)
         {
             this._errorService = errorService;
+        }
+
+        protected ApplicationRoleManager AppRoleManager
+        {
+            get
+            {
+                return HttpContext.Current.Request.GetOwinContext().GetUserManager<ApplicationRoleManager>();
+            }
+        }
+
+        protected ApplicationUserManager AppUserManager
+        {
+            get
+            {
+                return HttpContext.Current.Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
         }
 
         protected HttpResponseMessage CreateHttpResponse(HttpRequestMessage requestMessage, Func<HttpResponseMessage> function)

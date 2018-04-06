@@ -9,7 +9,7 @@ using TeduShop.Model.Models;
 
 namespace TeduShop.Data
 {
-    public class TeduShopDbContext : IdentityDbContext<ApplicationUser>
+    public class TeduShopDbContext : IdentityDbContext<AppUser>
     {
         public TeduShopDbContext() : base("TeduShopConnectionString")
         {
@@ -33,14 +33,22 @@ namespace TeduShop.Data
         public DbSet<Tag> Tags { get; set; }
         public DbSet<VisitorStatistic> VisitorStatistics { get; set; }
         public DbSet<Error> Errors { get; set; }
+
+        public DbSet<Function> Functions { set; get; }
+        public DbSet<Permission> Permissions { set; get; }
+        public DbSet<AppRole> AppRoles { set; get; }
+        public DbSet<IdentityUserRole> UserRoles { set; get; }
+
         public static TeduShopDbContext Create()
         {
             return new TeduShopDbContext();
         }
         protected override void OnModelCreating(DbModelBuilder builder)
         {
-            builder.Entity<IdentityUserRole>().HasKey(m => new { m.UserId, m.RoleId });
-            builder.Entity<IdentityUserLogin>().HasKey(m => new { m.UserId });
+            builder.Entity<IdentityRole>().HasKey<string>(r => r.Id).ToTable("AppRoles");
+            builder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId }).ToTable("AppUserRoles");
+            builder.Entity<IdentityUserLogin>().HasKey(i => i.UserId).ToTable("AppUserLogins");
+            builder.Entity<IdentityUserClaim>().HasKey(i => i.UserId).ToTable("AppUserClaims");
 
         }
 
