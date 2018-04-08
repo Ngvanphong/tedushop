@@ -114,5 +114,39 @@ namespace TeduShop.Web.Api
             };
             return CreateHttpResponse(request, func);
         }
+        [HttpPut]
+        [Route("update")]
+        public HttpResponseMessage Update(HttpRequestMessage request, FunctionViewModel functionViewModel)
+        {
+            Func<HttpResponseMessage> func = () =>
+            {
+                HttpResponseMessage response = null;
+                if (ModelState.IsValid)
+                {
+                    Function functionDb = _functionService.Get(functionViewModel.ID);
+                    functionDb.UpdateFunction(functionViewModel);
+                    _functionService.Update(functionDb);
+                    _functionService.SaveChange();
+                    response = request.CreateResponse(HttpStatusCode.Created, functionViewModel);
+                }
+                return response;
+            };
+            return CreateHttpResponse(request, func);
+        }
+
+        [HttpDelete]
+        [Route("delete")]
+        public HttpResponseMessage Delete(HttpRequestMessage request, string id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                _functionService.Delete(id);
+                _functionService.SaveChange();
+                response = request.CreateResponse(HttpStatusCode.OK, id);
+                return response;
+            });
+        }
+
     }
 }

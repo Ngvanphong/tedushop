@@ -1,4 +1,5 @@
-﻿using TeduShop.Model.Models;
+﻿using System;
+using TeduShop.Model.Models;
 using TeduShop.Web.Models;
 
 namespace TeduShop.Web.Infrastructure.Extensions
@@ -105,6 +106,15 @@ namespace TeduShop.Web.Infrastructure.Extensions
             function.Status = functionVm.Status;
             function.URL = functionVm.URL;
             function.ID = functionVm.ID;
+        }
+        public static void UpdateApplicationRole(this AppRole appRole, ApplicationRoleViewModel appRoleViewModel, string action = "add")
+        {
+            if (action == "update")
+                appRole.Id = appRoleViewModel.Id;
+            else
+                appRole.Id = Guid.NewGuid().ToString();
+            appRole.Name = appRoleViewModel.Name;
+            appRole.Description = appRoleViewModel.Description;
         }
 
     }

@@ -83,7 +83,7 @@ namespace TeduShop.Web.Api
                 {
                     _postService.Delete(id);
                     _postService.SaveChanges();
-                    response = request.CreateResponse(HttpStatusCode.OK);
+                    response = request.CreateResponse(HttpStatusCode.OK, id);
                 }
                 else
                     response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);

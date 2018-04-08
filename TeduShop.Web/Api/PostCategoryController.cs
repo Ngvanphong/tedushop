@@ -89,7 +89,7 @@ namespace TeduShop.Web.Api
                 {
                     _postCategorySevice.Delete(id);
                     _postCategorySevice.SaveChanges();
-                    response = request.CreateResponse(HttpStatusCode.OK);
+                    response = request.CreateResponse(HttpStatusCode.OK, id);
                 }
                 else
                 {

@@ -146,7 +146,7 @@ namespace TeduShop.Web.Api
                 {
                     _productService.Delete(id);
                     _productService.SaveChanges();
-                    response = request.CreateResponse(HttpStatusCode.OK);
+                    response = request.CreateResponse(HttpStatusCode.OK, id);
                 }
                 else
                     response = request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
