@@ -53,6 +53,21 @@ namespace TeduShop.Web.Api
             };
             return CreateHttpResponse(request, func);
         }
+        [Route("getlistall")]
+        [HttpGet]
+        public HttpResponseMessage GetAll(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                var model = AppRoleManager.Roles.ToList();
+                IEnumerable<ApplicationRoleViewModel> modelVm = Mapper.Map<IEnumerable<ApplicationRoleViewModel>>(model);
+
+                response = request.CreateResponse(HttpStatusCode.OK, modelVm);
+
+                return response;
+            });
+        }
 
         [Route("detail/{id}")]
         [HttpGet]
@@ -199,29 +214,28 @@ namespace TeduShop.Web.Api
                     var functions = _functionService.GetAllWithParentID(data.FunctionId);
                     if (functions.Any())
                     {
-                        
                         foreach (var item in functions)
                         {
                             _permissionService.DeleteAll(item.ID);
-                           foreach(var per in data.Permissions)
+                            foreach (var per in data.Permissions)
                             {
                                 var permission = new Permission()
                                 {
-                                    FunctionId =item.ID,
-                                    RoleId=per.RoleId,
-                                    CanCreate=per.CanCreate,
-                                    CanRead=per.CanRead,
-                                    CanDelete=per.CanDelete,
-                                    CanUpdate=per.CanUpdate,
+                                    FunctionId = item.ID,
+                                    RoleId = per.RoleId,
+                                    CanCreate = per.CanCreate,
+                                    CanRead = per.CanRead,
+                                    CanDelete = per.CanDelete,
+                                    CanUpdate = per.CanUpdate,
                                 };
                                 _permissionService.Add(permission);
                             }
                         }
                     }
                     _permissionService.SaveChange();
-                    response= request.CreateResponse(HttpStatusCode.OK, "Lưu quyền thành công");
+                    response = request.CreateResponse(HttpStatusCode.OK, "Lưu quyền thành công");
                 }
-                return response;              
+                return response;
             };
             return CreateHttpResponse(request, func);
         }
