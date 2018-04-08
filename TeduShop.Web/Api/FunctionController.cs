@@ -19,10 +19,12 @@ namespace TeduShop.Web.Api
     public class FunctionController : ApiControllerBase
     {
         private IFunctionService _functionService;
+        private IPermissionService _permissionService;
 
-        public FunctionController(IErrorService errorService, IFunctionService functionService) : base(errorService)
+        public FunctionController(IErrorService errorService, IFunctionService functionService, IPermissionService permissionService) : base(errorService)
         {
             this._functionService = functionService;
+            this._permissionService = permissionService;
         }
 
         [Route("getlisthierarchy")]
@@ -140,6 +142,8 @@ namespace TeduShop.Web.Api
         {
             return CreateHttpResponse(request, () =>
             {
+                _permissionService.DeleteAll(id);
+                _permissionService.SaveChange();
                 HttpResponseMessage response = null;
                 _functionService.Delete(id);
                 _functionService.SaveChange();

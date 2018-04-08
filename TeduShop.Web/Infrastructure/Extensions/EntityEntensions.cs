@@ -117,5 +117,15 @@ namespace TeduShop.Web.Infrastructure.Extensions
             appRole.Description = appRoleViewModel.Description;
         }
 
+        public static void UpdatePermission(this Permission permission, PermissionViewModel permissionVm)
+        {
+            permission.RoleId = permissionVm.RoleId;
+            permission.FunctionId = permissionVm.FunctionId;
+            permission.CanCreate = permissionVm.CanCreate;
+            permission.CanDelete = permissionVm.CanDelete;
+            permission.CanRead = permissionVm.CanRead;
+            permission.CanUpdate = permissionVm.CanUpdate;
+        }
+
     }
 }

@@ -178,5 +178,52 @@ namespace TeduShop.Web.Api
             };
             return CreateHttpResponse(request, func);
         }
+
+        [HttpPost]
+        [Route("savePermission")]
+        public HttpResponseMessage SavePermission(HttpRequestMessage request, SavePermissionRequest data)
+        {
+            Func<HttpResponseMessage> func = () =>
+            {
+                HttpResponseMessage response = null;
+                if (ModelState.IsValid)
+                {
+                    _permissionService.DeleteAll(data.FunctionId);
+                    foreach (var item in data.Permissions)
+                    {
+                        Permission permission = new Permission();
+                        permission.UpdatePermission(item);
+                        permission.FunctionId = data.FunctionId;
+                        _permissionService.Add(permission);
+                    }
+                    var functions = _functionService.GetAllWithParentID(data.FunctionId);
+                    if (functions.Any())
+                    {
+                        
+                        foreach (var item in functions)
+                        {
+                            _permissionService.DeleteAll(item.ID);
+                           foreach(var per in data.Permissions)
+                            {
+                                var permission = new Permission()
+                                {
+                                    FunctionId =item.ID,
+                                    RoleId=per.RoleId,
+                                    CanCreate=per.CanCreate,
+                                    CanRead=per.CanRead,
+                                    CanDelete=per.CanDelete,
+                                    CanUpdate=per.CanUpdate,
+                                };
+                                _permissionService.Add(permission);
+                            }
+                        }
+                    }
+                    _permissionService.SaveChange();
+                    response= request.CreateResponse(HttpStatusCode.OK, "Lưu quyền thành công");
+                }
+                return response;              
+            };
+            return CreateHttpResponse(request, func);
+        }
     }
 }
