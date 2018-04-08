@@ -108,10 +108,23 @@
     <Compile Include="Migrations\201804061646480_authen.Designer.cs">
       <DependentUpon>201804061646480_authen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804070256491_function.cs" />
+    <Compile Include="Migrations\201804070256491_function.Designer.cs">
+      <DependentUpon>201804070256491_function.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804071628502_change-user.cs" />
+    <Compile Include="Migrations\201804071628502_change-user.Designer.cs">
+      <DependentUpon>201804071628502_change-user.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804071636528_delete-databse.cs" />
+    <Compile Include="Migrations\201804071636528_delete-databse.Designer.cs">
+      <DependentUpon>201804071636528_delete-databse.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reponsitories\ErrorRepository.cs" />
     <Compile Include="Reponsitories\FooterRepository.cs" />
+    <Compile Include="Reponsitories\FunctionRepository.cs" />
     <Compile Include="Reponsitories\MenuGroupRepository.cs" />
     <Compile Include="Reponsitories\MenuRepository.cs" />
     <Compile Include="Reponsitories\OrderDetailRepository.cs" />
@@ -181,6 +194,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804061646480_authen.resx">
       <DependentUpon>201804061646480_authen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804070256491_function.resx">
+      <DependentUpon>201804070256491_function.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804071628502_change-user.resx">
+      <DependentUpon>201804071628502_change-user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804071636528_delete-databse.resx">
+      <DependentUpon>201804071636528_delete-databse.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

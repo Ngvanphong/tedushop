@@ -3,13 +3,12 @@ using System;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
-using System.Web;
+using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using TeduShop.Model.Models;
 using TeduShop.Service;
 using TeduShop.Web.App_Start;
-using System.Net;
 
 namespace TeduShop.Web.Infrastructure.Core
 {
@@ -29,7 +28,7 @@ namespace TeduShop.Web.Infrastructure.Core
         {
             get
             {
-                return HttpContext.Current.Request.GetOwinContext().GetUserManager<ApplicationRoleManager>();
+                return Request.GetOwinContext().GetUserManager<ApplicationRoleManager>();
             }
         }
 
@@ -37,7 +36,7 @@ namespace TeduShop.Web.Infrastructure.Core
         {
             get
             {
-                return HttpContext.Current.Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
         }
 

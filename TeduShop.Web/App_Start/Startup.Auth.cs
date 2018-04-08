@@ -40,7 +40,7 @@ namespace TeduShop.Web.App_Start
             });
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
-
+         
             // Branch the pipeline here for requests that start with "/signalr"
 
             // Uncomment the following lines to enable logging in with third party login providers

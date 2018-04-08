@@ -95,6 +95,17 @@ namespace TeduShop.Web.Infrastructure.Extensions
             productCategory.Status = productCategoryVm.Status;
             
         }
+        public static void UpdateFunction(this Function function, FunctionViewModel functionVm)
+        {
+            function.Name = functionVm.Name;
+            function.DisplayOrder = functionVm.DisplayOrder;
+            function.IconCss = functionVm.IconCss;
+            function.Status = functionVm.Status;
+            function.ParentId = functionVm.ParentId;
+            function.Status = functionVm.Status;
+            function.URL = functionVm.URL;
+            function.ID = functionVm.ID;
+        }
 
     }
 }

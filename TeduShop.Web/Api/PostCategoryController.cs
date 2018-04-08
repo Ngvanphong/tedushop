@@ -22,7 +22,7 @@ namespace TeduShop.Web.Api
         }
 
         [Route("getall")]
-        public HttpResponseMessage Get(HttpRequestMessage request,int? categoryId, string keywords, int page,int pageSize=20)
+        public HttpResponseMessage Get(HttpRequestMessage request, int page,int pageSize=20)
         {
             return CreateHttpResponse(request, () =>
             {
