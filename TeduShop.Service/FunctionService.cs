@@ -23,7 +23,7 @@ namespace TeduShop.Service
 
         void Delete(string id);
 
-        void Save();
+        void SaveChange();
 
         bool CheckExistedId(string id);
     }
@@ -76,22 +76,23 @@ namespace TeduShop.Service
 
         public IEnumerable<Function> GetAllWithParentID(string parentId)
         {
-            throw new NotImplementedException();
+            return _functionRepository.GetMulti(x => x.ParentId == parentId);
         }
 
         public IEnumerable<Function> GetAllWithPermission(string userId)
         {
-            throw new NotImplementedException();
+            var query = _functionRepository.GetListFunctionWithPermission(userId);
+            return query.OrderBy(x => x.ParentId);
         }
 
-        public void Save()
+        public void SaveChange()
         {
-            throw new NotImplementedException();
+            _unitOfWork.Commit();
         }
 
         public void Update(Function function)
         {
-            throw new NotImplementedException();
+            _functionRepository.Update(function);
         }
     }
 }
