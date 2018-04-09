@@ -37,8 +37,8 @@
             //manager.Create(user, "123456");
             //if (!roleManager.Roles.Any())
             //{
-            //    roleManager.Create(new AppRole { Name = "Admin" });
-            //    roleManager.Create(new AppRole { Name = "User" });
+            //    roleManager.Create(new AppRole { Name = "Admin", Description="Admin" });
+            //    roleManager.Create(new AppRole { Name = "User", Description="User" });
             //};
 
             //var adminUser = manager.FindByEmail("ngvanphong92@gmail.com");

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using TeduShop.Model.Models;
 using TeduShop.Web.Models;
 
@@ -126,6 +127,26 @@ namespace TeduShop.Web.Infrastructure.Extensions
             permission.CanRead = permissionVm.CanRead;
             permission.CanUpdate = permissionVm.CanUpdate;
         }
+        public static void UpdateUser(this AppUser appUser, ApplicationUserViewModel appUserViewModel)
+        {
+            appUser.Id = appUserViewModel.Id;
+            appUser.FullName = appUserViewModel.FullName;
+            if (!string.IsNullOrEmpty(appUserViewModel.BirthDay))
+            {
+                DateTime dateTime = DateTime.ParseExact(appUserViewModel.BirthDay, "dd/MM/yyyy", new CultureInfo("vi-VN"));
+                appUser.BirthDay = dateTime;
+            }
+
+            appUser.Email = appUserViewModel.Email;
+            appUser.Address = appUserViewModel.Address;
+            appUser.UserName = appUserViewModel.UserName;
+            appUser.PhoneNumber = appUserViewModel.PhoneNumber;
+            appUser.Gender = appUserViewModel.Gender == "True" ? true : false;
+            appUser.Status = appUserViewModel.Status;
+            appUser.Address = appUserViewModel.Address;
+            appUser.Avatar = appUserViewModel.Avatar;
+        }
+
 
     }
 }

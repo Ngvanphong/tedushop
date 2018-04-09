@@ -11,6 +11,7 @@ namespace TeduShop.Data.Reponsitories
    public interface IPermissionRepository : IRepository<Permission>
     {
         List<Permission> GetByUserId(string userId);
+       
     };
    public class PermissionRepository:RepositoryBase<Permission>,IPermissionRepository
     {

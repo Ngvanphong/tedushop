@@ -15,8 +15,10 @@ namespace TeduShop.Service
         void Add(Permission permission);
 
         void DeleteAll(string functionId);
+        void DeleteAllByRoleID(string roleID);
 
         void SaveChange();
+     
     }
 
     public class PermissionService : IPermissionService
@@ -49,6 +51,10 @@ namespace TeduShop.Service
         public ICollection<Permission> GetByUserId(string userId)
         {
             return _permissionRepository.GetByUserId(userId);
+        }
+        public void DeleteAllByRoleID (string roleId)
+        {
+            _permissionRepository.DeleteMulti(x => x.RoleId == roleId);
         }
 
         public void SaveChange()

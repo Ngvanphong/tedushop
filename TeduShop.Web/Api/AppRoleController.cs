@@ -53,6 +53,7 @@ namespace TeduShop.Web.Api
             };
             return CreateHttpResponse(request, func);
         }
+
         [Route("getlistall")]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
@@ -90,7 +91,9 @@ namespace TeduShop.Web.Api
             return CreateHttpResponse(request, () =>
             {
                 HttpResponseMessage response = null;
-                AppRole role = AppRoleManager.FindById(id);
+                _permissionService.DeleteAllByRoleID(id);
+                _permissionService.SaveChange();
+;                AppRole role = AppRoleManager.FindById(id);
                 AppRoleManager.Delete(role);
                 response = request.CreateResponse(HttpStatusCode.OK, id);
                 return response;

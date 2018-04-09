@@ -31,6 +31,7 @@ namespace TeduShop.Web.Infrastructure.Core
                 return Request.GetOwinContext().GetUserManager<ApplicationRoleManager>();
             }
         }
+        
 
         protected ApplicationUserManager AppUserManager
         {
