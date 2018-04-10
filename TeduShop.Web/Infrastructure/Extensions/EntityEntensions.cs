@@ -47,6 +47,7 @@ namespace TeduShop.Web.Infrastructure.Extensions
             postCategory.UpdatedBy = postCategoryVm.UpdatedBy;
             postCategory.UpdatedDate = postCategoryVm.UpdatedDate;
             postCategory.Status = postCategoryVm.Status;
+           
         }
 
         public static void UpdateProduct(this Product product, ProductViewModel productVm)
@@ -95,7 +96,7 @@ namespace TeduShop.Web.Infrastructure.Extensions
             productCategory.UpdatedBy = productCategoryVm.UpdatedBy;
             productCategory.UpdatedDate = productCategoryVm.UpdatedDate;
             productCategory.Status = productCategoryVm.Status;
-            
+            productCategory.HomeOrder = productCategoryVm.HomeOrder;
         }
         public static void UpdateFunction(this Function function, FunctionViewModel functionVm)
         {

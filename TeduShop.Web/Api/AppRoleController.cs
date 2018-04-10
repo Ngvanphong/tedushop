@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using TeduShop.Model.Models;
 using TeduShop.Service;
@@ -20,11 +21,13 @@ namespace TeduShop.Web.Api
     {
         private IFunctionService _functionService;
         private IPermissionService _permissionService;
+        private IUserRoleServie _userRoleService;
 
-        public AppRoleController(IErrorService errorService, IFunctionService functionService, IPermissionService permissionService) : base(errorService)
+        public AppRoleController(IErrorService errorService, IFunctionService functionService, IPermissionService permissionService, IUserRoleServie userRoleService) : base(errorService)
         {
             this._functionService = functionService;
             this._permissionService = permissionService;
+            this._userRoleService = userRoleService;
         }
 
         [Route("getlistpaging")]
@@ -93,7 +96,9 @@ namespace TeduShop.Web.Api
                 HttpResponseMessage response = null;
                 _permissionService.DeleteAllByRoleID(id);
                 _permissionService.SaveChange();
-;                AppRole role = AppRoleManager.FindById(id);
+                _userRoleService.Delete(id);
+                _userRoleService.SaveChange();
+                AppRole role = AppRoleManager.FindById(id);
                 AppRoleManager.Delete(role);
                 response = request.CreateResponse(HttpStatusCode.OK, id);
                 return response;

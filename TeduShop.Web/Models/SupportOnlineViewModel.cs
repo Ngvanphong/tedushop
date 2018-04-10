@@ -11,17 +11,13 @@ namespace TeduShop.Web.Models
         public int ID { set; get; }
 
         public string Name { get; set; }
-
-        public string Department { get; set; }
-
+      
         public string Skype { set; get; }
 
         public string Email { set; get; }
 
         public string Mobile { set; get; }
-
-        public string Yahoo { set; get; }
-
+     
         public string Facebook { set; get; }
 
         public string Status { get; set; }

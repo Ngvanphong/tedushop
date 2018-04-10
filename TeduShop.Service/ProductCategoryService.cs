@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using TeduShop.Data.Inframestructure;
 using TeduShop.Data.Reponsitories;
 using TeduShop.Model.Models;
@@ -15,6 +13,7 @@ namespace TeduShop.Service
 
         void Delete(int id);
 
+        IEnumerable<ProductCategory> GetAll(string filter);
         IEnumerable<ProductCategory> GetAll();
 
         IEnumerable<ProductCategory> GetAllByParentId(int parentID);
@@ -22,8 +21,8 @@ namespace TeduShop.Service
         ProductCategory GetById(int id);
 
         IEnumerable<ProductCategory> GetAllByAlias(string alias);
+
         void SaveChanges();
-        
     }
 
     public class ProductCategoryService : IProductCategoryService
@@ -48,9 +47,15 @@ namespace TeduShop.Service
             _productCategoryRepository.Delete(id);
         }
 
-        public IEnumerable<ProductCategory> GetAll()
+        public IEnumerable<ProductCategory> GetAll(string filter)
         {
-            return _productCategoryRepository.GetAll();
+            IEnumerable<ProductCategory> listProductCategory;
+            if (!string.IsNullOrEmpty(filter))
+                listProductCategory = _productCategoryRepository.GetMulti(x => x.Name.Contains(filter) || x.Description.Contains(filter));
+            else
+                listProductCategory = _productCategoryRepository.GetAll();
+            return listProductCategory;
+            
         }
 
         public IEnumerable<ProductCategory> GetAllByAlias(string alias)
@@ -72,9 +77,15 @@ namespace TeduShop.Service
         {
             _productCategoryRepository.Update(productCategory);
         }
+
         public void SaveChanges()
         {
             this._unitOfWork.Commit();
+        }
+
+        public IEnumerable<ProductCategory> GetAll()
+        {
+            return _productCategoryRepository.GetAll();
         }
     }
 }

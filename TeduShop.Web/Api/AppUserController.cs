@@ -20,8 +20,11 @@ namespace TeduShop.Web.Api
     [RoutePrefix("api/appUser")]
     public class AppUserController : ApiControllerBase
     {
-        public AppUserController(IErrorService errorService) : base(errorService)
+        private IUserRoleServie _userRoleService;
+
+        public AppUserController(IErrorService errorService, IUserRoleServie userRoleService) : base(errorService)
         {
+            this._userRoleService = userRoleService;
         }
 
         [Route("getlistpaging")]
@@ -60,11 +63,18 @@ namespace TeduShop.Web.Api
         {
             HttpResponseMessage response = null;
             var user = await AppUserManager.FindByIdAsync(id);
-            var listRole = await AppUserManager.GetRolesAsync(user.Id);
-            var userModel = Mapper.Map<ApplicationUserViewModel>(user);
-            userModel.Roles = listRole;
-            response = request.CreateResponse(HttpStatusCode.OK, userModel);
-            return response;
+            if (user == null)
+            {
+                return request.CreateErrorResponse(HttpStatusCode.NoContent, "Không có dữ liệu");
+            }
+            else
+            {
+                var listRole = await AppUserManager.GetRolesAsync(user.Id);
+                var userModel = Mapper.Map<ApplicationUserViewModel>(user);
+                userModel.Roles = listRole;
+                response = request.CreateResponse(HttpStatusCode.OK, userModel);
+                return response;
+            }
         }
 
         [HttpPost]
@@ -91,7 +101,6 @@ namespace TeduShop.Web.Api
                     {
                         return request.CreateErrorResponse(HttpStatusCode.BadRequest, string.Join(",", result.Errors));
                     }
-
                 }
                 catch (NameDuplicatedException dex)
                 {
@@ -107,6 +116,7 @@ namespace TeduShop.Web.Api
                 return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             };
         }
+
         [HttpPut]
         [Route("update")]
         //[Authorize(Roles = "UpdateUser")]
@@ -123,28 +133,40 @@ namespace TeduShop.Web.Api
                     if (result.Succeeded)
                     {
                         var roles = await AppUserManager.GetRolesAsync(applicationUserViewModel.Id);
+                        await AppUserManager.RemoveFromRolesAsync(applicationUserViewModel.Id, roles.ToArray());
                         var selectRoles = applicationUserViewModel.Roles.ToArray();
                         selectRoles = selectRoles ?? new string[] { };
-                        await AppUserManager.AddToRolesAsync(applicationUserViewModel.Id, selectRoles.Except(roles).ToArray());
+                        await AppUserManager.AddToRolesAsync(applicationUserViewModel.Id, selectRoles);
                         return request.CreateResponse(HttpStatusCode.Created, applicationUserViewModel);
                     }
                     else
                     {
                         return request.CreateErrorResponse(HttpStatusCode.BadGateway, string.Join(",", result.Errors));
                     }
-
                 }
-                catch(NameDuplicatedException dex)
+                catch (NameDuplicatedException dex)
                 {
                     return request.CreateErrorResponse(HttpStatusCode.BadRequest, dex.Message);
                 }
             }
             else
                 return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-           
-
-
         }
 
-    } 
+        [HttpDelete]
+        [Route("delete")]
+        [Permission(Action = "Delete", Function = "USER")]
+        //[Authorize(Roles ="DeleteUser")]
+        public async Task<HttpResponseMessage> Delete(HttpRequestMessage request, string id)
+        {
+            _userRoleService.DeleteByUserId(id);
+            _userRoleService.SaveChange();
+            AppUser user = await AppUserManager.FindByIdAsync(id);
+            var result = await AppUserManager.DeleteAsync(user);
+            if (result.Succeeded)
+                return request.CreateResponse(HttpStatusCode.OK, id);
+            else
+                return request.CreateErrorResponse(HttpStatusCode.BadRequest, string.Join(",", result.Errors));
+        }
+    }
 }

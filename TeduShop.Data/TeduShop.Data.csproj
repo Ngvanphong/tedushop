@@ -120,6 +120,14 @@
     <Compile Include="Migrations\201804071636528_delete-databse.Designer.cs">
       <DependentUpon>201804071636528_delete-databse.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804101157254_deleteTable.cs" />
+    <Compile Include="Migrations\201804101157254_deleteTable.Designer.cs">
+      <DependentUpon>201804101157254_deleteTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804101618307_productCategory.cs" />
+    <Compile Include="Migrations\201804101618307_productCategory.Designer.cs">
+      <DependentUpon>201804101618307_productCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reponsitories\ErrorRepository.cs" />
@@ -139,9 +147,8 @@
     <Compile Include="Reponsitories\ProductTagRepository.cs" />
     <Compile Include="Reponsitories\SlideRepository.cs" />
     <Compile Include="Reponsitories\SupportOnlineRepository.cs" />
-    <Compile Include="Reponsitories\SystemConfigRepository.cs" />
     <Compile Include="Reponsitories\TagRepository.cs" />
-    <Compile Include="Reponsitories\VisitorStatisticRepository.cs" />
+    <Compile Include="Reponsitories\UserRoleRepository.cs" />
     <Compile Include="TeduShopDbContext.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +210,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804071636528_delete-databse.resx">
       <DependentUpon>201804071636528_delete-databse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804101157254_deleteTable.resx">
+      <DependentUpon>201804101157254_deleteTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804101618307_productCategory.resx">
+      <DependentUpon>201804101618307_productCategory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

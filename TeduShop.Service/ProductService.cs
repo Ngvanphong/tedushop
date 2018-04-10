@@ -18,6 +18,7 @@ namespace TeduShop.Service
         IEnumerable<Product> GetAll();
 
         IEnumerable<Product> GetAll(int? categoryId, string keyword);
+        
 
         IEnumerable<Product> GetAllPaging(int page, int pageSize, out int totalRow);
 

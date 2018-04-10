@@ -25,7 +25,6 @@ namespace TeduShop.Web.Mappings
                   cfg.CreateMap<Page, PageViewModel>();
                   cfg.CreateMap<Slide, SlideViewModel>();
                   cfg.CreateMap<SupportOnline, SupportOnlineViewModel>();
-                  cfg.CreateMap<VisitorStatistic, VisitorStatisticViewModel>();
                   cfg.CreateMap<Function, FunctionViewModel>();
                   cfg.CreateMap<Permission, PermissionViewModel>();
                   cfg.CreateMap<AppRole, ApplicationRoleViewModel>();

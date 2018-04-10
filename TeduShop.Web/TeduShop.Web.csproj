@@ -216,6 +216,7 @@
     <Compile Include="Api\PostController.cs" />
     <Compile Include="Api\ProductCategoryController.cs" />
     <Compile Include="Api\ProductController.cs" />
+    <Compile Include="Api\UploadController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -252,7 +253,6 @@
     <Compile Include="Models\SlideViewModel.cs" />
     <Compile Include="Models\SupportOnlineViewModel.cs" />
     <Compile Include="Models\TagViewModel.cs" />
-    <Compile Include="Models\VisitorStatisticViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\AuthorizationServerProvider.cs" />
     <Compile Include="Providers\PermissionAttribute.cs" />
