@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using TeduShop.Model.Models;
 
 namespace TeduShop.Web.Models
 {
@@ -15,12 +16,9 @@ namespace TeduShop.Web.Models
         public string Alias { set; get; }
 
         public int CategoryID { set; get; }
-        public virtual ProductCategoryViewModel ProductCategory { set; get; }
+        
         public int? DisplayOrder { set; get; }
-
-        public string Image { set; get; }
-
-        public string MoreImage { set; get; }
+      
         public Decimal Price { get; set; }
         public Decimal? PromotionPrice { set; get; }
         public int? Warranty { set; get; }
@@ -42,8 +40,10 @@ namespace TeduShop.Web.Models
         public string UpdatedBy { get; set; }
         public bool Status { get; set; }
 
-        public virtual List<OrderDetailViewModel> OrderDetail { get; set; }
-        public virtual List<ProductTagViewModel> ProductTag { set; get; }
+        public virtual ProductCategoryViewModel ProductCategory { set; get; }
+
         public string Tags { set; get; }
+
+        public string ThumbnailImage { set; get; }
     }
 }

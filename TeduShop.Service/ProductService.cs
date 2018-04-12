@@ -18,7 +18,7 @@ namespace TeduShop.Service
         IEnumerable<Product> GetAll();
 
         IEnumerable<Product> GetAll(int? categoryId, string keyword);
-        
+        IEnumerable<Product> GetAll(int? categoryId, string hotPromotion, string keyword);
 
         IEnumerable<Product> GetAllPaging(int page, int pageSize, out int totalRow);
 
@@ -83,12 +83,12 @@ namespace TeduShop.Service
 
         public IEnumerable<Product> GetAll()
         {
-            return _productRepository.GetAll(new string[] { "ProductCategory", "ProductTag" });
+            return _productRepository.GetAll(new string[] { "ProductCategory","ProductTags"});
         }
 
         public IEnumerable<Product> GetAll(int? categoryId, string keyword)
         {
-            var query = _productRepository.GetAll(new string[] { "ProductCategory", "ProductTag" });
+            var query = _productRepository.GetAll(new string[] { "ProductCategory", "ProductTags" });
             if (!string.IsNullOrEmpty(keyword))
             {
                 query = query.Where(x => (x.Name.Contains(keyword) || x.Alias.Contains(keyword) && x.Status));
@@ -96,6 +96,30 @@ namespace TeduShop.Service
             if (categoryId.HasValue)
             {
                 query = query.Where(x => x.CategoryID == categoryId);
+            };
+            return query;
+        }
+
+        public IEnumerable<Product> GetAll(int? categoryId, string hotPromotion, string keyword)
+        {
+            var query = _productRepository.GetAll(new string[] { "ProductCategory", "ProductTags" });
+  
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                query = query.Where(x => x.Name.Contains(keyword));
+            };
+            if (categoryId.HasValue)
+            {
+                query = query.Where(x => x.CategoryID == categoryId.Value);
+            };
+            if (!string.IsNullOrEmpty(hotPromotion))
+            {
+                if(hotPromotion=="Hot")
+                        query = query.Where(x =>x.HotFlag==true && x.Status);
+                else
+                {
+                    query = query.Where(x => x.PromotionPrice.HasValue&&x.Status);
+                }
             };
             return query;
         }

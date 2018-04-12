@@ -27,7 +27,7 @@ namespace TeduShop.Web.Api
 
         [Route("getall")]
         [HttpGet]
-        public HttpResponseMessage GetAll(HttpRequestMessage request, string filter="")
+        public HttpResponseMessage GetAll(HttpRequestMessage request, string filter = "")
         {
             return CreateHttpResponse(request, () =>
              {
@@ -36,7 +36,8 @@ namespace TeduShop.Web.Api
                  return request.CreateResponse(HttpStatusCode.OK, listProdutCategoryVm);
              });
         }
-
+        
+        
         [Route("getallhierachy")]
         [HttpGet]
         public HttpResponseMessage GetAllHierachy(HttpRequestMessage request)
@@ -44,16 +45,21 @@ namespace TeduShop.Web.Api
             Func<HttpResponseMessage> func = () =>
             {
 
-                IEnumerable<ProductCategory> listProductCategoryDb = _productCategoryService.GetAll().ToList();
-                IEnumerable<ProductCategoryViewModel> listProductCategoryVm = Mapper.Map<IEnumerable<ProductCategoryViewModel>>(listProductCategoryDb);
+                List<ProductCategory> listProductCategoryDb = _productCategoryService.GetAll().ToList();
+                List<ProductCategoryViewModel> listProductCategoryVm = Mapper.Map<List<ProductCategoryViewModel>>(listProductCategoryDb);
 
-                IEnumerable<ProductCategoryViewModel> listParent = listProductCategoryVm.Where(x => x.ParentID == null);
-                
+                List<ProductCategoryViewModel> listParent = listProductCategoryVm.Where(x => x.ParentID == null).ToList();
+                List<ProductCategoryViewModel> listParentHasChild = new List<ProductCategoryViewModel>() { };
                 foreach (var parent in listParent)
-                {                    
-                    parent.ChildFunctions = listProductCategoryVm.Where(x => x.ParentID == parent.ID).ToList();
+                {
+                    List<ProductCategoryViewModel> listchild = listProductCategoryVm.Where(x => x.ParentID == parent.ID).ToList();
+                    if (listchild.Count>0)
+                    listParentHasChild.Add(parent);
+                    
                 }
-                return request.CreateResponse(HttpStatusCode.OK, listParent);
+                var productCategorys = listProductCategoryVm.Except(listParentHasChild);
+                
+                return request.CreateResponse(HttpStatusCode.OK, productCategorys);
             };
             return CreateHttpResponse(request, func);
 
@@ -70,6 +76,7 @@ namespace TeduShop.Web.Api
                     var newProductCategoryDb = new ProductCategory();
                     newProductCategoryDb.UpdateProductCategory(productCategoryVm);
                     newProductCategoryDb.CreateDate = DateTime.Now;
+                    newProductCategoryDb.UpdatedDate = DateTime.Now;
                     _productCategoryService.Add(newProductCategoryDb);
                     _productCategoryService.SaveChanges();
                     response = request.CreateResponse(HttpStatusCode.Created,productCategoryVm);

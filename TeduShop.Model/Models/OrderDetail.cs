@@ -18,9 +18,16 @@ namespace TeduShop.Model.Models
         [Column(Order = 2)]
         public int ProductID { set; get; }
         public int Quntity { set; get; }
+
+        public decimal Price { set; get; }
+
+        public int SizeId { get; set; }
+
         [ForeignKey("OrderID")]
         public virtual Order Order { set; get; }
         [ForeignKey("ProductID")]
         public virtual Product Product { set; get; }
+        [ForeignKey("SizeId")]
+        public virtual Size Size { set; get; }
     }
 }

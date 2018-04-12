@@ -26,7 +26,6 @@ namespace TeduShop.Web.Api
             this._functionService = functionService;
             this._permissionService = permissionService;
         }
-
         [Route("getlisthierarchy")]
         [HttpGet]
         public HttpResponseMessage GetAllHierachy(HttpRequestMessage request)
@@ -44,7 +43,7 @@ namespace TeduShop.Web.Api
                     model = _functionService.GetAllWithPermission(User.Identity.GetUserId());
                 }
 
-                IEnumerable<FunctionViewModel> modelVm = Mapper.Map<IEnumerable<FunctionViewModel>>(model);
+                IEnumerable<FunctionViewModel> modelVm = Mapper.Map<IEnumerable<Function>, IEnumerable<FunctionViewModel>>(model);
                 var parents = modelVm.Where(x => x.Parent == null);
                 foreach (var parent in parents)
                 {

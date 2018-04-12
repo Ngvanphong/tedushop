@@ -51,7 +51,7 @@ namespace TeduShop.Service
         {
             IEnumerable<ProductCategory> listProductCategory;
             if (!string.IsNullOrEmpty(filter))
-                listProductCategory = _productCategoryRepository.GetMulti(x => x.Name.Contains(filter) || x.Description.Contains(filter));
+                listProductCategory = _productCategoryRepository.GetMulti(x => x.Name.Contains(filter));
             else
                 listProductCategory = _productCategoryRepository.GetAll();
             return listProductCategory;

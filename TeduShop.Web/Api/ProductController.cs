@@ -15,6 +15,7 @@ using TeduShop.Web.Models;
 namespace TeduShop.Web.Api
 {
     [RoutePrefix("api/product")]
+    [Authorize]
     public class ProductController : ApiControllerBase
     {
         private IProductService _productService;
@@ -26,56 +27,25 @@ namespace TeduShop.Web.Api
 
         [Route("getall")]
         [HttpGet]
-        public HttpResponseMessage get(HttpRequestMessage request, int? categoryId, string keyword, int page, int pageSize = 20)
+        public HttpResponseMessage GetAll(HttpRequestMessage request, int? categoryId, int page, int pageSize = 20, string filterHotPromotion = "", string keyword = "")
         {
-            return CreateHttpResponse(request, () =>
+            Func<HttpResponseMessage> func = () =>
             {
-                int totalRows = 0;
-                IEnumerable<Product> listProductDb = _productService.GetAll(categoryId, keyword);
-                totalRows = listProductDb.Count();
-                var query = listProductDb.OrderByDescending(x => x.CreateDate).Skip((page - 1) * pageSize).Take(pageSize);
-                List<ProductViewModel> listProductVm = Mapper.Map<List<ProductViewModel>>(query);
+                int totalRow = 0;
+                IEnumerable<Product> listProductDb = _productService.GetAll(categoryId, filterHotPromotion, keyword);
+                totalRow = listProductDb.Count();
+                IEnumerable<Product> query = listProductDb.OrderByDescending(x => x.UpdatedDate).Skip(pageSize * (page - 1)).Take(pageSize);
+                IEnumerable<ProductViewModel> listProduct = Mapper.Map<IEnumerable<ProductViewModel>>(query);
                 PaginationSet<ProductViewModel> pagination = new PaginationSet<ProductViewModel>()
                 {
-                    TotalRows = totalRows,
+                    TotalRows = totalRow,
                     PageIndex = page,
                     PageSize = pageSize,
-                    Items = listProductVm
+                    Items = listProduct,
                 };
-                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, pagination);
-                return response;
-            });
-        }
-
-        [Route("getallhot")]
-        [HttpGet]
-        public HttpResponseMessage get(HttpRequestMessage request, int page, int pageSize = 20, int top = 8)
-        {
-            return CreateHttpResponse(request, () =>
-            {
-                int totalRows = 0;
-                IEnumerable<Product> hotProduct;
-
-                if (top <= 8)
-                    hotProduct = _productService.GetHotProduct().Take(8);
-                else
-                {
-                    var query = _productService.GetHotProduct();
-                    totalRows = query.Count();
-                    hotProduct = _productService.GetHotProduct().Skip((page - 1) * pageSize).Take(pageSize);
-                };
-                IEnumerable<ProductViewModel> hotProductVm = Mapper.Map<IEnumerable<ProductViewModel>>(hotProduct);
-                PaginationSet<ProductViewModel> pagination = new PaginationSet<ProductViewModel>()
-                {
-                    PageIndex = page,
-                    PageSize = pageSize,
-                    Items = hotProductVm,
-                    TotalRows = totalRows
-                };
-
-                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, pagination);
-                return response;
-            });
+                return request.CreateResponse(HttpStatusCode.OK, pagination);
+            };
+            return CreateHttpResponse(request, func);
         }
 
         [Route("detail/{id:int}")]
@@ -103,10 +73,12 @@ namespace TeduShop.Web.Api
                 {
                     Product productDb = new Product();
                     productDb.UpdateProduct(productVm);
+                    productDb.CreateDate = DateTime.Now;
+                    productDb.UpdatedDate = DateTime.Now;
+                    productDb.CreateBy = User.Identity.Name.ToString();
                     var product = _productService.Add(productDb);
-                    _productService.SaveChanges();
-                    ProductViewModel responseProduct = Mapper.Map<ProductViewModel>(product);
-                    response = request.CreateResponse(HttpStatusCode.Created, responseProduct);
+                    _productService.SaveChanges();                   
+                    response = request.CreateResponse(HttpStatusCode.Created,productVm);
                 }
                 else
                     response = request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
@@ -125,6 +97,7 @@ namespace TeduShop.Web.Api
                 {
                     Product productDb = _productService.GetById(productVm.ID);
                     productDb.UpdateProduct(productVm);
+                    productDb.UpdatedDate = DateTime.Now;
                     _productService.Update(productDb);
                     _productService.SaveChanges();
                     response = request.CreateResponse(HttpStatusCode.Created, productVm);

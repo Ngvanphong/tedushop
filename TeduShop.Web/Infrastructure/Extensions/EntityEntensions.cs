@@ -59,8 +59,7 @@ namespace TeduShop.Web.Infrastructure.Extensions
             product.CategoryID = productVm.CategoryID;
             product.DisplayOrder = productVm.DisplayOrder;
             product.Description = productVm.Description;
-            product.Content = productVm.Content;
-            product.Image = productVm.Image;
+            product.Content = productVm.Content;           
             product.HomeFlag = productVm.HomeFlag;
             product.HotFlag = productVm.HotFlag;
             product.ViewCount = productVm.ViewCount;
@@ -71,7 +70,7 @@ namespace TeduShop.Web.Infrastructure.Extensions
             product.UpdatedBy = productVm.UpdatedBy;
             product.UpdatedDate = productVm.UpdatedDate;
             product.Status = productVm.Status;
-            product.MoreImage = productVm.MoreImage;
+            product.ThumbnailImage = productVm.ThumbnailImage;
             product.Price = productVm.Price;
             product.PromotionPrice = productVm.PromotionPrice;
             product.Warranty = productVm.Warranty;
@@ -146,6 +145,25 @@ namespace TeduShop.Web.Infrastructure.Extensions
             appUser.Status = appUserViewModel.Status;
             appUser.Address = appUserViewModel.Address;
             appUser.Avatar = appUserViewModel.Avatar;
+        }
+        public static void UpdateProductQuantity(this ProductQuantity quantity, ProductQuantityViewModel quantityVm)
+        {
+            quantity.ProductId = quantityVm.ProductId;
+            quantity.SizeId = quantityVm.SizeId;
+            quantity.Quantity = quantityVm.Quantity;
+        }
+
+
+        public static void UpdateProductImage(this ProductImage image, ProductImageViewModel imageVm)
+        {
+            image.ProductId = imageVm.ProductId;
+            image.Path = imageVm.Path;
+            image.Caption = imageVm.Caption;
+        }
+        public static void UpdateSize(this Size size, SizeViewModel sizeVm)
+        {
+            size.ID = sizeVm.ID;
+            size.Name = sizeVm.Name;
         }
 
 

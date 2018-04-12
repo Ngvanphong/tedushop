@@ -18,7 +18,7 @@
 
         protected override void Seed(TeduShop.Data.TeduShopDbContext context)
         {
-            CreateProdutCategorySamble(context);
+            CreateProductCategorySamble(context);
             CreateFunction(context);
             //  This method will be called after migrating to the latest version.
 
@@ -45,7 +45,7 @@
             //manager.AddToRoles(adminUser.Id, new string[] { "Admin", "User" });
 
         }
-        private void CreateProdutCategorySamble(TeduShopDbContext dbContext)
+        private void CreateProductCategorySamble(TeduShopDbContext dbContext)
         {
             if (dbContext.ProductCategories.Count() == 0)
             {
