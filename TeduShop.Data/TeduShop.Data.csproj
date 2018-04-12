@@ -171,6 +171,7 @@
     <Compile Include="Reponsitories\PostRepository.cs" />
     <Compile Include="Reponsitories\PostTagRepository.cs" />
     <Compile Include="Reponsitories\ProductCategoryRepository.cs" />
+    <Compile Include="Reponsitories\ProductImageRepository.cs" />
     <Compile Include="Reponsitories\ProductQuantityRepository.cs" />
     <Compile Include="Reponsitories\ProductRepository.cs" />
     <Compile Include="Reponsitories\ProductTagRepository.cs" />

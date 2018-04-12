@@ -19,10 +19,12 @@ namespace TeduShop.Web.Api
     public class ProductController : ApiControllerBase
     {
         private IProductService _productService;
+        private IProductImageService _productImageService;
 
-        public ProductController(IProductService productService, IErrorService errorService) : base(errorService)
+        public ProductController(IProductService productService, IErrorService errorService, IProductImageService productImageService) : base(errorService)
         {
             this._productService = productService;
+            this._productImageService = productImageService;
         }
 
         [Route("getall")]
@@ -77,8 +79,8 @@ namespace TeduShop.Web.Api
                     productDb.UpdatedDate = DateTime.Now;
                     productDb.CreateBy = User.Identity.Name.ToString();
                     var product = _productService.Add(productDb);
-                    _productService.SaveChanges();                   
-                    response = request.CreateResponse(HttpStatusCode.Created,productVm);
+                    _productService.SaveChanges();
+                    response = request.CreateResponse(HttpStatusCode.Created, productVm);
                 }
                 else
                     response = request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
@@ -151,6 +153,21 @@ namespace TeduShop.Web.Api
                 return response;
             };
             return CreateHttpResponse(request, Func);
+        }
+
+        [Route("thumnailImage")]
+        [HttpPut]
+        public HttpResponseMessage UpdateThumbnail(HttpRequestMessage request, int productId)
+        {
+            return CreateHttpResponse(request, () =>
+             {
+                 ProductImage ProductImage = _productImageService.GetAll(productId).FirstOrDefault();
+                 Product productDb = _productService.GetById(productId);
+                 productDb.ThumbnailImage = ProductImage.Path;
+                 _productService.Update(productDb);
+                 _productService.SaveChanges();
+                 return request.CreateResponse(HttpStatusCode.Created, productId);
+             });
         }
     }
 }

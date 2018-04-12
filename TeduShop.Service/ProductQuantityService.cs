@@ -15,6 +15,7 @@ namespace TeduShop.Service
         void Delete(int productId, int sizeId);
         void DeleteByProductID(int id);
         IEnumerable<ProductQuantity> GetAll(int productId, int? sizeId);
+        ProductQuantity GetSingle(int productId, int sizeId);
         bool CheckExist(int productId, int sizeId);
         IEnumerable<Size> GetListSize();
         void AddSize(Size size);
@@ -67,6 +68,12 @@ namespace TeduShop.Service
                 listProductQuantity = listProductQuantity.Where(x => x.SizeId == sizeId);
             }
             return listProductQuantity;
+        }
+        public ProductQuantity GetSingle(int productId, int sizeId)
+        {
+            ProductQuantity ProductQuantity = _productQuantityRepository.GetSingleByCondition(x => x.ProductId == productId && x.SizeId == sizeId);
+            return ProductQuantity;
+    
         }
 
         public IEnumerable<Size> GetListSize()

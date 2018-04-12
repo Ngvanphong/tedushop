@@ -47,6 +47,7 @@ namespace TeduShop.Web.Api
                 return request.CreateResponse(HttpStatusCode.OK, sizeVm);
             });
         }
+
         [Route("addsizes")]
         [HttpPost]
         public HttpResponseMessage AddSizes(HttpRequestMessage request, SizeViewModel sizeVm)
@@ -105,6 +106,77 @@ namespace TeduShop.Web.Api
                 {
                     return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
                 }
+            });
+        }
+
+        [Route("getall")]
+        [HttpGet]
+        public HttpResponseMessage GetAll(HttpRequestMessage request, int productId, int? sizeId)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                IEnumerable<ProductQuantity> listProductQuatityDb = _productQuantityService.GetAll(productId, sizeId);
+                IEnumerable<ProductQuantityViewModel> listProductVm = Mapper.Map<IEnumerable<ProductQuantityViewModel>>(listProductQuatityDb);
+                return request.CreateResponse(HttpStatusCode.OK, listProductVm);
+            });
+        }
+        [HttpPost]
+        [Route("add")]
+        public HttpResponseMessage Create(HttpRequestMessage request, ProductQuantityViewModel productQuantityVm)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                if (ModelState.IsValid)
+                {
+                    if (_productQuantityService.CheckExist(productQuantityVm.ProductId, productQuantityVm.SizeId))
+                    {
+                        return request.CreateErrorResponse(HttpStatusCode.BadRequest, "Size cho sản phẩm này đã tồn tại");
+                    }
+                    else
+                    {
+                        ProductQuantity productQuantityDb = new ProductQuantity();
+                        productQuantityDb.UpdateProductQuantity(productQuantityVm);
+                        _productQuantityService.Add(productQuantityDb);
+                        _productQuantityService.SaveChange();
+                        return request.CreateResponse(HttpStatusCode.Created, productQuantityVm);
+                    }
+                   
+                }
+                else
+                    return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+               
+            });
+        }
+        [HttpPut]
+        [Route("update")]
+        public HttpResponseMessage Update(HttpRequestMessage request, ProductQuantityViewModel productQuantityVm)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                if (ModelState.IsValid)
+                {
+                    ProductQuantity productQuantityDb = _productQuantityService.GetSingle(productQuantityVm.ProductId, productQuantityVm.SizeId);
+                    productQuantityDb.UpdateProductQuantity(productQuantityVm);
+                    _productQuantityService.SaveChange();
+                    return request.CreateResponse(HttpStatusCode.Created, productQuantityVm);
+                }
+                else
+                {
+                    return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+            });
+           
+        }
+
+        [HttpDelete]
+        [Route("delete")]
+        public HttpResponseMessage Delete(HttpRequestMessage request, int productId, int sizeId)
+        {
+           return CreateHttpResponse(request, () =>
+            {
+                _productQuantityService.Delete(productId, sizeId);
+                _productQuantityService.SaveChange();
+                return request.CreateResponse(HttpStatusCode.OK, "Xóa thành công");
             });
         }
     }

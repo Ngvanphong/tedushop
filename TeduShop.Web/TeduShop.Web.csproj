@@ -216,6 +216,7 @@
     <Compile Include="Api\PostController.cs" />
     <Compile Include="Api\ProductCategoryController.cs" />
     <Compile Include="Api\ProductController.cs" />
+    <Compile Include="Api\ProductImageController.cs" />
     <Compile Include="Api\ProductQuantityController.cs" />
     <Compile Include="Api\UploadController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
