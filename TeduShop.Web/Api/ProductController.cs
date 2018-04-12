@@ -161,12 +161,21 @@ namespace TeduShop.Web.Api
         {
             return CreateHttpResponse(request, () =>
              {
-                 ProductImage ProductImage = _productImageService.GetAll(productId).FirstOrDefault();
-                 Product productDb = _productService.GetById(productId);
-                 productDb.ThumbnailImage = ProductImage.Path;
-                 _productService.Update(productDb);
-                 _productService.SaveChanges();
-                 return request.CreateResponse(HttpStatusCode.Created, productId);
+                 try
+                 {
+                     ProductImage ProductImage = _productImageService.GetAll(productId).FirstOrDefault();
+                     Product productDb = _productService.GetById(productId);
+                     productDb.ThumbnailImage = ProductImage.Path;
+                     _productService.Update(productDb);
+                     _productService.SaveChanges();
+                     return request.CreateResponse(HttpStatusCode.Created, productId);
+                 }
+                 catch
+                 {
+                     return request.CreateErrorResponse(HttpStatusCode.BadRequest, "Sản phẩm không có ảnh");
+                 }
+
+                
              });
         }
     }
