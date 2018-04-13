@@ -27,6 +27,8 @@ namespace TeduShop.Service
 
         IEnumerable<Product> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow);
 
+       
+
         void SaveChanges();
     }
 

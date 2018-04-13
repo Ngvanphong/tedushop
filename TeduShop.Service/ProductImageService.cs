@@ -14,7 +14,8 @@ namespace TeduShop.Service
         void Add(ProductImage productImage);
 
         void Delete(int id);
-
+        ProductImage GetByID(int id);
+        List<ProductImage> GetProductImageByProdutID(int id);
         IEnumerable<ProductImage> GetAll(int productId);
 
         void Save();
@@ -41,6 +42,16 @@ namespace TeduShop.Service
         public IEnumerable<ProductImage> GetAll(int productId)
         {
             return _productImageRepository.GetMulti(x => x.ProductId == productId);
+        }
+
+        public ProductImage GetByID(int id)
+        {
+          return  _productImageRepository.GetSingleById(id);
+        }
+
+        public List<ProductImage> GetProductImageByProdutID(int id)
+        {
+            return _productImageRepository.GetMulti(x => x.ProductId == id).ToList();
         }
 
         public void Save()

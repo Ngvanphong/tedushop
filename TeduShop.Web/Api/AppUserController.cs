@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using TeduShop.Common;
 using TeduShop.Model.Models;
@@ -164,9 +166,19 @@ namespace TeduShop.Web.Api
             AppUser user = await AppUserManager.FindByIdAsync(id);
             var result = await AppUserManager.DeleteAsync(user);
             if (result.Succeeded)
+            {
+                DeleteElementImage(user.Avatar);
                 return request.CreateResponse(HttpStatusCode.OK, id);
+            }
             else
                 return request.CreateErrorResponse(HttpStatusCode.BadRequest, string.Join(",", result.Errors));
+        }
+
+        private void DeleteElementImage(string path)
+        {
+            string pathMap = HttpContext.Current.Server.MapPath(path);
+            if (!string.IsNullOrEmpty(pathMap))
+                File.Delete(pathMap);
         }
     }
 }

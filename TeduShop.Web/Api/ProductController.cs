@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using System.Web.Script.Serialization;
 using TeduShop.Model.Models;
@@ -119,8 +121,13 @@ namespace TeduShop.Web.Api
             {
                 if (ModelState.IsValid)
                 {
+                    List<ProductImage> listProductImage = _productImageService.GetProductImageByProdutID(id);
                     _productService.Delete(id);
                     _productService.SaveChanges();
+                    for (int i = 0; i < listProductImage.Count(); i++)
+                    {
+                        DeleteElementImage(listProductImage[i].Path);
+                    }
                     response = request.CreateResponse(HttpStatusCode.OK, id);
                 }
                 else
@@ -139,11 +146,23 @@ namespace TeduShop.Web.Api
                 if (ModelState.IsValid)
                 {
                     var listProduct = new JavaScriptSerializer().Deserialize<List<int>>(checkedProducts);
+                    List<string> listPath = new List<string>() { };
+
                     foreach (var productID in listProduct)
                     {
+                        List<ProductImage> listProductImage = _productImageService.GetProductImageByProdutID(productID);
+                        for (int i = 0; i < listProductImage.Count(); i++)
+                        {
+                            listPath.Add(listProductImage[i].Path);
+                        }
                         _productService.Delete(productID);
-                    }
+                    }                  
                     _productService.SaveChanges();
+                    for (int i = 0; i < listPath.Count(); i++)
+                    {
+                        DeleteElementImage(listPath[i]);
+                    }
+
                     response = request.CreateResponse(HttpStatusCode.Created, listProduct.Count());
                 }
                 else
@@ -174,9 +193,14 @@ namespace TeduShop.Web.Api
                  {
                      return request.CreateErrorResponse(HttpStatusCode.BadRequest, "Sản phẩm không có ảnh");
                  }
-
-                
              });
+        }
+
+        private void DeleteElementImage(string path)
+        {
+            string pathMap = HttpContext.Current.Server.MapPath(path);
+            if (!string.IsNullOrEmpty(pathMap))
+                File.Delete(pathMap);
         }
     }
 }

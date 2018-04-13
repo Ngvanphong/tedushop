@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -33,10 +34,15 @@ namespace TeduShop.Web.Controllers
                     HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
 
                     var postedFile = httpRequest.Files[file];
+                    
+
                     if (postedFile != null && postedFile.ContentLength > 0)
                     {
-
-                        int MaxContentLength = 1024 * 1024 * 1; //Size = 1 MB
+                        var postedFileThumbnail = new Bitmap(postedFile.InputStream);
+                        postedFileThumbnail.SetResolution(18f, 18f);
+                        postedFileThumbnail.SetResolution(8f, 9f);
+                        postedFileThumbnail.SetResolution(9f, 8f);
+                        postedFileThumbnail.SetResolution(5f, 5f);
 
                         IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".gif", ".png" };
                         var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
@@ -48,15 +54,7 @@ namespace TeduShop.Web.Controllers
 
                             dict.Add("error", message);
                             return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
-                        }
-                        else if (postedFile.ContentLength > MaxContentLength)
-                        {
-
-                            var message = string.Format("Please Upload a file upto 1 mb.");
-
-                            dict.Add("error", message);
-                            return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
-                        }
+                        }                      
                         else
                         {
                             string directory = string.Empty;
@@ -87,7 +85,8 @@ namespace TeduShop.Web.Controllers
 
                             string path = Path.Combine(HttpContext.Current.Server.MapPath(directory), postedFile.FileName);
                             //Userimage myfolder name where i want to save my image
-                            postedFile.SaveAs(path);
+                            //postedFile.SaveAs(path);
+                            postedFileThumbnail.Save(path);
                             return Request.CreateResponse(HttpStatusCode.OK, Path.Combine(directory, postedFile.FileName));
                         }
                     }

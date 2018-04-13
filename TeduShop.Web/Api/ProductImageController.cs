@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using TeduShop.Model.Models;
 using TeduShop.Service;
@@ -17,12 +17,13 @@ namespace TeduShop.Web.Api
     [RoutePrefix("api/productImage")]
     public class ProductImageController : ApiControllerBase
     {
-        IProductImageService _productImageService;
+        private IProductImageService _productImageService;
+
         public ProductImageController(IErrorService errorService, IProductImageService productImageService) : base(errorService)
         {
             this._productImageService = productImageService;
-            
         }
+
         [Route("getall")]
         [HttpGet]
         public HttpResponseMessage GetAll(HttpRequestMessage request, int productId)
@@ -45,26 +46,35 @@ namespace TeduShop.Web.Api
                 {
                     ProductImage productImageDb = new ProductImage();
                     productImageDb.UpdateProductImage(productImageVm);
-                    _productImageService.Add(productImageDb);                 
+                    _productImageService.Add(productImageDb);
                     _productImageService.Save();
                     return request.CreateResponse(HttpStatusCode.OK, productImageVm);
                 }
                 else
                     return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
-                
             });
-
         }
+
         [HttpDelete]
         [Route("delete")]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {
             return CreateHttpResponse(request, () =>
             {
-                _productImageService.Delete(id);
+                ProductImage produtImage = _productImageService.GetByID(id);
+                string pathImage = produtImage.Path;
+                 _productImageService.Delete(id);
                 _productImageService.Save();
+                DeleteElementImage(pathImage);
                 return request.CreateResponse(HttpStatusCode.OK, id);
             });
+        }
+
+        private void DeleteElementImage(string path)
+        {
+            string pathMap = HttpContext.Current.Server.MapPath(path);
+            if (!string.IsNullOrEmpty(pathMap))
+                File.Delete(pathMap);
         }
     }
 }
