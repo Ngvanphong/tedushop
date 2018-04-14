@@ -156,6 +156,22 @@
     <Compile Include="Migrations\201804121003186_addsize.Designer.cs">
       <DependentUpon>201804121003186_addsize.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804140350022_order.cs" />
+    <Compile Include="Migrations\201804140350022_order.Designer.cs">
+      <DependentUpon>201804140350022_order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804140457030_change.cs" />
+    <Compile Include="Migrations\201804140457030_change.Designer.cs">
+      <DependentUpon>201804140457030_change.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804140934343_updatesize.cs" />
+    <Compile Include="Migrations\201804140934343_updatesize.Designer.cs">
+      <DependentUpon>201804140934343_updatesize.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804141054353_change3.cs" />
+    <Compile Include="Migrations\201804141054353_change3.Designer.cs">
+      <DependentUpon>201804141054353_change3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reponsitories\ErrorRepository.cs" />
@@ -268,6 +284,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804121003186_addsize.resx">
       <DependentUpon>201804121003186_addsize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804140350022_order.resx">
+      <DependentUpon>201804140350022_order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804140457030_change.resx">
+      <DependentUpon>201804140457030_change.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804140934343_updatesize.resx">
+      <DependentUpon>201804140934343_updatesize.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804141054353_change3.resx">
+      <DependentUpon>201804141054353_change3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -28,6 +28,21 @@ namespace TeduShop.Web.Api
             this._productService = productService;
             this._productImageService = productImageService;
         }
+        [Route("getallparents")]
+        [HttpGet]
+        public HttpResponseMessage GetAll(HttpRequestMessage request)
+        {
+            Func<HttpResponseMessage> func = () =>
+            {
+                var model = _productService.GetAll();
+
+                var responseData = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(model);
+
+                var response = request.CreateResponse(HttpStatusCode.OK, responseData);
+                return response;
+            };
+            return CreateHttpResponse(request, func);
+        }
 
         [Route("getall")]
         [HttpGet]

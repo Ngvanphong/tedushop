@@ -212,6 +212,7 @@
     <Compile Include="Api\AppRoleController.cs" />
     <Compile Include="Api\AppUserController.cs" />
     <Compile Include="Api\FunctionController.cs" />
+    <Compile Include="Api\OrderController.cs" />
     <Compile Include="Api\PostCategoryController.cs" />
     <Compile Include="Api\PostController.cs" />
     <Compile Include="Api\ProductCategoryController.cs" />

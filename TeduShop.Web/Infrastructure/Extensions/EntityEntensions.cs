@@ -166,6 +166,21 @@ namespace TeduShop.Web.Infrastructure.Extensions
             size.Name = sizeVm.Name;
         }
 
+        public static void UpdateOrder(this Order order, OrderViewModel orderVm)
+        {
+            order.CustomerName = orderVm.CustomerName;
+            order.CustomerAddress = orderVm.CustomerAddress;
+            order.CustomerEmail = orderVm.CustomerEmail;
+            order.CustomerMobile = orderVm.CustomerMobile;
+            order.CustomerMessage = orderVm.CustomerMessage;
+            order.PaymentMethod = orderVm.PaymentMethod;
+            order.CreateDate = DateTime.Now;
+            order.CreateBy = orderVm.CreateBy;
+            order.PaymentStatus = orderVm.PaymentStatus;
+            order.Status = orderVm.Status;
+            order.CustomerId = orderVm.CustomerId;
+        }
+
 
     }
 }

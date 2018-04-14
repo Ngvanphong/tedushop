@@ -130,7 +130,9 @@ namespace TeduShop.Web.Api
                 AppUser userDb = await AppUserManager.FindByIdAsync(applicationUserViewModel.Id);
                 try
                 {
-                    userDb.UpdateUser(applicationUserViewModel);
+                    if(userDb.Avatar!=applicationUserViewModel.Avatar)
+                    DeleteElementImage(userDb.Avatar);
+                    userDb.UpdateUser(applicationUserViewModel);                 
                     var result = await AppUserManager.UpdateAsync(userDb);
                     if (result.Succeeded)
                     {
@@ -139,6 +141,8 @@ namespace TeduShop.Web.Api
                         var selectRoles = applicationUserViewModel.Roles.ToArray();
                         selectRoles = selectRoles ?? new string[] { };
                         await AppUserManager.AddToRolesAsync(applicationUserViewModel.Id, selectRoles);
+                        
+
                         return request.CreateResponse(HttpStatusCode.Created, applicationUserViewModel);
                     }
                     else
@@ -154,6 +158,8 @@ namespace TeduShop.Web.Api
             else
                 return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
         }
+
+
 
         [HttpDelete]
         [Route("delete")]

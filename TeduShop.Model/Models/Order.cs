@@ -36,7 +36,10 @@ namespace TeduShop.Model.Models
         [MaxLength(256)]
         public string PaymentStatus { set; get; }
         public bool Status { get; set; }
-        public virtual ICollection<OrderDetail> OrderDetail { set; get; }
+        [StringLength(128)]
+        [Column(TypeName = "nvarchar")]
+        public string CustomerId { set; get; }
+        public virtual ICollection<OrderDetail> OrderDetails { set; get; }
         
     }
 }

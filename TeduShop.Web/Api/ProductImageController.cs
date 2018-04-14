@@ -54,6 +54,25 @@ namespace TeduShop.Web.Api
                     return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             });
         }
+        [HttpPut]
+        [Route("update")]
+        public HttpResponseMessage Update(HttpRequestMessage request, ProductImageViewModel productImageVm)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                if (ModelState.IsValid)
+                {
+                    ProductImage productImageDb = _productImageService.GetByID(productImageVm.ID);
+                    productImageDb.UpdateProductImage(productImageVm);
+                    _productImageService.Add(productImageDb);
+                    _productImageService.Save();
+                    return request.CreateResponse(HttpStatusCode.OK, productImageVm);
+                }
+                else
+                    return request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
+
+            });
+        }
 
         [HttpDelete]
         [Route("delete")]

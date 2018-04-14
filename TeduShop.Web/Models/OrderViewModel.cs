@@ -28,6 +28,8 @@ namespace TeduShop.Web.Models
 
         public string PaymentStatus { set; get; }
         public bool Status { get; set; }
-        public virtual List<OrderDetailViewModel> OrderDetail { set; get; }
+        public string CustomerId { set; get; }
+
+        public virtual ICollection<OrderDetailViewModel> OrderDetails { set; get; }
     }
 }
