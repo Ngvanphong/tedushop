@@ -44,6 +44,7 @@ namespace TeduShop.Web.Api
                 return request.CreateResponse(HttpStatusCode.OK, pagination);
             });
         }
+       
         [Route("add")]
         [HttpPost]
         public HttpResponseMessage Create(HttpRequestMessage request,TagViewModel tagVm)
@@ -65,6 +66,29 @@ namespace TeduShop.Web.Api
                 }
                
 
+            });
+        }
+        
+        [Route("delete")]
+        [HttpDelete]
+        public HttpResponseMessage Delete(HttpRequestMessage request, string id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                _tagService.Delete(id);
+                _tagService.SaveChange();
+                return request.CreateResponse(HttpStatusCode.OK, id);
+            });
+        }
+        [Route("deletealltagnotuse")]
+        [HttpDelete]
+        public HttpResponseMessage Delete(HttpRequestMessage request)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                _tagService.DeleteMultiNotUse();
+                _tagService.SaveChange();
+                return request.CreateResponse(HttpStatusCode.OK, "Xóa thành công");
             });
         }
     }
