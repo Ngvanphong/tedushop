@@ -52,6 +52,7 @@
     <Compile Include="ProductQuantityService.cs" />
     <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TagService.cs" />
     <Compile Include="UserRoleService.cs" />
   </ItemGroup>
   <ItemGroup>

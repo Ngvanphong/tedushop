@@ -181,6 +181,13 @@ namespace TeduShop.Web.Infrastructure.Extensions
             order.CustomerId = orderVm.CustomerId;
         }
 
+        public static void UpdateTag(this Tag tag, TagViewModel tagVm)
+        {
+            tag.Name = tagVm.Name;
+            tag.Type = tagVm.Type;
+           
+        }
+
 
     }
 }

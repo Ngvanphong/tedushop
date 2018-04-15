@@ -219,6 +219,7 @@
     <Compile Include="Api\ProductController.cs" />
     <Compile Include="Api\ProductImageController.cs" />
     <Compile Include="Api\ProductQuantityController.cs" />
+    <Compile Include="Api\TagController.cs" />
     <Compile Include="Api\UploadController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
