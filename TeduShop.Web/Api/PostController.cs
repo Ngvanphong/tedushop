@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -23,13 +24,23 @@ namespace TeduShop.Web.Api
         }
 
         [Route("getall")]
-        public HttpResponseMessage get(HttpRequestMessage request)
+        public HttpResponseMessage get(HttpRequestMessage request, int page, int pageSize=10)
         {
             return CreateHttpResponse(request, () =>
             {
+                int totalRows = 0;
                 IEnumerable<Post> listPostDb = _postService.GetAll();
+                totalRows = listPostDb.Count();
+                listPostDb = listPostDb.OrderByDescending(x => x.UpdatedDate).Skip((page - 1) * pageSize).Take(pageSize);
                 IEnumerable<PostViewModel> listPostVm = Mapper.Map<List<PostViewModel>>(listPostDb);
-                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, listPostVm);
+                PaginationSet<PostViewModel> pagination = new PaginationSet<PostViewModel>()
+                {
+                    PageIndex = page,
+                    PageSize=pageSize,
+                    TotalRows=totalRows,
+                    Items=listPostVm,                   
+                };
+                HttpResponseMessage response = request.CreateResponse(HttpStatusCode.OK, pagination);
                 return response;
             });
         }

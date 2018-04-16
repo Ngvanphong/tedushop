@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TeduShop.Common;
 using TeduShop.Data.Inframestructure;
 using TeduShop.Data.Reponsitories;
 using TeduShop.Model.Models;
@@ -28,16 +29,44 @@ namespace TeduShop.Service
     {
         private IPostRepository _postRepository;
         private IUnitOfWork _unitOfWork;
-
-        public PostService(IPostRepository postRepository, IUnitOfWork unitOfWork)
+        private ITagRepository _tagReponsitory;
+        private IPostTagRepository _postTagRepository;
+        public PostService(IPostRepository postRepository, IUnitOfWork unitOfWork, ITagRepository tagReponsitory, IPostTagRepository postTagRepository)
         {
             this._postRepository = postRepository;
             this._unitOfWork = unitOfWork;
+            this._tagReponsitory = tagReponsitory;
+            this._postTagRepository = postTagRepository;
         }
 
         public int Add(Post post)
         {
-          var query= this._postRepository.Add(post);
+            Post query = _postRepository.Add(post);
+            _unitOfWork.Commit();
+            if (!string.IsNullOrEmpty(post.Tags))
+            {
+                string[] listTag = post.Tags.Split(',');
+                for (int i = 0; i < listTag.Length; i++)
+                {
+                    var tagId = StringHelper.ToUnsignString(listTag[i]);
+                    if (_tagReponsitory.Count(x => x.ID == tagId) == 0)
+                    {
+                        Tag tag = new Tag()
+                        {
+                            ID = tagId,
+                            Name = listTag[i],
+                            Type = CommonConstant.PostTag,
+                        };
+                        _tagReponsitory.Add(tag);
+                    }
+                    PostTag postTag = new PostTag()
+                    {
+                        PostID = query.ID,
+                        TagID = tagId,
+                    };
+                    _postTagRepository.Add(postTag);
+                }
+            }
             return query.ID;
         }
 
