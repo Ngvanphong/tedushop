@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ErrorService.cs" />
+    <Compile Include="FooterService.cs" />
     <Compile Include="FunctionService.cs" />
     <Compile Include="OrderService.cs" />
     <Compile Include="PermissionService.cs" />

@@ -18,7 +18,6 @@ namespace TeduShop.Web.Infrastructure.Extensions
             post.Content = postVm.Content;
             post.Image = postVm.Image;
             post.HomeFlag = postVm.HomeFlag;
-            post.HotFlag = postVm.HotFlag;
             post.ViewCount = postVm.ViewCount;
             post.MetaKeyword = postVm.MetaKeyword;
             post.MetaDiscription = postVm.MetaDiscription;
@@ -27,6 +26,8 @@ namespace TeduShop.Web.Infrastructure.Extensions
             post.UpdatedBy = postVm.UpdatedBy;
             post.UpdatedDate = postVm.UpdatedDate;
             post.Status = postVm.Status;
+            post.Tags = postVm.Tags;
+          
         }
 
         public static void UpdatePostCategory(this PostCategory postCategory, PostCategoryViewModel postCategoryVm)
@@ -47,7 +48,14 @@ namespace TeduShop.Web.Infrastructure.Extensions
             postCategory.UpdatedBy = postCategoryVm.UpdatedBy;
             postCategory.UpdatedDate = postCategoryVm.UpdatedDate;
             postCategory.Status = postCategoryVm.Status;
+            postCategory.HomeOrder = postCategoryVm.HomeOrder;
            
+        }
+        public static void UpdatePostImage(this PostImage postImage, PostImageViewModel postImageVm)
+        {
+            postImage.ID = postImageVm.ID;
+            postImage.Path = postImageVm.Path;
+            postImage.PostId = postImageVm.PostId;
         }
 
         public static void UpdateProduct(this Product product, ProductViewModel productVm)
@@ -186,6 +194,12 @@ namespace TeduShop.Web.Infrastructure.Extensions
             tag.Name = tagVm.Name;
             tag.Type = tagVm.Type;
            
+        }
+
+        public static void UpdateFooter(this Footer footer, FooterViewModel footerVm)
+        {
+            footer.ID = footerVm.ID;
+            footer.Content = footerVm.Content;
         }
 
 

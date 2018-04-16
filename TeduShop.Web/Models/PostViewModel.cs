@@ -21,7 +21,6 @@ namespace TeduShop.Web.Models
 
         public string Content { set; get; }
         public bool? HomeFlag { get; set; }
-        public bool? HotFlag { get; set; }
         public int? ViewCount { get; set; }
         public string Image { get; set; }
 
@@ -30,6 +29,7 @@ namespace TeduShop.Web.Models
         public string MetaKeyword { get; set; }
 
         public string MetaDiscription { get; set; }
+
         public DateTime? CreateDate { get; set; }
 
         public string CreateBy { get; set; }
@@ -37,5 +37,7 @@ namespace TeduShop.Web.Models
 
         public string UpdatedBy { get; set; }
         public bool Status { get; set; }
+
+        public string Tags { set; get; }
     }
 }

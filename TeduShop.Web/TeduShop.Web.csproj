@@ -211,6 +211,7 @@
     <Compile Include="Api\AccountController.cs" />
     <Compile Include="Api\AppRoleController.cs" />
     <Compile Include="Api\AppUserController.cs" />
+    <Compile Include="Api\FooterController.cs" />
     <Compile Include="Api\FunctionController.cs" />
     <Compile Include="Api\OrderController.cs" />
     <Compile Include="Api\PostCategoryController.cs" />
@@ -248,6 +249,7 @@
     <Compile Include="Models\PageViewModel.cs" />
     <Compile Include="Models\PermissionViewModel.cs" />
     <Compile Include="Models\PostCategoryViewModel.cs" />
+    <Compile Include="Models\PostImageViewModel.cs" />
     <Compile Include="Models\PostTagViewModel.cs" />
     <Compile Include="Models\PostViewModel.cs" />
     <Compile Include="Models\ProductCategoryViewModel.cs" />

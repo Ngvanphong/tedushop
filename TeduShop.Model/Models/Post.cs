@@ -36,9 +36,11 @@ namespace TeduShop.Model.Models
 
         public string Content { set; get; }
         public bool? HomeFlag { get; set; }
-        public bool? HotFlag { get; set; }
         public int? ViewCount { get; set; }
-
+      
         public virtual ICollection<PostTag> PostTag { get; set; }
+
+        [MaxLength(256)]
+        public string Tags { set; get; }
     }
 }

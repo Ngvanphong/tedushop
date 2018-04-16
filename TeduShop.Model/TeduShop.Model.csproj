@@ -70,6 +70,7 @@
     <Compile Include="Models\Permission.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\PostCategory.cs" />
+    <Compile Include="Models\PostImage.cs" />
     <Compile Include="Models\PostTag.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductCategory.cs" />

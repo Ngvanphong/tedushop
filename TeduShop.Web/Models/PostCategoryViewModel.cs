@@ -30,6 +30,7 @@ namespace TeduShop.Web.Models
       
         public string UpdatedBy { get; set; }
         public bool Status { get; set; }
+        public int? HomeOrder { set; get; }
 
     }
 }

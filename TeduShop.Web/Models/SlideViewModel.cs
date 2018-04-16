@@ -20,6 +20,8 @@ namespace TeduShop.Web.Models
 
         public int? DisplayOrder { set; get; }
 
+        public string Content { set; get; }
+
         public bool Status { set; get; }
     }
 }

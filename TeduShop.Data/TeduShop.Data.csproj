@@ -172,6 +172,18 @@
     <Compile Include="Migrations\201804141054353_change3.Designer.cs">
       <DependentUpon>201804141054353_change3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804151600198_change-data.cs" />
+    <Compile Include="Migrations\201804151600198_change-data.Designer.cs">
+      <DependentUpon>201804151600198_change-data.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804161212065_update-data6.cs" />
+    <Compile Include="Migrations\201804161212065_update-data6.Designer.cs">
+      <DependentUpon>201804161212065_update-data6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804161320186_change-data78.cs" />
+    <Compile Include="Migrations\201804161320186_change-data78.Designer.cs">
+      <DependentUpon>201804161320186_change-data78.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reponsitories\ErrorRepository.cs" />
@@ -184,6 +196,7 @@
     <Compile Include="Reponsitories\PageRepository.cs" />
     <Compile Include="Reponsitories\PermissionRepository.cs" />
     <Compile Include="Reponsitories\PostCategoryRepository.cs" />
+    <Compile Include="Reponsitories\PostImageRepository.cs" />
     <Compile Include="Reponsitories\PostRepository.cs" />
     <Compile Include="Reponsitories\PostTagRepository.cs" />
     <Compile Include="Reponsitories\ProductCategoryRepository.cs" />
@@ -296,6 +309,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804141054353_change3.resx">
       <DependentUpon>201804141054353_change3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804151600198_change-data.resx">
+      <DependentUpon>201804151600198_change-data.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804161212065_update-data6.resx">
+      <DependentUpon>201804161212065_update-data6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804161320186_change-data78.resx">
+      <DependentUpon>201804161320186_change-data78.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
