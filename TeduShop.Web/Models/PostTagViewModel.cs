@@ -8,7 +8,7 @@ namespace TeduShop.Web.Models
     public class PostTagViewModel
     {
   
-        public int PostID { get; set; }
+        public string PostID { get; set; }
       
         public virtual PostViewModel Post { get; set; }
        

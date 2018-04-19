@@ -64,7 +64,7 @@ namespace TeduShop.Web.Api
                 {
                     ProductImage productImageDb = _productImageService.GetByID(productImageVm.ID);
                     productImageDb.UpdateProductImage(productImageVm);
-                    _productImageService.Add(productImageDb);
+                    _productImageService.Update(productImageDb);
                     _productImageService.Save();
                     return request.CreateResponse(HttpStatusCode.OK, productImageVm);
                 }

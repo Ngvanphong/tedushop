@@ -30,7 +30,7 @@ namespace TeduShop.Model.Models
         public string Image { get; set; }
         public bool? HomeFlag { set; get; }
         public int? HomeOrder { set; get; }
-        public virtual ICollection<Post> Post { get; set; }
+        
        
     }
 }

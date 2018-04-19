@@ -53,9 +53,9 @@ namespace TeduShop.Web.Infrastructure.Extensions
         }
         public static void UpdatePostImage(this PostImage postImage, PostImageViewModel postImageVm)
         {
-            postImage.ID = postImageVm.ID;
             postImage.Path = postImageVm.Path;
             postImage.PostId = postImageVm.PostId;
+            postImage.Caption = postImageVm.Caption;
         }
 
         public static void UpdateProduct(this Product product, ProductViewModel productVm)

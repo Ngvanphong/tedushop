@@ -47,6 +47,7 @@
     <Compile Include="OrderService.cs" />
     <Compile Include="PermissionService.cs" />
     <Compile Include="PostCategoryService.cs" />
+    <Compile Include="PostImageService.cs" />
     <Compile Include="PostService.cs" />
     <Compile Include="ProductCategoryService.cs" />
     <Compile Include="ProductImageService.cs" />

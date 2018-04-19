@@ -13,7 +13,7 @@ namespace TeduShop.Model.Models
     {
         [Key]
         [Column(Order=1)]
-        public int PostID { get; set; }
+        public string PostID { get; set; }
         [ForeignKey("PostID")]
         public virtual Post Post { get; set; }
         [Key]

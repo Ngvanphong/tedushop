@@ -15,10 +15,10 @@ namespace TeduShop.Model.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
-        public int PostId { get; set; }
+        public string PostId { get; set; }
 
-        [ForeignKey("PostId")]
-        public virtual Post Post { get; set; }
+        //[ForeignKey("PostId")]
+        //public virtual Post Post { get; set; }
 
         [StringLength(250)]
         public string Path { get; set; }

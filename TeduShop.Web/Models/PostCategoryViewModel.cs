@@ -18,8 +18,7 @@ namespace TeduShop.Web.Models
 
         public string Image { get; set; }
         public bool? HomeFlag { set; get; }
-        public virtual List<PostViewModel> Post { get; set; }
-
+      
         public string MetaKeyword { get; set; }
  
         public string MetaDiscription { get; set; }

@@ -9,8 +9,7 @@ namespace TeduShop.Model.Models
     public class Post : TableCommon
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { set; get; }
+        public string ID { set; get; }
 
         [Required]
         [MaxLength(50)]

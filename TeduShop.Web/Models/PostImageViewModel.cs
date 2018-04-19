@@ -12,10 +12,9 @@ namespace TeduShop.Web.Models
 
         public int ID { get; set; }
 
-        public int PostId { get; set; }
+        public string PostId { get; set; }
 
-        public virtual PostViewModel Post { get; set; }
-
+      
         public string Path { get; set; }
 
         public string Caption { get; set; }

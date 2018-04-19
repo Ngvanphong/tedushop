@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using TeduShop.Model.Models;
 using TeduShop.Service;
@@ -17,13 +20,17 @@ namespace TeduShop.Web.Api
     public class PostController : ApiControllerBase
     {
         private IPostService _postService;
+        private IPostImageService _postImageService;
+       
 
-        public PostController(IErrorService errorService, IPostService postService) : base(errorService)
+        public PostController(IErrorService errorService, IPostService postService,IPostImageService postImageService) : base(errorService)
         {
             this._postService = postService;
+            this._postImageService = postImageService;
         }
 
         [Route("getall")]
+        [HttpGet]
         public HttpResponseMessage get(HttpRequestMessage request, int page, int pageSize=10)
         {
             return CreateHttpResponse(request, () =>
@@ -45,7 +52,22 @@ namespace TeduShop.Web.Api
             });
         }
 
+        [Route("detail")]
+        [HttpGet]
+        public HttpResponseMessage GetDetail (HttpRequestMessage request, string id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                Post postDb = _postService.GetById(id);
+                PostViewModel postVm = Mapper.Map<PostViewModel>(postDb);
+                return request.CreateResponse(HttpStatusCode.OK, postVm);
+            });
+           
+
+        }
+
         [Route("add")]
+        [HttpPost]
         public HttpResponseMessage post(HttpRequestMessage request, PostViewModel postVm)
         {
             return CreateHttpResponse(request, () =>
@@ -55,9 +77,11 @@ namespace TeduShop.Web.Api
                 {
                     Post postDb = new Post();
                     postDb.UpdatePost(postVm);
-                    var post = _postService.Add(postDb);
+                    postDb.CreateDate = DateTime.Now;
+                    postDb.UpdatedDate = DateTime.Now;
+                    _postService.Add(postDb);
                     _postService.SaveChanges();
-                    response = request.CreateResponse(HttpStatusCode.Created, post);
+                    response = request.CreateResponse(HttpStatusCode.Created, postVm);
                 }
                 else
                     response = request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
@@ -66,6 +90,7 @@ namespace TeduShop.Web.Api
         }
 
         [Route("update")]
+        [HttpPut]
         public HttpResponseMessage put(HttpRequestMessage request, PostViewModel postVm)
         {
             return CreateHttpResponse(request, () =>
@@ -74,10 +99,15 @@ namespace TeduShop.Web.Api
                 if (ModelState.IsValid)
                 {
                     Post postDb = _postService.GetById(postVm.ID);
-                    postDb.UpdatePost(postVm);
+                    if (postDb.Image!=postVm.Image)
+                    {
+                        DeleteElementImage(postDb.Image.ToString());
+                    }
+                    postDb.UpdatePost(postVm);                                             
                     _postService.Update(postDb);
+
                     _postService.SaveChanges();
-                    response = request.CreateResponse(HttpStatusCode.OK);
+                    response = request.CreateResponse(HttpStatusCode.Created,postVm);
                 }
                 else
                     response = request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
@@ -86,14 +116,28 @@ namespace TeduShop.Web.Api
         }
 
         [Route("delete")]
-        public HttpResponseMessage Delete(HttpRequestMessage request, int id)
+        [HttpDelete]
+        public HttpResponseMessage Delete(HttpRequestMessage request, string id)
         {
             HttpResponseMessage response = null;
             return CreateHttpResponse(request, () =>
             {
                 if (ModelState.IsValid)
                 {
+                    //deleteElementImage
+                    IEnumerable<PostImage> listPostImage=_postImageService.getAllByPostId(id);
+                    foreach(var item in listPostImage)
+                    {
+                        DeleteElementImage(item.Path);
+                    }
+                    //delete ThubnailImage
+                    DeleteElementImage(_postService.GetById(id).Image.ToString());                   
+                    //deletePostImage
+                    _postImageService.DeleteMultiByPostId(id);
+                    _postImageService.SaveChange();
+                    //delete post
                     _postService.Delete(id);
+
                     _postService.SaveChanges();
                     response = request.CreateResponse(HttpStatusCode.OK, id);
                 }
@@ -101,6 +145,13 @@ namespace TeduShop.Web.Api
                     response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
                 return response;
             });
+        }
+
+        private void DeleteElementImage(string path)
+        {
+            string pathMap = HttpContext.Current.Server.MapPath(path);
+            if (!string.IsNullOrEmpty(pathMap))
+                File.Delete(pathMap);
         }
     }
 }

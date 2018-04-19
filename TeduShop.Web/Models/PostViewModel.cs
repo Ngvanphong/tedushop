@@ -5,7 +5,7 @@ namespace TeduShop.Web.Models
 {
     public class PostViewModel
     {
-        public int ID { set; get; }
+        public string ID { set; get; }
 
         public string Name { get; set; }
 

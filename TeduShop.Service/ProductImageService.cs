@@ -12,7 +12,7 @@ namespace TeduShop.Service
     public interface IProductImageService
     {
         void Add(ProductImage productImage);
-
+        void Update(ProductImage productImage);
         void Delete(int id);
         ProductImage GetByID(int id);
         List<ProductImage> GetProductImageByProdutID(int id);
@@ -32,6 +32,10 @@ namespace TeduShop.Service
         public void Add(ProductImage productImage)
         {
             this._productImageRepository.Add(productImage);
+        }
+        public void Update(ProductImage productImage)
+        {
+            this._productImageRepository.Update(productImage);
         }
 
         public void Delete(int id)
