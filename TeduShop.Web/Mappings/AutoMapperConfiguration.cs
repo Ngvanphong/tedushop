@@ -20,8 +20,6 @@ namespace TeduShop.Web.Mappings
                   cfg.CreateMap<Order, OrderViewModel>();
                   cfg.CreateMap<OrderDetail, OrderDetailViewModel>();
                   cfg.CreateMap<Footer, FooterViewModel>();
-                  cfg.CreateMap<MenuGroup, MenuGroupViewModel>();
-                  cfg.CreateMap<Menu, MenuViewModel>();
                   cfg.CreateMap<Page, PageViewModel>();
                   cfg.CreateMap<Slide, SlideViewModel>();
                   cfg.CreateMap<SupportOnline, SupportOnlineViewModel>();

@@ -221,6 +221,8 @@
     <Compile Include="Api\ProductController.cs" />
     <Compile Include="Api\ProductImageController.cs" />
     <Compile Include="Api\ProductQuantityController.cs" />
+    <Compile Include="Api\SlideController.cs" />
+    <Compile Include="Api\SupportOnlineController.cs" />
     <Compile Include="Api\TagController.cs" />
     <Compile Include="Api\UploadController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -243,8 +245,6 @@
     <Compile Include="Models\ApplicationUserViewModel.cs" />
     <Compile Include="Models\FooterViewModel.cs" />
     <Compile Include="Models\FunctionViewModel.cs" />
-    <Compile Include="Models\MenuGroupViewModel.cs" />
-    <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\OrderDetailViewModel.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\PageViewModel.cs" />

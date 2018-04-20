@@ -201,6 +201,29 @@ namespace TeduShop.Web.Infrastructure.Extensions
             footer.ID = footerVm.ID;
             footer.Content = footerVm.Content;
         }
+        public static void UpdateSupportOnline(this SupportOnline support, SupportOnlineViewModel supportVm)
+        {
+            support.ID = supportVm.ID;
+            support.Name = supportVm.Name;
+            support.Skype = supportVm.Skype;
+            support.Status = "Kích hoạt";
+            support.Facebook = supportVm.Facebook;
+            support.Mobile = supportVm.Mobile;
+            support.Email = supportVm.Email;
+
+        }
+        public static void UpdateSlide(this Slide slide, SlideViewModel slideVm)
+        {
+            slide.ID = slideVm.ID;
+            slide.Name = slideVm.Name;
+            slide.Status = slideVm.Status;
+            slide.Description = slideVm.Description;
+            slide.DisplayOrder = slideVm.DisplayOrder;
+            slide.Content = slideVm.Content;
+            slide.Image = slideVm.Image;
+            slide.URL = slideVm.URL;
+
+        }
 
 
     }
