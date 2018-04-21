@@ -60,13 +60,9 @@
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\RepositotyBase.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Migrations\201804191428030_reset.cs" />
-    <Compile Include="Migrations\201804191428030_reset.Designer.cs">
-      <DependentUpon>201804191428030_reset.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804201402258_deletemenu.cs" />
-    <Compile Include="Migrations\201804201402258_deletemenu.Designer.cs">
-      <DependentUpon>201804201402258_deletemenu.cs</DependentUpon>
+    <Compile Include="Migrations\201804211612090_finishBasicAdmin.cs" />
+    <Compile Include="Migrations\201804211612090_finishBasicAdmin.Designer.cs">
+      <DependentUpon>201804211612090_finishBasicAdmin.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,6 +71,7 @@
     <Compile Include="Reponsitories\FunctionRepository.cs" />
     <Compile Include="Reponsitories\OrderDetailRepository.cs" />
     <Compile Include="Reponsitories\OrderRepository.cs" />
+    <Compile Include="Reponsitories\OrderUserAnnoucementRepository.cs" />
     <Compile Include="Reponsitories\PageRepository.cs" />
     <Compile Include="Reponsitories\PermissionRepository.cs" />
     <Compile Include="Reponsitories\PostCategoryRepository.cs" />
@@ -108,11 +105,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804191428030_reset.resx">
-      <DependentUpon>201804191428030_reset.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804201402258_deletemenu.resx">
-      <DependentUpon>201804201402258_deletemenu.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804211612090_finishBasicAdmin.resx">
+      <DependentUpon>201804211612090_finishBasicAdmin.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

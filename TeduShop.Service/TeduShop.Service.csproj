@@ -45,6 +45,7 @@
     <Compile Include="FooterService.cs" />
     <Compile Include="FunctionService.cs" />
     <Compile Include="OrderService.cs" />
+    <Compile Include="OrderUserAnnoucementService.cs" />
     <Compile Include="PermissionService.cs" />
     <Compile Include="PostCategoryService.cs" />
     <Compile Include="PostImageService.cs" />

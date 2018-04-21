@@ -64,6 +64,7 @@
     <Compile Include="Models\Function.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetail.cs" />
+    <Compile Include="Models\OrderUserAnnoucement.cs" />
     <Compile Include="Models\Page.cs" />
     <Compile Include="Models\Permission.cs" />
     <Compile Include="Models\Post.cs" />

@@ -224,6 +224,12 @@ namespace TeduShop.Web.Infrastructure.Extensions
             slide.URL = slideVm.URL;
 
         }
+        public static void UpdateOrderUserAnnoucement(this OrderUserAnnoucement annoucement, OrderUserAnnoucementViewModel annoucementVm)
+        {
+            annoucement.UserId = annoucementVm.UserId;
+            annoucement.HasRead = annoucementVm.HasRead;
+            annoucement.OrderId = annoucementVm.OrderId;
+        }
 
 
     }

@@ -42,6 +42,8 @@ namespace TeduShop.Data
         public DbSet<AppRole> AppRoles { set; get; }
         public DbSet<IdentityUserRole> UserRoles { set; get; }
 
+        public DbSet<OrderUserAnnoucement> OrderUserAnnoucements { set; get; }
+
         public static TeduShopDbContext Create()
         {
             return new TeduShopDbContext();

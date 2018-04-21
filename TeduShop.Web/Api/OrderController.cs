@@ -10,6 +10,7 @@ using TeduShop.Web.Infrastructure.Core;
 using TeduShop.Web.Infrastructure.Extensions;
 using TeduShop.Web.Models;
 using TeduShop.Web.Providers;
+using TeduShop.Web.SignalR;
 
 namespace TeduShop.Web.Api
 {
@@ -94,6 +95,10 @@ namespace TeduShop.Web.Api
                      orderDb.OrderDetails = listOrderDetails;
                      _orderService.Create(orderDb);
                      _orderService.Save();
+
+                     //push notification
+                     var annoucement = _orderService.GetDetail(orderDb.ID);
+                     TeduShopHub.PushToAllUsers(Mapper.Map<OrderViewModel>(annoucement), null);
                      return request.CreateResponse(HttpStatusCode.Created, orderVm);
                  }
                  else
