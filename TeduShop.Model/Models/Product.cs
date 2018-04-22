@@ -33,6 +33,7 @@ namespace TeduShop.Model.Models
         public string ThumbnailImage { set; get; }
 
         public Decimal Price { get; set; }
+        
         public Decimal? PromotionPrice { set; get; }
         public int? Warranty { set; get; }
         [MaxLength(500)]

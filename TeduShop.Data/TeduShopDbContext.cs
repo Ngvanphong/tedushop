@@ -54,6 +54,8 @@ namespace TeduShop.Data
             builder.Entity<IdentityUserRole>().HasKey(i => new { i.UserId, i.RoleId }).ToTable("AppUserRoles");
             builder.Entity<IdentityUserLogin>().HasKey(i => i.UserId).ToTable("AppUserLogins");
             builder.Entity<IdentityUserClaim>().HasKey(i => i.UserId).ToTable("AppUserClaims");
+            builder.Entity<Product>().Property(Product => Product.Price).HasPrecision(12, 3);
+            builder.Entity<Product>().Property(Product => Product.PromotionPrice).HasPrecision(12, 3);
 
         }
 
