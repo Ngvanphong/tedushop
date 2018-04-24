@@ -22,6 +22,7 @@
     <!-- styles -->
     <link href="/Assets/client/css/font-awesome.css" rel="stylesheet">
     <link href="/Assets/client/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
     <link href="/Assets/client/css/animate.min.css" rel="stylesheet">
     <link href="/Assets/client/css/owl.carousel.css" rel="stylesheet">
     <link href="/Assets/client/css/owl.theme.css" rel="stylesheet">
@@ -42,35 +43,21 @@
 
 <body>
 
-   @{ Html.RenderAction("Header","Home");}
+    @{ Html.RenderAction("Header", "Home");}
 
 
 
     <div id="all">
         @RenderBody()
-      
+
         <!-- /#content -->
         <!-- *** FOOTER ***
         _________________________________________________________ -->
-        @{Html.RenderAction("Footer", "Home");}      
+        @{Html.RenderAction("Footer", "Home");}
         <!-- /#footer -->
         <!-- *** FOOTER END *** -->
         <!-- *** COPYRIGHT ***
         _________________________________________________________ -->
-        <div id="copyright">
-            <div class="container">
-                <div class="col-md-6">
-                    <p class="pull-left">© 2018 Nguyễn Văn Phong</p>
-
-                </div>
-                <div class="col-md-6">
-                    <p class="pull-right">
-                        Template by <a href="https://bootstrapious.com/e-commerce-templates">Bootstrapious</a> & <a href="https://fity.cz">Fity</a>
-                        <!-- Not removing these links is part of the license conditions of the template. Thanks for understanding :) If you want to use the template without the attribution links, you can do so after supporting further themes development at https://bootstrapious.com/donate  -->
-                    </p>
-                </div>
-            </div>
-        </div>
         <!-- *** COPYRIGHT END *** -->
 
 
@@ -79,8 +66,15 @@
     <!-- /#all -->
     <!-- *** SCRIPTS TO INCLUDE ***
     _________________________________________________________ -->
-    @RenderSection("JavaScriptLayout", required: true)
-   
+    <script src="/Assets/client/js/jquery-1.11.0.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="/Assets/client/js/bootstrap.min.js"></script>
+
+    <script src="~/Assets/client/js/common.js"></script>
+
+
+    @RenderSection("JavaScriptLayout", required: false)
+
 
 
 </body>

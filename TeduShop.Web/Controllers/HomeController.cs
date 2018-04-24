@@ -19,14 +19,23 @@ namespace TeduShop.Web.Controllers
         private IPostService _postService;
         private ISlideService _slideService;
 
+        private ITagService _tagService;
+        private ISupportOnlineService _supportOnline;
+
+        private IFooterService _footerService;
+
         public HomeController(IProductCategoryService productCatgoryService, IPostCategoryService postCategoryService,
-            IProductService productService, IPostService postService,ISlideService slideService)
+            IProductService productService, IPostService postService, ISlideService slideService, ITagService tagService, ISupportOnlineService supportOnline,
+            IFooterService footerService)
         {
             this._productCategoryService = productCatgoryService;
             this._postCategoryService = postCategoryService;
             this._postService = postService;
             this._productService = productService;
             this._slideService = slideService;
+            this._tagService = tagService;
+            this._supportOnline = supportOnline;
+            this._footerService = footerService;
         }
         public ActionResult Index()
         {
@@ -55,8 +64,41 @@ namespace TeduShop.Web.Controllers
         [ChildActionOnly]
         public ActionResult Footer()
         {
+            FooterCommon footVm = new FooterCommon();
+            IEnumerable<ProductCategory> listAll = _productCategoryService.GetAll();
+            IEnumerable<ProductCategory> listParent = _productCategoryService.GetAll().Where(x => x.ParentID == null);
+            List<ProductCategory> listChild = new List<ProductCategory> { };
+            foreach(var item in listParent)
+            {
+                
+                var list = listAll.Where(x => x.ParentID == item.ID);
+                if (list.Count() == 0)
+                {
+                    listChild.Add(item);
+                }
+                else
+                {
+                    listChild.AddRange(list);
+                }
+                
+            }
+            listChild = listChild.OrderBy(x => x.Name).Take(9).ToList();
+            IEnumerable<ProductCategoryViewModel> listCategoryVm = Mapper.Map<IEnumerable<ProductCategoryViewModel>>(listChild);
+            footVm.listCategoryProduct = listCategoryVm;
 
-            return PartialView();
+            IEnumerable<Tag> listTagProdut = _tagService.GetAll().Where(x => x.Type == Common.CommonConstant.ProductTag.ToString()).OrderBy(x => x.Name).Take(9);
+            IEnumerable<TagViewModel> listTagVm = Mapper.Map<IEnumerable<TagViewModel>>(listTagProdut);
+            footVm.tagVm = listTagVm;
+
+            SupportOnline supportDb = _supportOnline.Get();
+            SupportOnlineViewModel supportVm = Mapper.Map<SupportOnlineViewModel>(supportDb);
+            footVm.supportOnlineVm = supportVm;
+
+            Footer footerDb = _footerService.GetAll();
+            FooterViewModel footerVm = Mapper.Map<FooterViewModel>(footerDb);
+            footVm.footerVm = footerVm;
+            
+            return PartialView(footVm);
         }
 
         [ChildActionOnly]
@@ -71,7 +113,7 @@ namespace TeduShop.Web.Controllers
             IEnumerable<ProductCategoryViewModel> productCategoryVm = Mapper.Map<IEnumerable<ProductCategoryViewModel>>(productCategoryDb);
             IEnumerable<PostCategory> postCategoryDb = _postCategoryService.GetAll();
             IEnumerable<PostCategoryViewModel> postCategoryVm = Mapper.Map < IEnumerable<PostCategoryViewModel>>(postCategoryDb);
-
+                      
             headerVm.productCategoryVm = productCategoryVm;
             headerVm.postCategoryVm = postCategoryVm;
 

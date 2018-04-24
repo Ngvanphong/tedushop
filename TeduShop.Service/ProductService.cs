@@ -14,6 +14,7 @@ namespace TeduShop.Service
         void Update(Product product);
 
         void Delete(int id);
+        IEnumerable<string> GetProductName(string productName);
 
         IEnumerable<Product> GetAll();
 
@@ -27,7 +28,9 @@ namespace TeduShop.Service
 
         IEnumerable<Product> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow);
 
-       
+        IEnumerable<Product> GetAllByCategoryPaging(int CategoryId, int page, int pageSize, string sort, out int totalRow);
+
+
 
         void SaveChanges();
     }
@@ -126,6 +129,26 @@ namespace TeduShop.Service
             return query;
         }
 
+        public IEnumerable<Product> GetAllByCategoryPaging(int CategoryId, int page, int pageSize, string sort, out int totalRow)
+        {
+            IEnumerable<Product> query = _productRepository.GetMulti(x => x.Status == true && x.CategoryID == CategoryId);
+            switch (sort)
+            {
+                case "price":
+                    query = query.OrderBy(x => x.Price);
+                    break;
+                case "promotion":
+                    query = query.Where(x => x.PromotionPrice.HasValue).OrderBy(x=>x.PromotionPrice);
+                    break;
+                default:
+                    query = query.OrderByDescending(x => x.UpdatedDate);
+                    break;
+            }
+            totalRow = query.Count();
+            query = query.Skip((page - 1) * pageSize).Take(pageSize);
+            return query;
+        }
+
         public IEnumerable<Product> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow)
         {
             return _productRepository.GetAllByTag(tag, page, pageSize, out totalRow);
@@ -146,6 +169,11 @@ namespace TeduShop.Service
             IEnumerable<Product> listHotProduct = _productRepository.GetMulti(x => x.Status && x.HotFlag == true)
                 .OrderByDescending(x => x.CreateDate);
             return listHotProduct;
+        }
+
+        public IEnumerable<string> GetProductName(string productName)
+        {
+           return _productRepository.GetMulti(x => x.Status && x.Name.Contains(productName)).Select(x => x.Name);
         }
 
         public void SaveChanges()
