@@ -1,10 +1,10 @@
 ﻿@model TeduShop.Web.Infrastructure.Core.PaginationClient<TeduShop.Web.Models.ProductViewModel>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Tìm kiếm";
     Layout = "~/Views/Shared/Layouts.cshtml";
-    var Category = (TeduShop.Web.Models.ProductCategoryViewModel)ViewBag.Category;
-    var urlParent = "/" + Category.Alias + ".pc-" + Category.ID + ".html";
     var sort = (string)ViewBag.Sort;
+    var ProductName = (string)ViewBag.ProductName;
+    var urlSearch = "/search.html?productName=" + ProductName;
 }
 @section JavaScriptLayout {
     <script src="/Assets/client/js/jquery.cookie.js"></script>
@@ -27,7 +27,7 @@
                     <li>
                         <a href="#">Home</a>
                     </li>
-                    <li>@Category.Name</li>
+                    <li>Tìm kiếm</li>
                 </ul>
 
                 <div class="box info-bar">
@@ -40,29 +40,29 @@
                                         <select id="choiceshort" name="sort-by" class="form-control">
                                             @if (sort == "lasted")
                                             {
-                                                <option selected value="@urlParent?page=1 &sort=lasted">Mới nhất</option>
+                                                <option selected value="@urlSearch&page=1 &sort=lasted">Mới nhất</option>
                                             }
                                             else
                                             {
-                                                <option value="@urlParent?page=1 &sort=lasted">Mới nhất</option>
+                                                <option value="@urlSearch&page=1&sort=lasted">Mới nhất</option>
                                             }
                                             @if (sort == "price")
                                             {
-                                                <option selected value="@urlParent?page=1 &sort=price"> Giá ---></option>
+                                                <option selected value="@urlSearch&page=1 &sort=price"> Giá ---></option>
                                             }
                                             else
                                             {
-                                                <option value="@urlParent?page=1 &sort=price"> Giá ---></option>
+                                                <option value="@urlSearch&page=1 &sort=price"> Giá ---></option>
                                             }
                                             @if (sort == "promotion")
                                             {
-                                                <option selected value="@urlParent?page=1&sort=promotion">Khuyến mãi</option>
+                                                <option selected value="@urlSearch&page=1&sort=promotion">Khuyến mãi</option>
                                             }
                                             else
                                             {
-                                                <option value="@urlParent?page=1&sort=promotion">Khuyến mãi</option>
+                                                <option value="@urlSearch&page=1&sort=promotion">Khuyến mãi</option>
                                             }
-                                           
+
                                         </select>
                                     </div>
                                 </form>
@@ -143,7 +143,7 @@
                             @if (Model.PageIndex > 1)
                             {
                                 <li>
-                                    <a href="?page=@(Model.PageIndex - 1)&sort=@sort">&laquo;</a>
+                                    <a href="@urlSearch&page=@(Model.PageIndex - 1)&sort=@sort">&laquo;</a>
                                 </li>
                             }
 
@@ -152,13 +152,13 @@
                                 if (i == Model.PageIndex)
                                 {
                                     <li class="active">
-                                        <a href="?page=@i&sort=@sort">@i</a>
+                                        <a href="@urlSearch&page=@i&sort=@sort">@i</a>
                                     </li>
                                 }
                                 else
                                 {
                                     <li>
-                                        <a href="?page=@i&sort=@sort">@i</a>
+                                        <a href="@urlSearch&page=@i&sort=@sort">@i</a>
                                     </li>
                                 }
 
@@ -167,7 +167,7 @@
                             @if (Model.PageIndex < Model.TotalPage)
                             {
                                 <li>
-                                    <a href="?page=@(Model.PageIndex + 1)&sort=@sort ">&raquo;</a>
+                                    <a href="@urlSearch&page=@(Model.PageIndex + 1)&sort=@sort ">&raquo;</a>
                                 </li>
                             }
 
@@ -185,4 +185,5 @@
         <!-- /.container -->
     </div>
     <!-- /#content -->
+
 

@@ -10,6 +10,12 @@ namespace TeduShop.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+              name: "Search Product",
+              url: "search.html",
+              defaults: new { controller = "Product", action = "SearchProduct", id = UrlParameter.Optional },
+               namespaces: new string[] { "TeduShop.Web.Controllers" }
+          );
+            routes.MapRoute(
                name: "Product Caterory",
                url: "{alias}.pc-{id}.html",
                defaults: new { controller = "Product", action = "Index", id = UrlParameter.Optional },

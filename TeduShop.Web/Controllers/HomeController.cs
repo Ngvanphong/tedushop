@@ -43,10 +43,10 @@ namespace TeduShop.Web.Controllers
             {
 
             };
-            IEnumerable<Product> listHotProductDb = _productService.GetAll().Where(x => x.HotFlag == true && x.HotFlag == true).OrderByDescending(x => x.UpdatedDate).Take(7);
+            IEnumerable<Product> listHotProductDb = _productService.GetHotProduct();
             IEnumerable<ProductViewModel> listHotProductVm = Mapper.Map<IEnumerable<ProductViewModel>>(listHotProductDb);
             indexVm.productHotVm = listHotProductVm;
-            IEnumerable<Product> listPromotionProductDb = _productService.GetAll().Where(x => x.HotFlag == true && x.PromotionPrice.HasValue).OrderByDescending(x=>x.UpdatedDate).Take(7);
+            IEnumerable<Product> listPromotionProductDb = _productService.GetPromotionProduct();
             IEnumerable<ProductViewModel> listPromotionVm = Mapper.Map<IEnumerable<ProductViewModel>>(listPromotionProductDb);
             indexVm.productPromotionVm = listPromotionVm;
 
@@ -66,7 +66,7 @@ namespace TeduShop.Web.Controllers
         {
             FooterCommon footVm = new FooterCommon();
             IEnumerable<ProductCategory> listAll = _productCategoryService.GetAll();
-            IEnumerable<ProductCategory> listParent = _productCategoryService.GetAll().Where(x => x.ParentID == null);
+            IEnumerable<ProductCategory> listParent = listAll.Where(x => x.ParentID == null);
             List<ProductCategory> listChild = new List<ProductCategory> { };
             foreach(var item in listParent)
             {

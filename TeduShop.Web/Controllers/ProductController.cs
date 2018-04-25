@@ -55,5 +55,26 @@ namespace TeduShop.Web.Controllers
                 
             
         }
+
+        public ActionResult SearchProduct(string productName, int page = 1, string sort="")
+        {
+            int pageSize = Common.CommonConstant.PageSize;
+            int totalRow = 0;
+            ViewBag.Sort = sort;
+            ViewBag.ProductName = productName;
+            IEnumerable<Product> listProductDb = _productService.GetAllByNamePaging(productName, page, pageSize, sort, out totalRow);
+            IEnumerable<ProductViewModel> listProductVm = Mapper.Map<IEnumerable<ProductViewModel>>(listProductDb);
+            int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
+            PaginationClient<ProductViewModel> pagination = new PaginationClient<ProductViewModel>()
+            {
+                PageDisplay=Common.CommonConstant.PageDisplay,
+                PageIndex=page,
+                PageSize=pageSize,
+                TotalPage=totalPage,
+                Items=listProductVm,
+                TotalRows=totalRow,
+            };
+            return View(pagination);
+        }
     }
 }
