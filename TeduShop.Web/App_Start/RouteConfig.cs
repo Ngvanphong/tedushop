@@ -10,6 +10,12 @@ namespace TeduShop.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+          name: "Contact",
+          url: "contact.html",
+          defaults: new { controller = "Contact", action = "Index", id = UrlParameter.Optional },
+           namespaces: new string[] { "TeduShop.Web.Controllers" }
+      );
+            routes.MapRoute(
             name: "Promotion Product",
             url: "promotion-product.html",
             defaults: new { controller = "Product", action = "PromotionProduct", id = UrlParameter.Optional },
@@ -41,6 +47,22 @@ namespace TeduShop.Web
                 defaults: new { controller = "Product", action = "Detail", id = UrlParameter.Optional },
                  namespaces: new string[] { "TeduShop.Web.Controllers" }
             );
+
+            routes.MapRoute(
+                name: "Post Category",
+                url: "{alias}.blog-{id}.html",
+                defaults: new { controller = "Post", action = "Index", id = UrlParameter.Optional },
+                 namespaces: new string[] { "TeduShop.Web.Controllers" }
+            );
+
+            routes.MapRoute(
+               name: "Post Detail",
+               url: "{alias}.blog-detail-{id}.html",
+               defaults: new { controller = "Post", action = "Detail", id = UrlParameter.Optional },
+                namespaces: new string[] { "TeduShop.Web.Controllers" }
+           );
+
+
             routes.MapRoute(
                 name: "Home",
                 url: "index.html",

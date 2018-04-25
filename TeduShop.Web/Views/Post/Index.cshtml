@@ -1,0 +1,91 @@
+﻿@model TeduShop.Web.Infrastructure.Core.PaginationClient<TeduShop.Web.Models.PostViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layouts.cshtml";
+    var Category = (TeduShop.Web.Models.PostCategoryViewModel)ViewBag.Category;
+}
+
+@section JavaScriptLayout {
+    <script src="/Assets/client/js/jquery.cookie.js"></script>
+    <script src="/Assets/client/js/waypoints.min.js"></script>
+    <script src="/Assets/client/js/modernizr.js"></script>
+    <script src="/Assets/client/js/bootstrap-hover-dropdown.js"></script>
+    <script src="/Assets/client/js/owl.carousel.min.js"></script>
+    <script src="/Assets/client/js/front.js"></script>
+}
+
+<div id="all">
+
+    <div id="content">
+        <div class="container">
+
+            <!-- *** LEFT COLUMN ***
+            _________________________________________________________ -->
+
+            <div class="col-sm-9 col-md-9" id="blog-listing">
+
+                <ul class="breadcrumb">
+
+                    <li>
+                        <a href="#">Home</a>
+                    </li>
+                    <li>@Category.Name</li>
+                </ul>
+                @if (Model.Count > 0)
+                {
+                    foreach (var item in Model.Items)
+                    {
+                        var url = "/" + item.Alias + ".blog-detail-" + item.ID + ".html";
+                        <div class="post">
+                            <hr>
+                            <p class="date-comments">
+                                <a href="@url"><i class="fa fa-calendar-o"></i> @item.UpdatedDate</a>
+                            </p>
+                            <div class="image">
+                                <a href="@url">
+                                    <img src="@item.Image" class="img-responsive" alt="@item.Name">
+                                </a>
+                            </div>
+                            <p class="intro">
+                                @item.Description
+                            </p>
+                            <p class="read-more">
+                                <a href="post.html" class="btn btn-primary">Xem thêm</a>
+                            </p>
+                        </div>
+                    }
+
+
+                    <ul class="pager">
+                        @if (Model.PageIndex > 1)
+                        {
+                            <li class="previous">
+                                <a href="?page=@(Model.PageIndex-1)">&larr; Lùi</a>
+                            </li>
+                        }
+
+                        @if (Model.PageIndex < Model.TotalPage)
+                        {
+                            <li class="next">
+                                <a href="?page=@(Model.PageIndex+1)">Tiếp &rarr;</a>
+                            </li>
+                        }
+
+                    </ul>
+
+
+                }
+                else
+                {
+                    <div style="text-align:center"><h3>Hiện tại chưa có bài viết nào</h3></div>
+                }
+
+
+
+            </div>
+            <!-- /.col-md-9 -->
+
+        </div>
+        <!-- /.container -->
+    </div>
+
