@@ -1,15 +1,11 @@
-﻿@model TeduShop.Web.Infrastructure.Core.PaginationClient<TeduShop.Web.Models.ProductViewModel>
+﻿
+@model TeduShop.Web.Infrastructure.Core.PaginationClient<TeduShop.Web.Models.ProductViewModel>
 @{
-    ViewBag.Title = "Tìm kiếm";
+    ViewBag.Title = "Sản phẩm khuyến mãi";
     Layout = "~/Views/Shared/Layouts.cshtml";
-    var sort = (string)ViewBag.Sort;
-    var ProductName = (string)ViewBag.ProductName;
-    var urlSearch = "/search.html?productName=" + ProductName;
 }
 @section JavaScriptLayout {
     <script src="/Assets/client/js/jquery.cookie.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-    <script src="~/Assets/client/js/Sort.js"></script>
     <script src="/Assets/client/js/waypoints.min.js"></script>
     <script src="/Assets/client/js/modernizr.js"></script>
     <script src="/Assets/client/js/bootstrap-hover-dropdown.js"></script>
@@ -27,49 +23,9 @@
                     <li>
                         <a href="/index.html">Home</a>
                     </li>
-                    <li>Tìm kiếm</li>
+                    <li>Sản phẩm nổi bật</li>
                 </ul>
 
-                <div class="box info-bar">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-12  products-number-sort">
-                            <div class="row">
-                                <form class="form-inline">
-                                    <div class="products-sort-by" style="text-align:right;">
-                                        <strong>Sắp xếp</strong>
-                                        <select id="choiceshort" name="sort-by" class="form-control">
-                                            @if (sort == "lasted")
-                                            {
-                                                <option selected value="@urlSearch&page=1 &sort=lasted">Mới nhất</option>
-                                            }
-                                            else
-                                            {
-                                                <option value="@urlSearch&page=1&sort=lasted">Mới nhất</option>
-                                            }
-                                            @if (sort == "price")
-                                            {
-                                                <option selected value="@urlSearch&page=1 &sort=price"> Giá ---></option>
-                                            }
-                                            else
-                                            {
-                                                <option value="@urlSearch&page=1 &sort=price"> Giá ---></option>
-                                            }
-                                            @if (sort == "promotion")
-                                            {
-                                                <option selected value="@urlSearch&page=1&sort=promotion">Khuyến mãi</option>
-                                            }
-                                            else
-                                            {
-                                                <option value="@urlSearch&page=1&sort=promotion">Khuyến mãi</option>
-                                            }
-
-                                        </select>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <div id="productSort" class="row products">
                     @if (@Model.Count > 0)
@@ -93,14 +49,8 @@
                                     </a>
                                     <div class="text">
                                         <h3><a href="detail.html">@item.Name</a></h3>
-                                        @if (item.PromotionPrice.HasValue == true)
-                                        {
+               
                                             <p class="price"><del>@item.Price</del>@item.PromotionPrice</p>
-                                        }
-                                        else
-                                        {
-                                            <p class="price">@item.Price</p>
-                                        }
 
                                         <p class="buttons">
                                             <a href="@url" class="btn btn-default">Chi tiết</a>
@@ -108,13 +58,11 @@
                                         </p>
                                     </div>
                                     <!-- /.text -->
-                                    @if (item.PromotionPrice.HasValue == true)
-                                    {
+
                                         <div class="ribbon sale">
                                             <div class="theribbon">SALE</div>
                                             <div class="ribbon-background"></div>
                                         </div>
-                                    }
 
                                     <!-- /.ribbon -->
 
@@ -143,7 +91,7 @@
                             @if (Model.PageIndex > 1)
                             {
                                 <li>
-                                    <a href="@urlSearch&page=@(Model.PageIndex - 1)&sort=@sort">&laquo;</a>
+                                    <a href="?page=@(Model.PageIndex - 1)">&laquo;</a>
                                 </li>
                             }
 
@@ -152,13 +100,13 @@
                                 if (i == Model.PageIndex)
                                 {
                                     <li class="active">
-                                        <a href="@urlSearch&page=@i&sort=@sort">@i</a>
+                                        <a href="?page=@i">@i</a>
                                     </li>
                                 }
                                 else
                                 {
                                     <li>
-                                        <a href="@urlSearch&page=@i&sort=@sort">@i</a>
+                                        <a href="?page=@i">@i</a>
                                     </li>
                                 }
 
@@ -167,7 +115,7 @@
                             @if (Model.PageIndex < Model.TotalPage)
                             {
                                 <li>
-                                    <a href="@urlSearch&page=@(Model.PageIndex + 1)&sort=@sort ">&raquo;</a>
+                                    <a href="?page=@(Model.PageIndex + 1)">&raquo;</a>
                                 </li>
                             }
 
@@ -185,5 +133,6 @@
         <!-- /.container -->
     </div>
     <!-- /#content -->
+
 
 

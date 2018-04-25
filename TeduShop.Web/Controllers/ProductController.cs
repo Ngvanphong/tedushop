@@ -15,10 +15,12 @@ namespace TeduShop.Web.Controllers
     {
         private IProductService _productService;
         private IProductCategoryService _productCategoryService;
-        public ProductController(IProductService productService, IProductCategoryService productCategoryService)
+        private IProductImageService _productImageService;
+        public ProductController(IProductService productService, IProductCategoryService productCategoryService, IProductImageService productImageService)
         {
             this._productService = productService;
             this._productCategoryService = productCategoryService;
+            this._productImageService = productImageService;
         }
         // GET: ProductCategory
         public ActionResult Index(int id, int page = 1, string sort = "")
@@ -75,6 +77,64 @@ namespace TeduShop.Web.Controllers
                 TotalRows=totalRow,
             };
             return View(pagination);
+        }
+
+        public ActionResult Detail(int id)
+        {
+            Product productDb = _productService.GetById(id);
+            ProductViewModel productVm = Mapper.Map<ProductViewModel>(productDb);
+            IEnumerable<Product> listProductDb = _productService.GetProductRelate(productVm.CategoryID);
+            IEnumerable<ProductViewModel> listProductVm = Mapper.Map<IEnumerable<ProductViewModel>>(listProductDb);
+            IEnumerable<ProductImage> listProductImageDb = _productImageService.GetProductImageByProdutID(id);
+            IEnumerable<ProductImageViewModel> listProductImageVm = Mapper.Map<IEnumerable<ProductImageViewModel>>(listProductImageDb);
+            ProductDetailViewModel ProductDetail = new ProductDetailViewModel()
+            {
+                ListProductImageVm = listProductImageVm,
+                ListProductVm = listProductVm,
+                ProductVm = productVm
+            };
+            return View(ProductDetail);
+
+        }
+
+        public ActionResult HotProduct(int page=1)
+        {
+            int pageSize = Common.CommonConstant.PageSize;
+            int totalRow = 0;
+            IEnumerable<Product> listHotProductDb = _productService.GetAllHotProduct(page,pageSize,out totalRow);
+            IEnumerable<ProductViewModel> listHotProductVm = Mapper.Map<IEnumerable<ProductViewModel>>(listHotProductDb);
+            int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
+            PaginationClient<ProductViewModel> paginnation = new PaginationClient<ProductViewModel>()
+            {
+                PageSize=pageSize,
+                PageDisplay=Common.CommonConstant.PageDisplay,
+                PageIndex =page,
+                TotalPage=totalPage,
+                TotalRows=totalRow,
+                Items=listHotProductVm,
+            };
+            return View(paginnation);
+
+        }
+
+        public ActionResult PromotionProduct(int page = 1)
+        {
+            int pageSize = Common.CommonConstant.PageSize;
+            int totalRow = 0;
+            IEnumerable<Product> listProductDb = _productService.GetAllPromotionProduct(page, pageSize, out totalRow);
+            IEnumerable<ProductViewModel> listProductVm = Mapper.Map<IEnumerable<ProductViewModel>>(listProductDb);
+            int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
+            PaginationClient<ProductViewModel> pagination = new PaginationClient<ProductViewModel>()
+            {
+                PageIndex = page,
+                PageSize = pageSize,
+                PageDisplay = Common.CommonConstant.PageDisplay,
+                TotalPage = totalPage,
+                Items = listProductVm,
+                TotalRows=totalRow
+            };
+            return View(pagination);
+
         }
     }
 }

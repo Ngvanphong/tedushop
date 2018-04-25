@@ -1,0 +1,120 @@
+﻿@model TeduShop.Web.Models.ProductDetailViewModel
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/Layouts.cshtml";
+}
+@section JavaScriptLayout {
+    <script src="/Assets/client/js/jquery.cookie.js"></script>
+    <script src="/Assets/client/js/waypoints.min.js"></script>
+    <script src="/Assets/client/js/modernizr.js"></script>
+    <script src="/Assets/client/js/bootstrap-hover-dropdown.js"></script>
+    <script src="/Assets/client/js/owl.carousel.min.js"></script>
+    <script src="/Assets/client/js/front.js"></script>
+}
+<div id="all">
+    <div id="content">
+        <div class="container">
+
+
+            <div class="col-md-12">
+
+                <div class="row" id="productMain">
+                    <div class="col-sm-6 col-md-6 col-xs12">
+                        <div id="mainImage">
+                            <img src="@Model.ProductVm.ThumbnailImage" alt="@Model.ProductVm.Name" class="img-responsive">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="row" id="thumbs">
+                            @foreach (var item in Model.ListProductImageVm)
+                            {
+                                <div class="col-xs-4">
+                                    <a href="@item.Path" class="thumb">
+                                        <img src="@item.Path" alt="@item.Caption" class="img-responsive">
+                                    </a>
+                                </div>
+                            }
+
+                        </div>
+                        <div class="box">
+                            <h1 class="text-center">@Model.ProductVm.Name</h1>
+                            <p class="goToDescription">
+                                @Model.ProductVm.Description </br>
+                                <a href="#details" class="scroll-to">Chi tiết</a>
+                            </p>
+                            @if (Model.ProductVm.PromotionPrice.HasValue)
+                            {
+                                <p class="price">@Model.ProductVm.PromotionPrice</p>
+                            }
+                            else
+                            {
+                                <p class="price">@Model.ProductVm.Price</p>
+                            }
+
+                            <p class="text-center buttons">
+                                <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Mua hàng</a>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="box" id="details">
+
+                    <h4>Chi tiết sản phẩm</h4>
+                    <p>@Html.Raw(Model.ProductVm.Content)</p>
+
+                    <hr>
+                </div>
+                @if (Model.ListProductVm.Count() > 1)
+                {
+                    <div class="row same-height-row">
+                        <div class="col-md-12">
+                            <h3>Sản phầm liên quan</h3>
+                        </div>
+
+
+                        @foreach (var item in Model.ListProductVm)
+                        {
+                            var url = "/" + item.Alias + ".p-" + item.ID + ".html";
+                            <div class="col-md-3 col-sm-6">
+                                <div class="product same-height">
+                                    <div class="flip-container">
+                                        <div class="flipper">
+                                            <div class="front">
+                                                <a href="@url">
+                                                    <img src="@item.ThumbnailImage" alt="@item.Name" class="img-responsive">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="@url" class="invisible">
+                                        <img src="@item.ThumbnailImage" alt="" class="img-responsive">
+                                    </a>
+                                    <div class="text">
+                                        <h3>@item.Name</h3>
+                                        @if (item.PromotionPrice.HasValue)
+                                        {
+                                            <p class="price"><del>@item.Price</del>@item.PromotionPrice</p>
+                                        }
+                                        else
+                                        {
+                                            <p class="price">@item.Price</p>
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        <!-- /.product -->
+                    </div>
+                }
+
+            </div>
+            <!-- /.col-md-9 -->
+        </div>
+        <!-- /.container -->
+    </div>
+

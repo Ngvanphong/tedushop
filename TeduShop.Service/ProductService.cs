@@ -25,13 +25,17 @@ namespace TeduShop.Service
 
         Product GetById(int id);
         IEnumerable<Product> GetHotProduct();
+        IEnumerable<Product> GetAllHotProduct(int page, int pageSize, out int totalRow);
         IEnumerable<Product> GetPromotionProduct();
+        IEnumerable<Product> GetAllPromotionProduct(int page, int pageSize, out int totalRow);
 
         IEnumerable<Product> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow);
 
         IEnumerable<Product> GetAllByCategoryPaging(int CategoryId, int page, int pageSize, string sort, out int totalRow);
 
         IEnumerable<Product> GetAllByNamePaging(string Name, int page, int pageSize, string sort, out int totalRow);
+
+        IEnumerable<Product> GetProductRelate(int CategoryId);
 
 
 
@@ -194,9 +198,32 @@ namespace TeduShop.Service
             return listHotProduct;
         }
 
+        public IEnumerable<Product> GetAllHotProduct(int page, int pageSize, out int totalRow)
+        {
+            IEnumerable<Product> listHotProduct = _productRepository.GetMulti(x => x.Status == true && x.HotFlag == true).OrderByDescending(x => x.UpdatedDate);
+            totalRow = listHotProduct.Count();
+            listHotProduct = listHotProduct.Skip((page - 1) * pageSize).Take(pageSize);
+
+            return listHotProduct;
+        }
+
+        public IEnumerable<Product> GetAllPromotionProduct(int page, int pageSize, out int totalRow)
+        {
+            IEnumerable<Product> listPromotionProduct = _productRepository.GetMulti(x => x.Status == true && x.PromotionPrice.HasValue).OrderByDescending(x => x.UpdatedDate);
+            totalRow = listPromotionProduct.Count();
+            listPromotionProduct = listPromotionProduct.Skip((page - 1) * pageSize).Take(pageSize);
+
+            return listPromotionProduct;
+        }
+
         public IEnumerable<string> GetProductName(string productName)
         {
            return _productRepository.GetMulti(x => x.Status && x.Name.Contains(productName)).Select(x => x.Name);
+        }
+
+        public IEnumerable<Product> GetProductRelate(int CategoryId)
+        {
+            return _productRepository.GetMulti(x => x.Status == true && x.CategoryID == CategoryId).OrderBy(x => x.UpdatedDate).Take(8);
         }
 
         public IEnumerable<Product> GetPromotionProduct()

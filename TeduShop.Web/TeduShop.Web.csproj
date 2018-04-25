@@ -273,6 +273,7 @@
     <Compile Include="Models\PostTagViewModel.cs" />
     <Compile Include="Models\PostViewModel.cs" />
     <Compile Include="Models\ProductCategoryViewModel.cs" />
+    <Compile Include="Models\ProductDetailViewModel.cs" />
     <Compile Include="Models\ProductImageViewModel.cs" />
     <Compile Include="Models\ProductQuantityViewModel.cs" />
     <Compile Include="Models\ProductTagViewModel.cs" />
@@ -419,6 +420,9 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Product\SearchProduct.cshtml" />
+    <Content Include="Views\Product\Detail.cshtml" />
+    <Content Include="Views\Product\HotProduct.cshtml" />
+    <Content Include="Views\Product\PromotionProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
