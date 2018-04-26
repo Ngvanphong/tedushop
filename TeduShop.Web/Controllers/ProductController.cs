@@ -13,14 +13,17 @@ namespace TeduShop.Web.Controllers
 {
     public class ProductController : Controller
     {
+        private ITagService _tagService;
         private IProductService _productService;
         private IProductCategoryService _productCategoryService;
         private IProductImageService _productImageService;
-        public ProductController(IProductService productService, IProductCategoryService productCategoryService, IProductImageService productImageService)
+        public ProductController(IProductService productService, IProductCategoryService productCategoryService, IProductImageService productImageService,
+          ITagService tagService)
         {
             this._productService = productService;
             this._productCategoryService = productCategoryService;
             this._productImageService = productImageService;
+            this._tagService = tagService;
         }
         // GET: ProductCategory
         public ActionResult Index(int id, int page = 1, string sort = "")
@@ -87,6 +90,9 @@ namespace TeduShop.Web.Controllers
             IEnumerable<ProductViewModel> listProductVm = Mapper.Map<IEnumerable<ProductViewModel>>(listProductDb);
             IEnumerable<ProductImage> listProductImageDb = _productImageService.GetProductImageByProdutID(id);
             IEnumerable<ProductImageViewModel> listProductImageVm = Mapper.Map<IEnumerable<ProductImageViewModel>>(listProductImageDb);
+            IEnumerable<Tag> listTagDb = _tagService.GetTagByProductId(id);
+            IEnumerable<TagViewModel> listTagVm = Mapper.Map<IEnumerable<TagViewModel>>(listTagDb);
+            ViewBag.TagProducts = listTagVm;
             ProductDetailViewModel ProductDetail = new ProductDetailViewModel()
             {
                 ListProductImageVm = listProductImageVm,
@@ -133,6 +139,26 @@ namespace TeduShop.Web.Controllers
                 Items = listProductVm,
                 TotalRows=totalRow
             };
+            return View(pagination);
+
+        }
+        public ActionResult Tag(string tagId, int page=1)
+        {
+            int pageSize = Common.CommonConstant.PageSize;
+            int totalRow = 0;
+            IEnumerable<Product> listProductDb = _productService.GetAllByTagPaging(tagId, page, pageSize, out totalRow);
+            IEnumerable<ProductViewModel> listProductVm = Mapper.Map<IEnumerable<ProductViewModel>>(listProductDb);
+            int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
+            PaginationClient<ProductViewModel> pagination = new PaginationClient<ProductViewModel>()
+            {
+                PageIndex=page,
+                PageDisplay=Common.CommonConstant.PageDisplay,
+                PageSize=pageSize,
+                TotalPage=totalPage,
+                TotalRows=totalRow,
+                Items=listProductVm,
+            };
+            ViewBag.ProductTag =Mapper.Map<TagViewModel>(_tagService.GetDetail(tagId));
             return View(pagination);
 
         }

@@ -27,7 +27,7 @@
                 <ul>
                     @foreach (var item in Model.tagVm)
                     {
-                        var url = "/" + item.ID + ".t.html";
+                        var url = "/tag-" + item.ID + ".html";
                         <li>
                             <a href="@url">@item.Name</a>
                         </li>

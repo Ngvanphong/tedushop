@@ -1,0 +1,64 @@
+﻿@model TeduShop.Web.Models.PostViewModel
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/Layouts.cshtml";
+
+}
+
+@section JavaScriptLayout {
+    <script src="/Assets/client/js/jquery.cookie.js"></script>
+    <script src="/Assets/client/js/waypoints.min.js"></script>
+    <script src="/Assets/client/js/modernizr.js"></script>
+    <script src="/Assets/client/js/bootstrap-hover-dropdown.js"></script>
+    <script src="/Assets/client/js/owl.carousel.min.js"></script>
+    <script src="/Assets/client/js/front.js"></script>
+}
+
+<div id="all">
+
+    <div id="content" >
+        <div class="container" >
+
+            <div class="col-sm-12">
+
+                <ul class="breadcrumb">
+
+                    <li>
+                        <a href="/index.html">Home</a>
+                    </li>
+                   @{var urlCategory = "/" + Model.PostCategory.Alias + ".blog-" + Model.PostCategory.ID + ".html";}
+                    <li>
+                        <a href="@urlCategory">@Model.PostCategory.Name</a>
+                    </li>
+                    <li>@Model.Name</li>
+                </ul>
+            </div>
+
+            <div class="col-sm-12 col-md-12" id="blog-post">
+
+
+                <div class="box">
+
+                    <h1>@Model.Name</h1>
+                    <p>@Model.UpdatedDate</p>
+                    <p class="lead">@Model.Description</p>
+
+                    <div id="post-content">
+                        @Html.Raw(Model.Content)
+                    </div>
+                    <!-- /#post-content -->
+
+
+
+                </div>
+                <!-- /#comments -->
+
+
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /#blog-post -->
+
+    </div>
+    <!-- /.container -->
+</div>

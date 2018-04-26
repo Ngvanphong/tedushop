@@ -44,5 +44,12 @@ namespace TeduShop.Web.Controllers
 
             return View(pagination);
         }
+
+        public ActionResult Detail(string postid)
+        {
+            Post postDb = _postService.GetById(postid);
+            PostViewModel postVm = Mapper.Map<PostViewModel>(postDb);            
+            return View(postVm);
+        }
     }
 }

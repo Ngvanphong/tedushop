@@ -35,24 +35,26 @@
                 {
                     foreach (var item in Model.Items)
                     {
-                        var url = "/" + item.Alias + ".blog-detail-" + item.ID + ".html";
-                        <div class="post">
-                            <hr>
-                            <p class="date-comments">
-                                <a href="@url"><i class="fa fa-calendar-o"></i> @item.UpdatedDate</a>
-                            </p>
-                            <div class="image">
-                                <a href="@url">
-                                    <img src="@item.Image" class="img-responsive" alt="@item.Name">
-                                </a>
-                            </div>
-                            <p class="intro">
-                                @item.Description
-                            </p>
-                            <p class="read-more">
-                                <a href="post.html" class="btn btn-primary">Xem thêm</a>
-                            </p>
-                        </div>
+                        
+                        var url = "/blog-detail.html"+"?postid="+item.ID;
+                <div class="post">
+                    <div class="col-md-12 col-sm-12"> <h4>@item.Name</h4></div>
+                    <hr>
+                    <p class="date-comments">
+                        <a href="@url"><i class="fa fa-calendar-o"></i> @item.UpdatedDate</a>
+                    </p>
+                    <div class="image">
+                        <a href="@url">
+                            <img src="@item.Image" class="img-responsive" alt="@item.Name">
+                        </a>
+                    </div>
+                    <p class="intro">
+                        @item.Description
+                    </p>
+                    <p class="read-more">
+                        <a href="@url" class="btn btn-primary">Xem thêm</a>
+                    </p>
+                </div>
                     }
 
 

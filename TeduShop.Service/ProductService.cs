@@ -35,6 +35,8 @@ namespace TeduShop.Service
 
         IEnumerable<Product> GetAllByNamePaging(string Name, int page, int pageSize, string sort, out int totalRow);
 
+    
+
         IEnumerable<Product> GetProductRelate(int CategoryId);
 
 

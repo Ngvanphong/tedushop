@@ -104,7 +104,7 @@ namespace TeduShop.Service
 
         public Post GetById(string id)
         {
-            return this._postRepository.GetSingleByCondition(x => x.ID == id);
+            return this._postRepository.GetSingleByCondition(x => x.ID == id,new string[] { "PostCategory" });
         }
 
         public void SaveChanges()

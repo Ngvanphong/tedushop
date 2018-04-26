@@ -17,6 +17,7 @@ namespace TeduShop.Service
         void Update(Tag tag);
         void Delete(string id);
         void DeleteMultiNotUse();
+        IEnumerable<Tag> GetTagByProductId(int productId);
         void SaveChange();
 
     }
@@ -66,6 +67,11 @@ namespace TeduShop.Service
         public Tag GetDetail(string id)
         {
             return _tagRepository.GetSingleByCondition(x => x.ID == id);
+        }
+
+        public IEnumerable<Tag> GetTagByProductId(int productId)
+        {
+            return _tagRepository.GetTagByProductId(productId);
         }
 
         public void SaveChange()

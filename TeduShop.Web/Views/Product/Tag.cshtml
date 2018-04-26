@@ -1,8 +1,10 @@
 ﻿
 @model TeduShop.Web.Infrastructure.Core.PaginationClient<TeduShop.Web.Models.ProductViewModel>
+
 @{
-    ViewBag.Title = "Sản phẩm khuyến mãi";
+    ViewBag.Title = "Tag";
     Layout = "~/Views/Shared/Layouts.cshtml";
+    var ProductTag = (TeduShop.Web.Models.TagViewModel)ViewBag.ProductTag;
 }
 @section JavaScriptLayout {
     <script src="/Assets/client/js/jquery.cookie.js"></script>
@@ -23,7 +25,7 @@
                     <li>
                         <a href="/index.html">Home</a>
                     </li>
-                    <li>Sản phẩm nổi bật</li>
+                    <li>@ProductTag.Name</li>
                 </ul>
 
 
@@ -49,8 +51,14 @@
                                     </a>
                                     <div class="text">
                                         <h3><a href="@url">@item.Name</a></h3>
-               
+                                        @if (item.PromotionPrice.HasValue == true)
+                                        {
                                             <p class="price"><del>@item.Price</del>@item.PromotionPrice</p>
+                                        }
+                                        else
+                                        {
+                                            <p class="price">@item.Price</p>
+                                        }
 
                                         <p class="buttons">
                                             <a href="@url" class="btn btn-default">Chi tiết</a>
@@ -58,11 +66,13 @@
                                         </p>
                                     </div>
                                     <!-- /.text -->
-
+                                    @if (item.PromotionPrice.HasValue == true)
+                                    {
                                         <div class="ribbon sale">
                                             <div class="theribbon">SALE</div>
                                             <div class="ribbon-background"></div>
                                         </div>
+                                    }
 
                                     <!-- /.ribbon -->
 
@@ -133,6 +143,8 @@
         <!-- /.container -->
     </div>
     <!-- /#content -->
+
+
 
 
 

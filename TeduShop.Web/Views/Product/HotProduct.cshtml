@@ -48,7 +48,7 @@
                                         <img src="@item.ThumbnailImage" alt="" class="img-responsive">
                                     </a>
                                     <div class="text">
-                                        <h3><a href="detail.html">@item.Name</a></h3>
+                                        <h3><a href="@url">@item.Name</a></h3>
                                         @if (item.PromotionPrice.HasValue == true)
                                         {
                                             <p class="price"><del>@item.Price</del>@item.PromotionPrice</p>

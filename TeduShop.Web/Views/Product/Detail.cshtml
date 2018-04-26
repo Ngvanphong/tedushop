@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/Layouts.cshtml";
+    var productTags = (IEnumerable<TeduShop.Web.Models.TagViewModel>)ViewBag.TagProducts;
 }
 @section JavaScriptLayout {
     <script src="/Assets/client/js/jquery.cookie.js"></script>
@@ -38,10 +39,20 @@
                         </div>
                         <div class="box">
                             <h1 class="text-center">@Model.ProductVm.Name</h1>
-                            <p class="goToDescription">
-                                @Model.ProductVm.Description </br>
-                                <a href="#details" class="scroll-to">Chi tiết</a>
-                            </p>
+                            @if (productTags.Count() > 0)
+                            {
+                                <p style="text-align:center">
+                                    Tag:
+                                    @foreach (var tagitem in productTags)
+                                    {
+                                        var url = "/tag-" + tagitem.ID+".html";
+                                        <a style="color:black" href="@url">@tagitem.Name ;</a>
+                                    }
+                                </p>
+
+                            }
+
+
                             @if (Model.ProductVm.PromotionPrice.HasValue)
                             {
                                 <p class="price">@Model.ProductVm.PromotionPrice</p>

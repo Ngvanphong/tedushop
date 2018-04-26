@@ -23,7 +23,7 @@ namespace TeduShop.Data.Reponsitories
                         pt in DbContext.ProductTags
                         on p.ID equals pt.ProductID
                         where p.Status && pt.TagID == tag
-                        orderby p.CreateDate descending                       
+                        orderby p.UpdatedDate descending                       
                         select p;
             totalRow = query.Count();
             return query.Skip((pageIndex - 1) * pageSize).Take(pageSize);
