@@ -1,19 +1,43 @@
 ﻿<!-- *** TOPBAR ***
    _________________________________________________________ -->
+@using Microsoft.AspNet.Identity
 @model TeduShop.Web.Models.HeaderViewModel
+
 <div id="top">
     <div class="container">
         <div class="col-md-12" data-animate="fadeInDown">
             <ul class="menu">
-                <li>
-                    <a href="#" data-toggle="modal" data-target="#login-modal">Đăng nhập</a>
-                </li>
-                <li>
-                    <a href="register.html">Đăng ký</a>
-                </li>
-                <li>
-                    <a href="/contact.html">Liên hệ</a>
-                </li>
+
+                @if (Request.IsAuthenticated)
+                {
+
+                    using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { @id = "frmLogout" }))
+                    {
+                        @Html.AntiForgeryToken();
+                        <li style="color:white">
+                            Xin chào: @User.Identity.Name |
+
+                            <a href="#" id="btnlogout">Đăng xuất</a> |
+
+                            <a href="/contact.html">Liên hệ</a>
+                        </li>
+
+
+                    }
+                }
+                else
+                {
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#login-modal">Đăng nhập</a>
+                    </li>
+                    <li>
+                        <a href="/register.html">Đăng ký</a>
+                    </li>
+                    <li>
+                        <a href="/contact.html">Liên hệ</a>
+                    </li>
+                }
+
             </ul>
         </div>
     </div>
@@ -26,21 +50,31 @@
                     <h4 class="modal-title" id="Login">Đăng nhập</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="customer-orders.html" method="post">
+                    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+                    {
+
+                        @Html.AntiForgeryToken();
+                        @Html.ValidationSummary(false, "", new { @class = "error" });
                         <div class="form-group">
-                            <input type="text" class="form-control" id="email-modal" placeholder="email">
+                            @Html.TextBox("UserName", null,new { @class = "form-control", @id = "UserName" })
                         </div>
+
                         <div class="form-group">
-                            <input type="password" class="form-control" id="password-modal" placeholder="password">
+                            @Html.Password("Password",null, new { @class = "form-control", @id = "Password" })
+                        </div>
+                       
+                        <div class="form-group">
+                            Lưu mật khẩu:   @Html.CheckBox("RememberMe")
                         </div>
 
                         <p class="text-center">
                             <button class="btn btn-primary"><i class="fa fa-sign-in"></i>Đăng nhập</button>
                         </p>
-                    </form>
+                    }
+
 
                     <p class="text-center text-muted">Bạn chưa có tài khoản?</p>
-                    <p class="text-center text-muted"><a href="register.html"><strong>Đăng ký</strong></a></p>
+                    <p class="text-center text-muted"><a href="/register.html"><strong>Đăng ký</strong></a></p>
                 </div>
             </div>
         </div>

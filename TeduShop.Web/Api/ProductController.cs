@@ -13,6 +13,7 @@ using TeduShop.Service;
 using TeduShop.Web.Infrastructure.Core;
 using TeduShop.Web.Infrastructure.Extensions;
 using TeduShop.Web.Models;
+using TeduShop.Web.Providers;
 
 namespace TeduShop.Web.Api
 {
@@ -30,6 +31,7 @@ namespace TeduShop.Web.Api
         }
         [Route("getallparents")]
         [HttpGet]
+        [Permission(Action = "Read", Function = "PRODUCT")]
         public HttpResponseMessage GetAll(HttpRequestMessage request)
         {
             Func<HttpResponseMessage> func = () =>
@@ -46,6 +48,7 @@ namespace TeduShop.Web.Api
 
         [Route("getall")]
         [HttpGet]
+        [Permission(Action = "Read", Function = "PRODUCT")]
         public HttpResponseMessage GetAll(HttpRequestMessage request, int? categoryId, int page, int pageSize = 20, string filterHotPromotion = "", string keyword = "")
         {
             Func<HttpResponseMessage> func = () =>
@@ -69,6 +72,7 @@ namespace TeduShop.Web.Api
 
         [Route("detail/{id:int}")]
         [HttpGet]
+        [Permission(Action = "Read", Function = "PRODUCT")]
         public HttpResponseMessage GetById(HttpRequestMessage request, int id)
         {
             Func<HttpResponseMessage> Fuc = () =>
@@ -83,6 +87,7 @@ namespace TeduShop.Web.Api
 
         [Route("add")]
         [HttpPost]
+        [Permission(Action = "Create", Function = "PRODUCT")]
         public HttpResponseMessage post(HttpRequestMessage request, ProductViewModel productVm)
         {
             return CreateHttpResponse(request, () =>
@@ -107,6 +112,7 @@ namespace TeduShop.Web.Api
 
         [Route("update")]
         [HttpPut]
+        [Permission(Action = "Update", Function = "PRODUCT")]
         public HttpResponseMessage put(HttpRequestMessage request, ProductViewModel productVm)
         {
             HttpResponseMessage response = null;
@@ -129,6 +135,7 @@ namespace TeduShop.Web.Api
 
         [Route("delete")]
         [HttpDelete]
+        [Permission(Action = "Delete", Function = "PRODUCT")]
         public HttpResponseMessage Delete(HttpRequestMessage request, int id)
         {
             HttpResponseMessage response = null;
@@ -153,6 +160,7 @@ namespace TeduShop.Web.Api
 
         [Route("deletemulti")]
         [HttpDelete]
+        [Permission(Action = "Delete", Function = "PRODUCT")]
         public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string checkedProducts)
         {
             Func<HttpResponseMessage> Func = () =>
@@ -191,6 +199,7 @@ namespace TeduShop.Web.Api
 
         [Route("thumnailImage")]
         [HttpPut]
+        [Permission(Action = "Update", Function = "PRODUCT")]
         public HttpResponseMessage UpdateThumbnail(HttpRequestMessage request, int productId)
         {
             return CreateHttpResponse(request, () =>

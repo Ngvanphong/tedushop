@@ -10,5 +10,6 @@ namespace TeduShop.Web.Models
         public IEnumerable<ProductCategoryViewModel> productCategoryVm;
 
         public IEnumerable<PostCategoryViewModel> postCategoryVm;
+        public LoginViewModel LoginModel;
     }
 }

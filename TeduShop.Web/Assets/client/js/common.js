@@ -32,8 +32,14 @@
                     .appendTo(ul);
             };    
         })
+
+        $("#btnlogout").off('click').on('click', function (e) {
+            e.preventDefault();
+            $("#frmLogout").submit();
+        })
        
     }
+    
 
 }
 

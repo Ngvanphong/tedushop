@@ -230,6 +230,7 @@ namespace TeduShop.Web.Infrastructure.Extensions
             annoucement.HasRead = annoucementVm.HasRead;
             annoucement.OrderId = annoucementVm.OrderId;
         }
+       
 
 
     }
