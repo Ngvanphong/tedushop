@@ -114,8 +114,7 @@ namespace TeduShop.Web.Controllers
                     {
                         return RedirectToAction("Index", "Home");
                     }
-                   
-                  
+                                  
                 }
                 else
                 {
@@ -129,8 +128,6 @@ namespace TeduShop.Web.Controllers
                 return View("Register");
             }
            
-
-
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

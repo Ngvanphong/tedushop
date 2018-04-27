@@ -86,7 +86,7 @@ namespace TeduShop.Web.Controllers
             IEnumerable<ProductCategoryViewModel> listCategoryVm = Mapper.Map<IEnumerable<ProductCategoryViewModel>>(listChild);
             footVm.listCategoryProduct = listCategoryVm;
 
-            IEnumerable<Tag> listTagProdut = _tagService.GetAll().Where(x => x.Type == Common.CommonConstant.ProductTag.ToString()).OrderBy(x => x.Name).Take(9);
+            IEnumerable<Tag> listTagProdut = _tagService.GetAll().Where(x => x.Type == Common.CommonConstant.ProductTag.ToString()).OrderBy(x => x.Name).Take(18);
             IEnumerable<TagViewModel> listTagVm = Mapper.Map<IEnumerable<TagViewModel>>(listTagProdut);
             footVm.tagVm = listTagVm;
 

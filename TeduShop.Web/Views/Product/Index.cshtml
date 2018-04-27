@@ -10,6 +10,7 @@
     <script src="/Assets/client/js/jquery.cookie.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/Assets/client/js/Sort.js"></script>
+    <script src="~/Assets/client/js/shoppingCart.js"></script>
     <script src="/Assets/client/js/waypoints.min.js"></script>
     <script src="/Assets/client/js/modernizr.js"></script>
     <script src="/Assets/client/js/bootstrap-hover-dropdown.js"></script>
@@ -62,7 +63,7 @@
                                             {
                                                 <option value="@urlParent?page=1&sort=promotion">Khuyến mãi</option>
                                             }
-                                           
+
                                         </select>
                                     </div>
                                 </form>
@@ -104,7 +105,7 @@
 
                                         <p class="buttons">
                                             <a href="@url" class="btn btn-default">Chi tiết</a>
-                                            <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Mua</a>
+                                            <a href="#"  data-id="@item.ID" class="btn btn-primary btnshoppingCart"><i class="fa fa-shopping-cart"></i>Mua</a>
                                         </p>
                                     </div>
                                     <!-- /.text -->

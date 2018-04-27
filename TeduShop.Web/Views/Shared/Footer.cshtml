@@ -25,7 +25,7 @@
 
                 <h4>Từ khóa</h4>
                 <ul>
-                    @foreach (var item in Model.tagVm)
+                    @foreach (var item in Model.tagVm.Take(9))
                     {
                         var url = "/tag-" + item.ID + ".html";
                         <li>
@@ -33,11 +33,28 @@
                         </li>
                     }
 
-
                 </ul>
 
 
             </div>
+            @if (Model.tagVm.Count() > 9)
+            {
+                <div class="col-md-3 col-sm-6">
+                    <h4>Từ khóa</h4>
+                    <ul>
+                        @foreach (var item in Model.tagVm.Skip(9).Take(9))
+                        {
+                            var url = "/tag-" + item.ID + ".html";
+                            <li>
+                                <a href="@url">@item.Name</a>
+                            </li>
+                        }
+
+                    </ul>
+
+                </div>
+            }
+
             <!-- /.col-md-3 -->
 
             <div class="col-md-3 col-sm-6">
@@ -51,7 +68,7 @@
                     Skype: @Model.supportOnlineVm.Skype</br>
                     Facebook: @Model.supportOnlineVm.Facebook.
                 </p>
-               
+
 
 
                 <hr class="hidden-md hidden-lg">
@@ -73,8 +90,8 @@
 
         </div>
         <div class="col-md-9">
-            <p class="pull-right" >
-                @Html.Raw(@Model.footerVm.Content)            
+            <p class="pull-right">
+                @Html.Raw(@Model.footerVm.Content)
             </p>
         </div>
     </div>

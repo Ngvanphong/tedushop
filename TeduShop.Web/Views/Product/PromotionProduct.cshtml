@@ -6,6 +6,7 @@
 }
 @section JavaScriptLayout {
     <script src="/Assets/client/js/jquery.cookie.js"></script>
+    <script src="~/Assets/client/js/shoppingCart.js"></script>
     <script src="/Assets/client/js/waypoints.min.js"></script>
     <script src="/Assets/client/js/modernizr.js"></script>
     <script src="/Assets/client/js/bootstrap-hover-dropdown.js"></script>
@@ -49,20 +50,20 @@
                                     </a>
                                     <div class="text">
                                         <h3><a href="@url">@item.Name</a></h3>
-               
-                                            <p class="price"><del>@item.Price</del>@item.PromotionPrice</p>
+
+                                        <p class="price"><del>@item.Price</del>@item.PromotionPrice</p>
 
                                         <p class="buttons">
                                             <a href="@url" class="btn btn-default">Chi tiết</a>
-                                            <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Mua</a>
+                                            <a href="#" data-id="@item.ID" class="btn btn-primary btnshoppingCart"><i class="fa fa-shopping-cart"></i>Mua</a>
                                         </p>
                                     </div>
                                     <!-- /.text -->
 
-                                        <div class="ribbon sale">
-                                            <div class="theribbon">SALE</div>
-                                            <div class="ribbon-background"></div>
-                                        </div>
+                                    <div class="ribbon sale">
+                                        <div class="theribbon">SALE</div>
+                                        <div class="ribbon-background"></div>
+                                    </div>
 
                                     <!-- /.ribbon -->
 
