@@ -116,7 +116,23 @@ namespace TeduShop.Web.Controllers
             });
         }
 
+        [HttpPost]
+        public JsonResult DeleteItem(int productId)
+        {     
+            var shoppingCart = (List<ShoppingCartViewModel>)Session[Common.CommonConstant.SesstionCart];
+            if (shoppingCart != null)
+            {
+                shoppingCart.RemoveAll(x => x.productId == productId);
+            }
+            
+            Session[Common.CommonConstant.SesstionCart] = shoppingCart;
+            return Json(new
+            {
+                status = true,            
 
+            });
 
+        }
+       
     }
 }
