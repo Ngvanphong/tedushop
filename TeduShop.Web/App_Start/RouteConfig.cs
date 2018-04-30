@@ -10,6 +10,18 @@ namespace TeduShop.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+           name: "OverView",
+           url: "overview.html",
+           defaults: new { controller = "Checkout", action = "Orverview", id = UrlParameter.Optional },
+            namespaces: new string[] { "TeduShop.Web.Controllers" }
+       );
+            routes.MapRoute(
+           name: "Checkout",
+           url: "checkout.html",
+           defaults: new { controller = "Checkout", action = "Index", id = UrlParameter.Optional },
+            namespaces: new string[] { "TeduShop.Web.Controllers" }
+       );
+            routes.MapRoute(
             name: "Basket",
             url: "basket.html",
             defaults: new { controller = "ShoppingCart", action = "Index", id = UrlParameter.Optional },

@@ -66,9 +66,7 @@
                                 <a href='javascript:history.go(-2)' class="btn btn-default"><i class="fa fa-chevron-left"></i>Tiếp tục mua</a>
                             </div>
                             <div class="pull-right">
-                                <button type="submit" class="btn btn-primary">
-                                    Thanh toán <i class="fa fa-chevron-right"></i>
-                                </button>
+                                    <a class="btn btn-primary" id="gotoCheckout"> Thanh toán <i class="fa fa-chevron-right"></i></a>                                    
                             </div>
                         </div>
 
@@ -87,7 +85,10 @@
                 <td>
                     {{Name}}
                 </td>
-                <td><input type="text" data-id="{{ProductId}}" value="{{Size}}" class="form-control txtSizeShopping" /></td>               
+                <td data-id="{{ProductId}}" class="txtSizeShopping">
+                    {{Size}}
+                </td>   
+                
                 <td><input type="number" data-size="{{Size}}" data-price="{{salePrice}}" data-id="{{ProductId}}" value="{{Quantity}}" class="form-control txtKeyupQuantity" /></td>
                 <td>{{PriceF}}</td>
                 <td>{{PromotionPrice}}</td>

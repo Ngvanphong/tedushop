@@ -100,7 +100,7 @@ namespace TeduShop.Web.Controllers
             {
                 foreach(var itemVm in listCartVm)
                 {
-                    if (itemVm.productId == item.productId)
+                    if (itemVm.productId == item.productId&&item.SizesVm.Name==itemVm.SizesVm.Name)
                     {
                         item.Quantity = itemVm.Quantity;
                     }
@@ -109,11 +109,38 @@ namespace TeduShop.Web.Controllers
             }
             Session[Common.CommonConstant.SesstionCart] = listCartSession;
 
+            //getotalPrice;
+            getTotalPrice();
+
             return Json(new
             {
                 status = true
             });
 
+        }
+
+        private decimal getTotalPrice()
+        {
+            decimal totalPrice = 0;
+            var listCartSession = (List<ShoppingCartViewModel>)Session[Common.CommonConstant.SesstionCart];
+            
+           if (Session[Common.CommonConstant.SesstionOrder]==null)
+            {
+                Session[Common.CommonConstant.SesstionOrder] = new OrderSession();
+            }
+            var orderSession = (OrderSession)Session[Common.CommonConstant.SesstionOrder];
+            foreach (var item in listCartSession)
+            {
+                var salePrice = item.productViewModel.Price;
+                if (item.productViewModel.PromotionPrice.HasValue)
+                {
+                    salePrice = (decimal)item.productViewModel.PromotionPrice;
+                }
+                totalPrice += item.Quantity * salePrice;               
+            };
+            orderSession.totalPrice = totalPrice;
+            Session[Common.CommonConstant.SesstionOrder] = orderSession;
+            return totalPrice;
         }
 
         [HttpPost]

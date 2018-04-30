@@ -11,6 +11,11 @@
             var sizeId = parseInt($("#SizeSelectList_"+productId).val());
             shoppingCart.addItem(productId,sizeId);
         });
+        $("#gotoCheckout").off('click').on('click', function (e) {
+            e.preventDefault();
+            shoppingCart.updateAll();
+        });
+
         $(".btnDeleteItemShoppingCart").off('click').on('click', function (e) {
             e.preventDefault();
             var productId = parseInt($(this).data('id'));
@@ -26,6 +31,37 @@
                 $(".btnshoppingCart").attr('disabled',true)
             }
             
+        });
+       
+
+        $("#gotoComfirm").off('click').on('click', function (e) {
+            e.preventDefault();
+            var valid = $("#validationOrder").valid();
+        
+       
+        });
+
+        $("#validationOrder").validate({
+            rules: {
+                name: "required",
+                address: "required",
+                email: {
+                    email: true,
+                },
+                mobile: "required",
+                CitySelectList: "required",
+                DistrictSelectList: "required",
+            },
+            messages: {
+                name: "Bạn phải nhập tên",
+                address: "Bạn phải nhập địa chỉ",
+                email: {
+                    email: "Email không đúng"
+                },
+                mobile: "Bạn phải nhập số điện thoại",
+                CitySelectList: "",
+                DistrictSelectList: "",
+            }
         });
 
         $(".txtKeyupQuantity").off('keyup').on('keyup', function (e) {
@@ -59,6 +95,8 @@
 
     },
 
+
+
     addItem: function (productId,sizeId) {
         $.ajax({
             url: "/ShoppingCart/Add",
@@ -75,6 +113,36 @@
                 }
             }
         })
+
+    },
+
+    updateAll: function () {
+
+        var cartList = [];
+        $.each($(".txtKeyupQuantity"), function (i, item) {
+            cartList.push({
+                productId: $(this).data("id"),
+                Quantity: $(this).val(),
+                SizesVm:{
+                   Name: $(this).data("size"),
+                }
+            });
+        });
+        $.ajax({
+            url: "/ShoppingCart/Update",
+            type: "POST",
+            dataType: "Json",
+            data: {
+                listCart: JSON.stringify(cartList),
+            },
+            success: function (res) {
+                if (res.status) {
+                    shoppingCart.loadData();
+                    window.location.href = "/checkout.html";
+                }
+            }
+
+        });
 
     },
    
@@ -117,6 +185,8 @@
             }
         })
     },
+
+  
 
     deleteItem: function (productId,sizeName) {
         $.ajax({

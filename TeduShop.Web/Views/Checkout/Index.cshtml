@@ -1,0 +1,131 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layouts.cshtml";
+}
+@section JavaScriptLayout {
+    <script src="/Assets/client/js/jquery.cookie.js"></script>
+    <script src="/Assets/client/js/waypoints.min.js"></script>
+    <script src="/Assets/client/js/modernizr.js"></script>
+    <script src="/Assets/client/js/bootstrap-hover-dropdown.js"></script>
+    <script src="/Assets/client/js/owl.carousel.min.js"></script>
+    <script src="/Assets/client/js/front.js"></script>
+    <script src="~/Assets/client/js/shoppingCart.js"></script>
+}
+
+<div id="all ">
+
+    <div id="content">
+        <div class="container">
+
+            <div class="col-md-9">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="/index.html">Home</a>
+                    </li>
+                    <li>Thanh toán</li>
+                </ul>
+            </div>
+
+            <div class="col-md-9" id="checkout">
+
+                <div class="box">
+                    <form id="validationOrder" >
+                        <h1>Thanh toán</h1>
+
+                        <div  class="content">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="firstname">Tên</label>
+                                        <input type="text" class="form-control" name="name" id="name">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="address">Địa chỉ nhận hàng</label>
+                                        <input type="text" class="form-control" name="address" id="address">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.row -->
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="mobile">Số điện thoại</label>
+                                        <input type="text" class="form-control" name="mobile" id="mobile">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="text" name="email" class="form-control" id="email">
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <h4 class="col-md-12 col-sm-12">Phí vận chuyển</h4>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="city"> Chọn tỉnh/thành phố: </label>
+                                        <select style="width:150px; height:30px;text-align:center" id="CitySelectList" name="CitySelectList">
+                                            <option value="">Chọn tỉnh/TP</option>
+                                            @*@foreach (var size in Model.SizeVm)
+                                                {
+                                                    <option value="@size.ID">@size.Name</option>
+                                                }*@
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="city"> Chọn quận/huyện: </label>
+                                        <select style="width:150px; height:30px;text-align:center" id="DistrictSelectList" name="DistrictSelectList">
+                                            <option value="">Chọn quận/huyện</option>
+                                            @*@foreach (var size in Model.SizeVm)
+                                                {
+                                                    <option value="@size.ID">@size.Name</option>
+                                                }*@
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">                                   
+                                        <label >Phí vận chuyển: </label>
+                                        <label id="taxtransfer">125</label>
+                                </div>                            
+                            </div>
+
+                            <!-- /.row -->
+                            <!-- /.row -->
+                        </div>
+
+                        <div class="box-footer">
+                            <div class="pull-left">
+                                <a href="/basket.html" class="btn btn-default"><i class="fa fa-chevron-left"></i>Quay lại giỏ hàng</a>
+                            </div>
+                            <div class="pull-right">
+                                <button id="gotoComfirm" class="btn btn-primary">
+                                    Thanh toán<i class="fa fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.box -->
+
+
+            </div>
+            <!-- /.col-md-9 -->
+           
+            <!-- /.col-md-3 -->
+
+        </div>
+        <!-- /.container -->
+    </div>
+  </div>
+
