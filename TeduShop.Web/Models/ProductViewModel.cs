@@ -47,5 +47,7 @@ namespace TeduShop.Web.Models
         public string Tags { set; get; }
 
         public string ThumbnailImage { set; get; }
+
+       
     }
 }

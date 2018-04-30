@@ -8,59 +8,76 @@
         $(".btnshoppingCart").off('click').on('click', function (e) {
             e.preventDefault();
             var productId = parseInt($(this).data('id'));
-            shoppingCart.addItem(productId);
+            var sizeId = parseInt($("#SizeSelectList_"+productId).val());
+            shoppingCart.addItem(productId,sizeId);
         });
         $(".btnDeleteItemShoppingCart").off('click').on('click', function (e) {
             e.preventDefault();
             var productId = parseInt($(this).data('id'));
-            shoppingCart.deleteItem(productId);
+            var sizeName = $(this).data('size')
+            shoppingCart.deleteItem(productId,sizeName);
+        });
+        $(".SizeSelectList").off('change').on('change', function (e) {
+            e.preventDefault();
+            if ($(".SizeSelectList").val() != "nochoice") {
+                $(".btnshoppingCart").removeAttr('disabled');
+            }
+            else {
+                $(".btnshoppingCart").attr('disabled',true)
+            }
+            
         });
 
         $(".txtKeyupQuantity").off('keyup').on('keyup', function (e) {
             e.preventDefault();
             var salePrice = parseInt($(this).data('price'));
             var quantity = parseInt($(this).val());
+            var size = $(this).data('size')
             var productId = parseInt($(this).data('id'));
+
             if (isNaN(quantity) == false) {
 
-                $("#amount_" + productId).text(numeral(salePrice * quantity).format('0,0'));
+                $("#amount_" + productId+"_"+size).text(numeral(salePrice * quantity).format('0,0'));
 
             }
             else {
-                $("#amount_" + productId).text(0)
+                $("#amount_" + productId+"-"+size).text(0)
             }
-              shoppingCart.getTotalPrice();
-        });     
+            shoppingCart.getTotalPrice();
+        });
 
     },
 
-    getTotalPrice: function () {     
+    getTotalPrice: function () {
         var total = 0;
         $.each($(".txtKeyupQuantity"), function (i, item) {
             var price = parseInt($(item).data('price'));
             var quantity = parseInt($(item).val());
-            total += price*quantity;
+            total += price * quantity;
         });
         $("#totalPriceShopping").text(numeral(total).format('0,0'));
 
     },
 
-    addItem: function (productId) {
+    addItem: function (productId,sizeId) {
         $.ajax({
             url: "/ShoppingCart/Add",
             type: "POST",
             dataType: "Json",
             data: {
-                productId: productId
+                productId: productId,
+                sizeId:sizeId,
             },
             success: function (res) {
                 if (res.status) {
+                   
                     alert("Bạn đã thêm một sản phẩm vào giỏ hàng");
                 }
             }
         })
 
     },
+   
 
     loadData: function () {
         $.ajax({
@@ -69,8 +86,8 @@
             dataType: "Json",
             success: function (res) {
                 if (res.status) {
-                    var template = $('#tmpShoppingContent').html();
 
+                    var template = $('#tmpShoppingContent').html();
                     var html = "";
                     $.each(res.data, function (i, item) {
                         var salePrice = 0;
@@ -83,6 +100,7 @@
                         html += Mustache.render(template, {
                             Image: item.productViewModel.ThumbnailImage,
                             Name: item.productViewModel.Name,
+                            Size: item.SizesVm.Name,
                             ProductId: item.productId,
                             Quantity: item.Quantity,
                             Price: item.productViewModel.Price * 1000,
@@ -100,13 +118,14 @@
         })
     },
 
-    deleteItem: function (productId) {
+    deleteItem: function (productId,sizeName) {
         $.ajax({
             url: "/ShoppingCart/DeleteItem",
             type: "POST",
             dataType: "Json",
             data: {
-                productId: productId
+                productId: productId,
+                size:sizeName
             },
             success: function (res) {
                 if (res.status) {

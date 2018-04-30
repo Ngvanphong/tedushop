@@ -52,7 +52,17 @@
                                 </p>
 
                             }
+                            <p class="price" style="text-align:center">
+                                Size:
+                                <select style="width:120px;text-align:center" class="SizeSelectList" id="SizeSelectList_@(Model.ProductVm.ID)" name="SizeSelectList">
+                                    <option value="nochoice">Chọn size</option>
+                                    @foreach (var size in Model.SizeVm)
+                                    {
+                                        <option value="@size.ID">@size.Name</option>
+                                    }
+                                </select>
 
+                            </p>
 
                             @if (Model.ProductVm.PromotionPrice.HasValue)
                             {
@@ -64,7 +74,7 @@
                             }
 
                             <p class="text-center buttons">
-                                <a href="#" class="btn btn-primary btnshoppingCart"  data-id="@Model.ProductVm.ID"><i class="fa fa-shopping-cart"></i>Mua hàng</a>
+                                <a href="#" disabled="disabled"  class="btn btn-primary btnshoppingCart" data-id="@Model.ProductVm.ID"><i class="fa fa-shopping-cart"></i>Mua hàng</a>
                             </p>
                         </div>
                     </div>
@@ -128,5 +138,6 @@
             <!-- /.col-md-9 -->
         </div>
         <!-- /.container -->
+    </div>
     </div>
 

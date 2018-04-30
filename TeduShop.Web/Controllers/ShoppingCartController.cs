@@ -13,10 +13,12 @@ namespace TeduShop.Web.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        IProductService _productService;
-        public ShoppingCartController(IProductService productService)
+       private IProductService _productService;
+       private IProductQuantityService _productQantityService;
+        public ShoppingCartController(IProductService productService, IProductQuantityService productQuantityService)
         {
             this._productService = productService;
+            this._productQantityService = productQuantityService;
         }
         // GET: ShoppingCart
         public ActionResult Index()
@@ -45,21 +47,28 @@ namespace TeduShop.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult Add(int productId)
+        public JsonResult Add(int productId,int sizeId)
         {
+
             var shoppingCart = (List<ShoppingCartViewModel>)Session[Common.CommonConstant.SesstionCart];
+            SizeViewModel sizeVm = new SizeViewModel();
+
+               sizeVm = Mapper.Map<SizeViewModel>(_productQantityService.GetSizeById(sizeId));
+
+                                      
             if (shoppingCart == null)
             {
                 shoppingCart = new List<ShoppingCartViewModel>();
             };
-            if (shoppingCart.Any(x => x.productId == productId))
+            if (shoppingCart.Any(x => x.productId == productId&&x.SizesVm.ID==sizeId))
             {
                 foreach(var item in shoppingCart)
                 {
 
-                    if (item.productId == productId)
+                    if (item.productId == productId&&item.SizesVm.ID==sizeId)
                     {
                         item.Quantity += 1;
+                       
                     }
                 }
             }
@@ -71,7 +80,8 @@ namespace TeduShop.Web.Controllers
                 {
                     productId = productId,
                     productViewModel = Mapper.Map<ProductViewModel>(product),
-                    Quantity = 1
+                    Quantity = 1,                  
+                    SizesVm= sizeVm,
                 };
                 shoppingCart.Add(cart);
             }
@@ -117,12 +127,12 @@ namespace TeduShop.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult DeleteItem(int productId)
+        public JsonResult DeleteItem(int productId, string size)
         {     
             var shoppingCart = (List<ShoppingCartViewModel>)Session[Common.CommonConstant.SesstionCart];
             if (shoppingCart != null)
             {
-                shoppingCart.RemoveAll(x => x.productId == productId);
+                shoppingCart.RemoveAll(x => x.productId == productId&&(x.SizesVm.Name==size|| x.SizesVm.Name == null));
             }
             
             Session[Common.CommonConstant.SesstionCart] = shoppingCart;

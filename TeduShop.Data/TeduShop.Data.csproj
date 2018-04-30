@@ -68,6 +68,10 @@
     <Compile Include="Migrations\201804221515047_updateprice.Designer.cs">
       <DependentUpon>201804221515047_updateprice.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804300235312_sizeid.cs" />
+    <Compile Include="Migrations\201804300235312_sizeid.Designer.cs">
+      <DependentUpon>201804300235312_sizeid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reponsitories\ErrorRepository.cs" />
@@ -114,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804221515047_updateprice.resx">
       <DependentUpon>201804221515047_updateprice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804300235312_sizeid.resx">
+      <DependentUpon>201804300235312_sizeid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

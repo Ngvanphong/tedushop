@@ -10,7 +10,6 @@
     <script src="/Assets/client/js/jquery.cookie.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     <script src="~/Assets/client/js/Sort.js"></script>
-    <script src="~/Assets/client/js/shoppingCart.js"></script>
     <script src="/Assets/client/js/waypoints.min.js"></script>
     <script src="/Assets/client/js/modernizr.js"></script>
     <script src="/Assets/client/js/bootstrap-hover-dropdown.js"></script>
@@ -103,10 +102,6 @@
                                             <p class="price">@item.Price</p>
                                         }
 
-                                        <p class="buttons">
-                                            <a href="@url" class="btn btn-default">Chi tiết</a>
-                                            <a href="#"  data-id="@item.ID" class="btn btn-primary btnshoppingCart"><i class="fa fa-shopping-cart"></i>Mua</a>
-                                        </p>
                                     </div>
                                     <!-- /.text -->
                                     @if (item.PromotionPrice.HasValue == true)
@@ -186,5 +181,5 @@
         <!-- /.container -->
     </div>
     <!-- /#content -->
-
+    </div>
 

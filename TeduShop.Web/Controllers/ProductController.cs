@@ -17,13 +17,15 @@ namespace TeduShop.Web.Controllers
         private IProductService _productService;
         private IProductCategoryService _productCategoryService;
         private IProductImageService _productImageService;
+        private IProductQuantityService _productQuantityService;
         public ProductController(IProductService productService, IProductCategoryService productCategoryService, IProductImageService productImageService,
-          ITagService tagService)
+          ITagService tagService, IProductQuantityService productQuantityService)
         {
             this._productService = productService;
             this._productCategoryService = productCategoryService;
             this._productImageService = productImageService;
             this._tagService = tagService;
+            this._productQuantityService = productQuantityService;
         }
         // GET: ProductCategory
         public ActionResult Index(int id, int page = 1, string sort = "")
@@ -86,6 +88,9 @@ namespace TeduShop.Web.Controllers
         {
             Product productDb = _productService.GetById(id);
             ProductViewModel productVm = Mapper.Map<ProductViewModel>(productDb);
+            IEnumerable<Size> sizeDb = _productQuantityService.GetSizeByProductId(id);
+            IEnumerable<SizeViewModel> sizeVm = Mapper.Map<IEnumerable<SizeViewModel>>(sizeDb);
+
             IEnumerable<Product> listProductDb = _productService.GetProductRelate(productVm.CategoryID);
             IEnumerable<ProductViewModel> listProductVm = Mapper.Map<IEnumerable<ProductViewModel>>(listProductDb);
             IEnumerable<ProductImage> listProductImageDb = _productImageService.GetProductImageByProdutID(id);
@@ -97,7 +102,8 @@ namespace TeduShop.Web.Controllers
             {
                 ListProductImageVm = listProductImageVm,
                 ListProductVm = listProductVm,
-                ProductVm = productVm
+                ProductVm = productVm,
+                SizeVm=sizeVm,               
             };
             return View(ProductDetail);
 

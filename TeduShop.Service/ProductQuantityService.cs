@@ -23,6 +23,7 @@ namespace TeduShop.Service
         Size GetSizeById(int id);
         void UpdateSize(Size size);
         void SaveChange();
+        IEnumerable<Size> GetSizeByProductId(int productId);
         
 
 
@@ -100,7 +101,12 @@ namespace TeduShop.Service
         {
             _unitOfWork.Commit();
         }
-        
 
+        public IEnumerable<Size> GetSizeByProductId(int productId)
+        {
+            return _sizeRepository.GetSizeByProductId(productId);
+        }
+
+        
     }
 }

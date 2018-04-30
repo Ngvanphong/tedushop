@@ -23,7 +23,7 @@ namespace TeduShop.Model.Models
         [Required]
         [MaxLength(256)]
         public string CustomerMobile { set; get; }
-        [Required]
+
         [MaxLength(256)]
         public string CustomerEmail { set; get; }
         public string CustomerMessage { set; get; }
