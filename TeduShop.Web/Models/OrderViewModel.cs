@@ -31,5 +31,7 @@ namespace TeduShop.Web.Models
         public string CustomerId { set; get; }
 
         public virtual ICollection<OrderDetailViewModel> OrderDetails { set; get; }
+
+        public decimal? TotalPayment { set; get; }
     }
 }

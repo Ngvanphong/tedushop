@@ -37,7 +37,9 @@
         $("#gotoComfirm").off('click').on('click', function (e) {
             e.preventDefault();
             var valid = $("#validationOrder").valid();
-        
+            if (valid) {
+                shoppingCart.gotoComfirm();
+            };
        
         });
 
@@ -50,7 +52,7 @@
                 },
                 mobile: "required",
                 CitySelectList: "required",
-                DistrictSelectList: "required",
+               
             },
             messages: {
                 name: "Bạn phải nhập tên",
@@ -59,10 +61,51 @@
                     email: "Email không đúng"
                 },
                 mobile: "Bạn phải nhập số điện thoại",
-                CitySelectList: "",
-                DistrictSelectList: "",
+                CitySelectList: "",             
             }
         });
+
+        $("#CitySelectList").off('change').on('change', function (e) {
+            e.preventDefault();
+            var province = $("#CitySelectList").val();
+            if (province == 701) {
+                $("#proviceDisplay").show();
+                shoppingCart.loadDistrict(province);
+            }
+            else {
+                $("#proviceDisplay").hide();
+                $("#taxtransfer").text("20.000");
+            }
+
+        });
+
+        $("#DistrictSelectList").off('change').on('change', function (e) {
+            e.preventDefault();
+            
+            var districtId = $("#DistrictSelectList").val();
+            if (districtId != "") {
+                shoppingCart.getTaxForHCM(districtId);
+            }
+            else {
+                $("#taxtransfer").text("14.000");
+            }
+        });
+
+        $("#createOrder").off('click').on('click', function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "/Checkout/CreateOrder",
+                type: "POST",
+                dataType: "Json",
+                success: function (res) {
+                    if (res.status) {
+                        alert("Cảm ơn quý khách đã mua hàng");
+                    }
+                }
+            })
+
+        });
+       
 
         $(".txtKeyupQuantity").off('keyup').on('keyup', function (e) {
             e.preventDefault();
@@ -81,6 +124,7 @@
             }
             shoppingCart.getTotalPrice();
         });
+
 
     },
 
@@ -205,7 +249,82 @@
 
         })
 
+    },
+
+    getTaxForHCM: function (districtId) {
+        $.ajax({
+            url: "/Checkout/GetTaxHCM",
+            type: "POST",
+            dataType: "Json",
+            data: {
+                districtId:districtId
+            },
+            success: function (res) {
+                if (res.status) {
+                    var taxTransfer = res.data;
+                    $("#taxtransfer").text(taxTransfer);
+                }
+            }
+
+        });
+    },
+
+    gotoComfirm: function () {
+        var taxPrice = 0;
+        var orderVm = {};
+        taxPrice = $("#taxtransfer").text();
+        var taxTransfer = parseInt(taxPrice.slice(0, taxPrice.indexOf('.')));
+        orderVm = {
+            CustomerName:$("#name").val(),
+            CustomerAddress: $("#address").val(),
+            CustomerMobile: $("#mobile").val(),
+            CustomerEmail: $("#email").val(),          
+        };
+
+        $.ajax({
+            url: "/Checkout/GotoComfirm",
+            type: "POST",
+            dataType: "Json",
+            data: {
+                totalPrice:taxTransfer,
+                orderVm: JSON.stringify(orderVm),
+            },
+            success: function (res) {
+                if (res.status) {
+                    window.location.href = "/overview.html";
+                }
+            }
+
+        });
+
+    },
+
+    loadDistrict: function (provinceId) {
+        $.ajax({
+            url: "/Checkout/LoadDistrict",
+            type: "POST",
+            dataType: "Json",
+            data: {
+                provinceId:provinceId,
+            },
+            success: function (res) {
+                if (res.status) {                
+                    var html = '<option value="">Chọn quận/huyện</option>';
+                    var data = res.data;
+                    $.each(data, function (i, item) {
+
+                        html += '<option value="'+item.ID+'">'+item.Name+'</option>'
+                    });
+                    $("#DistrictSelectList").html(html);
+                }
+            }
+
+
+        });
+
     }
+
+   
 
 
 }

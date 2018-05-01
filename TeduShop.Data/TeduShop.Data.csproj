@@ -72,6 +72,14 @@
     <Compile Include="Migrations\201804300235312_sizeid.Designer.cs">
       <DependentUpon>201804300235312_sizeid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805010855066_totalPayment.cs" />
+    <Compile Include="Migrations\201805010855066_totalPayment.Designer.cs">
+      <DependentUpon>201805010855066_totalPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805010857521_changepament.cs" />
+    <Compile Include="Migrations\201805010857521_changepament.Designer.cs">
+      <DependentUpon>201805010857521_changepament.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reponsitories\ErrorRepository.cs" />
@@ -121,6 +129,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804300235312_sizeid.resx">
       <DependentUpon>201804300235312_sizeid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805010855066_totalPayment.resx">
+      <DependentUpon>201805010855066_totalPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805010857521_changepament.resx">
+      <DependentUpon>201805010857521_changepament.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,6 +8,7 @@ namespace TeduShop.Web.Models
     public class OrderSession
     {
         public decimal totalPrice;
+        public decimal taxTransferPrice;
         public OrderViewModel orderVm;
     }
 }

@@ -30,10 +30,10 @@
             <div class="col-md-9" id="checkout">
 
                 <div class="box">
-                    <form id="validationOrder" >
+                    <form id="validationOrder">
                         <h1>Thanh toán</h1>
 
-                        <div  class="content">
+                        <div class="content">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
@@ -72,32 +72,25 @@
                                         <label for="city"> Chọn tỉnh/thành phố: </label>
                                         <select style="width:150px; height:30px;text-align:center" id="CitySelectList" name="CitySelectList">
                                             <option value="">Chọn tỉnh/TP</option>
-                                            @*@foreach (var size in Model.SizeVm)
-                                                {
-                                                    <option value="@size.ID">@size.Name</option>
-                                                }*@
+                                            <option value="701">TP.Hồ Chí Minh</option>
+                                            <option value="702">Khu vực khác</option>
                                         </select>
                                     </div>
 
                                 </div>
-                                <div class="col-sm-6">
+                                <div id="proviceDisplay" style="display:none" class="col-sm-6">
                                     <div class="form-group">
                                         <label for="city"> Chọn quận/huyện: </label>
-                                        <select style="width:150px; height:30px;text-align:center" id="DistrictSelectList" name="DistrictSelectList">
-                                            <option value="">Chọn quận/huyện</option>
-                                            @*@foreach (var size in Model.SizeVm)
-                                                {
-                                                    <option value="@size.ID">@size.Name</option>
-                                                }*@
+                                        <select style="width:150px; height:30px;text-align:center" id="DistrictSelectList" name="DistrictSelectList">                                        
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-12">                                   
-                                        <label >Phí vận chuyển: </label>
-                                        <label id="taxtransfer">125</label>
-                                </div>                            
+                                <div class="col-sm-12">
+                                    <label>Phí vận chuyển: </label>
+                                    <label id="taxtransfer"></label>
+                                </div>
                             </div>
 
                             <!-- /.row -->
@@ -121,11 +114,10 @@
 
             </div>
             <!-- /.col-md-9 -->
-           
             <!-- /.col-md-3 -->
 
         </div>
         <!-- /.container -->
     </div>
-  </div>
+</div>
 

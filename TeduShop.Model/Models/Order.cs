@@ -40,6 +40,9 @@ namespace TeduShop.Model.Models
         [Column(TypeName = "nvarchar")]
         public string CustomerId { set; get; }
         public virtual ICollection<OrderDetail> OrderDetails { set; get; }
-        
+
+
+        public decimal? TotalPayment { set; get; }
+
     }
 }

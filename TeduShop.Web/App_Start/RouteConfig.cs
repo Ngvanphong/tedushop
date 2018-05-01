@@ -12,7 +12,7 @@ namespace TeduShop.Web
             routes.MapRoute(
            name: "OverView",
            url: "overview.html",
-           defaults: new { controller = "Checkout", action = "Orverview", id = UrlParameter.Optional },
+           defaults: new { controller = "Checkout", action = "OverViewResult", id = UrlParameter.Optional },
             namespaces: new string[] { "TeduShop.Web.Controllers" }
        );
             routes.MapRoute(

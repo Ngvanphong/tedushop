@@ -56,6 +56,7 @@ namespace TeduShop.Data
             builder.Entity<IdentityUserClaim>().HasKey(i => i.UserId).ToTable("AppUserClaims");
             builder.Entity<Product>().Property(Product => Product.Price).HasPrecision(12, 3);
             builder.Entity<Product>().Property(Product => Product.PromotionPrice).HasPrecision(12, 3);
+            builder.Entity<Order>().Property(Order => Order.TotalPayment).HasPrecision(12, 3);
 
         }
 

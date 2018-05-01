@@ -187,6 +187,7 @@ namespace TeduShop.Web.Infrastructure.Extensions
             order.PaymentStatus = orderVm.PaymentStatus;
             order.Status = orderVm.Status;
             order.CustomerId = orderVm.CustomerId;
+            order.TotalPayment = orderVm.TotalPayment;
         }
 
         public static void UpdateTag(this Tag tag, TagViewModel tagVm)
