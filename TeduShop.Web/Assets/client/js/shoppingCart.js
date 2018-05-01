@@ -99,8 +99,7 @@
                 dataType: "Json",
                 success: function (res) {
                     if (res.status) {
-                        alert("Cảm ơn quý khách đã mua hàng");
-                        shoppingCart.loadData();
+                        alert("Cảm ơn quý khách đã mua hàng");                     
                         window.location.href = "/index.html";
                     }
                 }
