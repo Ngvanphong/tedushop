@@ -49,16 +49,21 @@ namespace TeduShop.Web.Controllers
         [HttpPost]
         public JsonResult Add(int productId,int sizeId)
         {
-
+            if (Session[Common.CommonConstant.CountShopping] == null)
+            {
+                Session[Common.CommonConstant.CountShopping] = new int();
+            }
+            var countShopping =(int)Session[Common.CommonConstant.CountShopping];
             var shoppingCart = (List<ShoppingCartViewModel>)Session[Common.CommonConstant.SesstionCart];
             SizeViewModel sizeVm = new SizeViewModel();
 
                sizeVm = Mapper.Map<SizeViewModel>(_productQantityService.GetSizeById(sizeId));
-
+               
                                       
             if (shoppingCart == null)
             {
                 shoppingCart = new List<ShoppingCartViewModel>();
+             
             };
             if (shoppingCart.Any(x => x.productId == productId&&x.SizesVm.ID==sizeId))
             {
@@ -85,7 +90,9 @@ namespace TeduShop.Web.Controllers
                 };
                 shoppingCart.Add(cart);
             }
+            countShopping += 1;          
             Session[Common.CommonConstant.SesstionCart] = shoppingCart;
+            Session[Common.CommonConstant.CountShopping] = countShopping;
             return Json(new
             {
                 status = true
@@ -108,7 +115,7 @@ namespace TeduShop.Web.Controllers
 
             }
             Session[Common.CommonConstant.SesstionCart] = listCartSession;
-
+            Session[Common.CommonConstant.CountShopping] = listCartSession.Count();
             //getotalPrice;
             getTotalPrice();
 
@@ -162,8 +169,9 @@ namespace TeduShop.Web.Controllers
             {
                 shoppingCart.RemoveAll(x => x.productId == productId&&(x.SizesVm.Name==size|| x.SizesVm.Name == null));
             }
-            
+         
             Session[Common.CommonConstant.SesstionCart] = shoppingCart;
+            Session[Common.CommonConstant.CountShopping] = shoppingCart.Count();
             return Json(new
             {
                 status = true,            

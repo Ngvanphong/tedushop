@@ -39,6 +39,7 @@ namespace TeduShop.Web.Controllers
         }
         public ActionResult Index()
         {
+                     
             IndexViewModel indexVm = new IndexViewModel()
             {
 
@@ -104,11 +105,21 @@ namespace TeduShop.Web.Controllers
         [ChildActionOnly]
         public ActionResult Header()
         {
+            int countShopping = 0;
+            if (Session[Common.CommonConstant.CountShopping] != null)
+            {
+                countShopping = (int)Session[Common.CommonConstant.CountShopping];
+            }
+            else
+            {
+                Session[Common.CommonConstant.CountShopping] = new int();
+            }
+
             HeaderViewModel headerVm =new HeaderViewModel()
             {
 
             };
-        
+            headerVm.CountShopping = countShopping;
             IEnumerable<ProductCategory> productCategoryDb = _productCategoryService.GetAll();
             IEnumerable<ProductCategoryViewModel> productCategoryVm = Mapper.Map<IEnumerable<ProductCategoryViewModel>>(productCategoryDb);
             IEnumerable<PostCategory> postCategoryDb = _postCategoryService.GetAll();

@@ -143,6 +143,7 @@ namespace TeduShop.Web.Controllers
 
             Session[Common.CommonConstant.SesstionCart] = new List<ShoppingCartViewModel>();
             Session[Common.CommonConstant.SesstionOrder] = new OrderSession();
+            Session[Common.CommonConstant.CountShopping] = new int();
 
             return Json(new
             {

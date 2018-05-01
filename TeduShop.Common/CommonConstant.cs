@@ -8,5 +8,7 @@
         public const int PageDisplay = 5;
         public const string SesstionCart = "ShoppingCart";
         public const string SesstionOrder = "OrderSession";
+        public const string CountShopping = "CountShopping";
+
     }
 }

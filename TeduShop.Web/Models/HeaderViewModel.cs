@@ -11,5 +11,7 @@ namespace TeduShop.Web.Models
 
         public IEnumerable<PostCategoryViewModel> postCategoryVm;
         public LoginViewModel LoginModel;
+
+        public int CountShopping;
     }
 }
