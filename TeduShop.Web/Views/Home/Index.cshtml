@@ -43,7 +43,6 @@
     <!-- *** HOT PRODUCT SLIDESHOW ***
     _________________________________________________________ -->
     <div id="hot">
-
         <div class="box">
             <div class="container">
                 <div class="col-md-12">
@@ -56,7 +55,7 @@
         </div>
 
         <div class="container">
-            <div class="product-slider">
+            <div class="product-slider" style="margin-bottom:-20px">
                 @foreach (var item in Model.productHotVm)
                 {
                     var url = "/" + item.Alias + ".p-" + item.ID + ".html";
@@ -99,27 +98,23 @@
                     </div>
                 }
 
-
                 <!-- /.col-md-4 -->
 
             </div>
             <!-- /.product-slider -->
         </div>
         <!-- /.container -->
-
     </div>
     <!-- /#hot -->
     <!-- *** HOT END *** -->
     <!-- *** HOT PRODUCT SLIDESHOW ***
     _________________________________________________________ -->
     <div id="hot">
-
-
         <div class="container">
             <div class="col-md-12" style="text-align: center">
                 <h2>Sản phẩm khuyến mãi</h2>
                 <p class="loadMore">
-                    <a href="promotion-product.html" class="btn btn-primary">Tất cả</a>
+                    <a href="/promotion-product.html" class="btn btn-primary">Tất cả</a>
                 </p>
             </div>
         </div>
