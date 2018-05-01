@@ -100,6 +100,8 @@
                 success: function (res) {
                     if (res.status) {
                         alert("Cảm ơn quý khách đã mua hàng");
+                        shoppingCart.loadData();
+                        window.location.href = "/index.html";
                     }
                 }
             })

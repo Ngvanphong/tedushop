@@ -1,16 +1,26 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Xml.Linq;
+using TeduShop.Model.Models;
+using TeduShop.Service;
+using TeduShop.Web.Infrastructure.Extensions;
 using TeduShop.Web.Models;
+using TeduShop.Web.SignalR;
 
 namespace TeduShop.Web.Controllers
 {
     public class CheckoutController : Controller
     {
+        public IOrderService _orderService;
+        public CheckoutController(IOrderService orderService)
+        {
+            this._orderService = orderService;
+        }
         // GET: Checkout
         public ActionResult Index()
         {
@@ -97,7 +107,42 @@ namespace TeduShop.Web.Controllers
         public JsonResult CreateOrder()
         {
 
+            var orderSession = (OrderSession)Session[Common.CommonConstant.SesstionOrder];
+            var cartShopping = (List<ShoppingCartViewModel>)Session[Common.CommonConstant.SesstionCart];
+            Order orderDb = new Order();
+            orderDb.UpdateOrder(orderSession.orderVm);
+            orderDb.Status = true;
+            orderDb.TotalPayment = orderSession.totalPrice;
+            _orderService.Create(orderDb);
+            _orderService.Save();
 
+            //push hup
+            var annoucement = _orderService.GetDetail(orderDb.ID);
+            TeduShopHub.PushToAllUsers(Mapper.Map<OrderViewModel>(annoucement), null);
+
+            foreach (var item in cartShopping)
+            {
+                OrderDetail orderDetail = new OrderDetail();
+                orderDetail.OrderID = orderDb.ID;
+                decimal price = 0;
+                if (item.productViewModel.PromotionPrice.HasValue)
+                {
+                    price = (decimal)item.productViewModel.PromotionPrice;
+                }
+                else
+                {
+                    price = item.productViewModel.Price;
+                }
+                orderDetail.Price = price;
+                orderDetail.Quantity = item.Quantity;
+                orderDetail.SizeId = item.SizesVm.ID;
+                orderDetail.ProductID = item.productViewModel.ID;
+                _orderService.CreateDetail(orderDetail);
+                _orderService.Save();              
+            }
+
+            Session[Common.CommonConstant.SesstionCart] = new List<ShoppingCartViewModel>();
+            Session[Common.CommonConstant.SesstionOrder] = new OrderSession();
 
             return Json(new
             {

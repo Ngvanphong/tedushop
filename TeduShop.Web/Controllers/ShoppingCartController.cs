@@ -122,6 +122,7 @@ namespace TeduShop.Web.Controllers
         private decimal getTotalPrice()
         {
             decimal totalPrice = 0;
+
             var listCartSession = (List<ShoppingCartViewModel>)Session[Common.CommonConstant.SesstionCart];
             
            if (Session[Common.CommonConstant.SesstionOrder]==null)

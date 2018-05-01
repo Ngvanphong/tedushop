@@ -120,7 +120,17 @@ namespace TeduShop.Service
   
             if (!string.IsNullOrEmpty(keyword))
             {
-                query = query.Where(x => x.Name.Contains(keyword));
+                int id = 0;
+                bool flagId = int.TryParse(keyword, out id);
+                if (flagId == true)
+                {
+                    query = query.Where(x => x.ID==id);
+                }
+                else
+                {
+                    query = query.Where(x => x.Name.Contains(keyword));
+                }
+                              
             };
             if (categoryId.HasValue)
             {
