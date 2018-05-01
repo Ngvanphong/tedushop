@@ -34,6 +34,7 @@ namespace TeduShop.Web
          defaults: new { controller = "Account", action = "Register", id = UrlParameter.Optional },
           namespaces: new string[] { "TeduShop.Web.Controllers" }
      );
+     
             routes.MapRoute(
           name: "Contact",
           url: "contact.html",

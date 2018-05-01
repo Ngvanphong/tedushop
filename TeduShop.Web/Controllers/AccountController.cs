@@ -125,7 +125,7 @@ namespace TeduShop.Web.Controllers
             else
             {
                 TempData["ErrorLogin"] = "Bạn phải nhập đủ thông tin";
-                return View("Register");
+                return Redirect("/register.html");
             }
            
         }
@@ -134,7 +134,7 @@ namespace TeduShop.Web.Controllers
         public ActionResult Logout()
         {
             IAuthenticationManager authenticationManager = HttpContext.GetOwinContext().Authentication;
-            authenticationManager.SignOut();
+            authenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie, DefaultAuthenticationTypes.ExternalCookie);
             return Redirect("/");
         }
 
