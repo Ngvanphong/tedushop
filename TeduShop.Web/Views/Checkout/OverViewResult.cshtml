@@ -8,7 +8,7 @@
 
 @section JavaScriptLayout {
 
-    <script src="~/Assets/client/js/shoppingCart.js"></script>
+    @Scripts.Render("~/js/shoppingcart");
 }
 
 
@@ -99,7 +99,7 @@
         <td>{{PriceF}}</td>
         <td>{{PromotionPrice}}</td>
         <td id="amount_{{ProductId}}_{{Size}}">{{Amount}}</td>
-      
+
     </tr>
 </script>
 

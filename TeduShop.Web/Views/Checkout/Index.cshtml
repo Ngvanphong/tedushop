@@ -5,7 +5,7 @@
 }
 @section JavaScriptLayout {
 
-    <script src="~/Assets/client/js/shoppingCart.js"></script>
+    @Scripts.Render("~/js/shoppingcart");
 }
 
 <div id="all ">
@@ -76,8 +76,7 @@
                                 <div id="proviceDisplay" style="display:none" class="col-sm-6">
                                     <div class="form-group">
                                         <label for="city"> Chọn quận/huyện: </label>
-                                        <select style="width:150px; height:30px;text-align:center" id="DistrictSelectList" name="DistrictSelectList">                                        
-                                        </select>
+                                        <select style="width:150px; height:30px;text-align:center" id="DistrictSelectList" name="DistrictSelectList"></select>
                                     </div>
                                 </div>
                             </div>

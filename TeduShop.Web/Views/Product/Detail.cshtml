@@ -6,7 +6,7 @@
 }
 @section JavaScriptLayout {
 
-    <script src="~/Assets/client/js/shoppingCart.js"></script>
+    @Scripts.Render("~/js/shoppingcart");
 }
 <div id="all">
     <div id="content">
@@ -69,7 +69,7 @@
                             }
 
                             <p class="text-center buttons">
-                                <a href="#" disabled="disabled"  class="btn btn-primary btnshoppingCart" data-id="@Model.ProductVm.ID"><i class="fa fa-shopping-cart"></i>Mua hàng</a>
+                                <a href="#" disabled="disabled" class="btn btn-primary btnshoppingCart" data-id="@Model.ProductVm.ID"><i class="fa fa-shopping-cart"></i>Mua hàng</a>
                             </p>
                         </div>
                     </div>
@@ -134,5 +134,5 @@
         </div>
         <!-- /.container -->
     </div>
-    </div>
+</div>
 
