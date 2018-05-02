@@ -231,7 +231,16 @@ namespace TeduShop.Web.Infrastructure.Extensions
             annoucement.HasRead = annoucementVm.HasRead;
             annoucement.OrderId = annoucementVm.OrderId;
         }
-       
+
+        public static void UpdateSystemConfig(this SystemConfig systemConfig, SystemConfigViewModel systemConfigVm)
+        {
+            systemConfig.ID = systemConfigVm.ID;
+            systemConfig.Code = systemConfigVm.Code;
+            systemConfig.ValueString = systemConfigVm.ValueString;
+            systemConfig.ValueInt = systemConfigVm.ValueInt;
+
+        }
+
 
 
     }
