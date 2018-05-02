@@ -3,6 +3,7 @@
 
         shoppingCart.loadData();
         shoppingCart.registerEvent();
+   
     },
     registerEvent: function () {
         $(".btnshoppingCart").off('click').on('click', function (e) {
@@ -194,6 +195,7 @@
 
     loadData: function () {
         $.ajax({
+            cache: false,
             url: "/ShoppingCart/GetAll",
             type: "GET",
             dataType: "Json",
@@ -223,9 +225,11 @@
                             Amount: numeral(salePrice * item.Quantity).format('0,0'),
                         })
                     });
-                    $('#shopingContent').html(html);
+
+                    $('#shopingContent').html(html);          
                     shoppingCart.registerEvent();
                     shoppingCart.getTotalPrice();
+                  
                 }
             }
         })
