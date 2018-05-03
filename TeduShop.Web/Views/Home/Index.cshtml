@@ -169,7 +169,7 @@
                 <div id="get-inspired" class="owl-carousel owl-theme">
                     @foreach (var item in Model.postVm)
                     {
-                        var url = "/" + item.Alias + ".blog-" + item.ID + ".html";
+                        var url = "/blog-detail.html" + "?postid=" + item.ID;
                         <div class="item">
                             <a href="@url">
                                 <img src="@item.Image" alt="@item.Name" class="img-responsive">
