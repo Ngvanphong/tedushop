@@ -1,8 +1,12 @@
 ﻿@model TeduShop.Web.Infrastructure.Core.PaginationClient<TeduShop.Web.Models.PostViewModel>
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/Layouts.cshtml";
     var Category = (TeduShop.Web.Models.PostCategoryViewModel)ViewBag.Category;
+    var pageIndex = Model.PageIndex;
+    ViewBag.Title = pageIndex == 1 ? Category.Name : Category.Name+"-trang="+pageIndex;
+    ViewBag.MetaKeyword = pageIndex==1? Category.MetaKeyword: Category.MetaKeyword+"-trang="+pageIndex;
+    ViewBag.MetaDiscription = pageIndex == 1 ? Category.MetaDiscription : Category.MetaDiscription+ "-trang=" + pageIndex;
+    Layout = "~/Views/Shared/Layouts.cshtml";
+
 }
 
 

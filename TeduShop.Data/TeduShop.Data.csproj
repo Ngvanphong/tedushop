@@ -84,6 +84,10 @@
     <Compile Include="Migrations\201805021549482_addsystemconfig.Designer.cs">
       <DependentUpon>201805021549482_addsystemconfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805031146292_changesys.cs" />
+    <Compile Include="Migrations\201805031146292_changesys.Designer.cs">
+      <DependentUpon>201805031146292_changesys.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reponsitories\ErrorRepository.cs" />
@@ -143,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805021549482_addsystemconfig.resx">
       <DependentUpon>201805021549482_addsystemconfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805031146292_changesys.resx">
+      <DependentUpon>201805031146292_changesys.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

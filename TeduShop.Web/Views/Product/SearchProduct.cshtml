@@ -1,9 +1,14 @@
 ﻿@model TeduShop.Web.Infrastructure.Core.PaginationClient<TeduShop.Web.Models.ProductViewModel>
 @{
-    ViewBag.Title = "Tìm kiếm";
-    Layout = "~/Views/Shared/Layouts.cshtml";
-    var sort = (string)ViewBag.Sort;
     var ProductName = (string)ViewBag.ProductName;
+    var sort = (string)ViewBag.Sort;
+    var pageIndex = Model.PageIndex;
+    ViewBag.Title = pageIndex == 1 ? ProductName:ProductName+"-trang="+pageIndex;
+    ViewBag.MetaKeyword = pageIndex == 1 ? ProductName:ProductName+"-trang="+pageIndex;
+    ViewBag.MetaDiscription = pageIndex == 1 ? ProductName+"-lọc theo="+sort:ProductName+"-lọc theo="+sort+"-trang="+pageIndex;
+    Layout = "~/Views/Shared/Layouts.cshtml";
+
+
     var urlSearch = "/search.html?productName=" + ProductName;
 }
 @section JavaScriptLayout {

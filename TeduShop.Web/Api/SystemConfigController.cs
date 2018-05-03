@@ -35,7 +35,7 @@ namespace TeduShop.Web.Api
              });
         }
 
-        [Route("detail")]
+        [Route("detail/{id:int}")]
         [HttpGet]
         public HttpResponseMessage Detail(HttpRequestMessage request,int id)
         {

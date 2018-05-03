@@ -1,7 +1,10 @@
 ﻿
 @model TeduShop.Web.Infrastructure.Core.PaginationClient<TeduShop.Web.Models.ProductViewModel>
 @{
-    ViewBag.Title = "Sản phẩm nổi bật";
+    var pageIndex = Model.PageIndex;
+    ViewBag.Title = pageIndex==1? "Sản phầm hot":"Sản phẩm hot-trang="+pageIndex;
+    ViewBag.MetaKeyword = pageIndex == 1 ? "Thời trang nữ nổi bật" : "Thời trang nữ nổi bật-trang=" + pageIndex;
+    ViewBag.MetaDiscription = pageIndex == 1 ? "Các sản phẩm thời trang nữ mới nhất" : "Các sản phẩm thời trang nữ mới nhất-trang=" + pageIndex;
     Layout = "~/Views/Shared/Layouts.cshtml";
 }
 

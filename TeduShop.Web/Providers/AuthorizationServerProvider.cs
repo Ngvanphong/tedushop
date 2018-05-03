@@ -43,6 +43,10 @@ namespace TeduShop.Web.Providers
                 context.Rejected();
                 return;
             }
+           
+
+
+
             if (user != null)
             {
                 var permissions = ServiceFactory.Get<IPermissionService>().GetByUserId(user.Id);

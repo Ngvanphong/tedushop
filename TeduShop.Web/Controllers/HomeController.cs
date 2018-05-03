@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TeduShop.Common;
 using TeduShop.Model.Models;
 using TeduShop.Service;
 using TeduShop.Web.Models;
@@ -24,9 +25,11 @@ namespace TeduShop.Web.Controllers
 
         private IFooterService _footerService;
 
+        private ISystemConfigService _systemConfigService;
+
         public HomeController(IProductCategoryService productCatgoryService, IPostCategoryService postCategoryService,
             IProductService productService, IPostService postService, ISlideService slideService, ITagService tagService, ISupportOnlineService supportOnline,
-            IFooterService footerService)
+            IFooterService footerService, ISystemConfigService systemConfigService)
         {
             this._productCategoryService = productCatgoryService;
             this._postCategoryService = postCategoryService;
@@ -36,6 +39,7 @@ namespace TeduShop.Web.Controllers
             this._tagService = tagService;
             this._supportOnline = supportOnline;
             this._footerService = footerService;
+            this._systemConfigService = systemConfigService;
         }
         public ActionResult Index()
         {
@@ -57,6 +61,17 @@ namespace TeduShop.Web.Controllers
 
             IEnumerable<Post> listPostDb = _postService.GetAll().Where(x => x.HomeFlag == true).OrderByDescending(x => x.UpdatedDate).Take(3);
             IEnumerable<PostViewModel> listPostVm = Mapper.Map<IEnumerable<PostViewModel>>(listPostDb);
+
+            try
+            {
+                indexVm.Title = _systemConfigService.GetByCode(CommonConstant.Title);
+                indexVm.MetaKeyword= _systemConfigService.GetByCode(CommonConstant.MetaKeyword);
+                indexVm.MetaDiscription = _systemConfigService.GetByCode(CommonConstant.MetaDiscription);
+            }
+            catch
+            {
+
+            }
             indexVm.postVm = listPostVm;
 
             return View(indexVm);

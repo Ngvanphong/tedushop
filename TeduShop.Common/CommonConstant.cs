@@ -10,5 +10,9 @@
         public const string SesstionOrder = "OrderSession";
         public const string CountShopping = "CountShopping";
 
+        public const string MetaKeyword = "MetaKeyword";
+        public const string Title = "Title";
+        public const string MetaDiscription = "MetaDiscription";
+
     }
 }

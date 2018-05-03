@@ -1,6 +1,8 @@
 ﻿@model TeduShop.Web.Models.IndexViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Model.Title;
+    ViewBag.MetaKeyword = Model.MetaKeyword;
+    ViewBag.MetaDiscription = Model.MetaDiscription;
     Layout = "~/Views/Shared/Layouts.cshtml";
 }
 

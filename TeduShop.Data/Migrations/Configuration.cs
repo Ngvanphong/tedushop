@@ -95,6 +95,7 @@
                     new Function() {ID = "CONTACT",Name = "Liên hệ",ParentId = "UTILITY",DisplayOrder = 2,Status = true,URL = "/main/contact/index",IconCss = "fa-clone"  },
                      new Function() {ID = "TAG",Name = "Tag",ParentId = "UTILITY",DisplayOrder = 3,Status = true,URL = "/main/tag/index",IconCss = "fa-clone"  },
                      new Function() {ID = "SIZE",Name = "Size",ParentId = "UTILITY",DisplayOrder = 4,Status = true,URL = "/main/size/index",IconCss = "fa-clone"  },
+                      new Function() {ID = "SYSTEMCONFIG",Name = "Systemconfig",ParentId = "UTILITY",DisplayOrder = 5,Status = true,URL = "/main/systemconfig/index",IconCss = "fa-clone"  },
                 });
                 context.SaveChanges();
             }

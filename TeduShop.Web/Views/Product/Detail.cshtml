@@ -1,6 +1,8 @@
 ﻿@model TeduShop.Web.Models.ProductDetailViewModel
 @{
-    ViewBag.Title = "Detail";
+    ViewBag.Title = Model.ProductVm.Name;
+    ViewBag.MetaKeyword =Model.ProductVm.MetaKeyword ;
+    ViewBag.MetaDiscription = Model.ProductVm.MetaDiscription;
     Layout = "~/Views/Shared/Layouts.cshtml";
     var productTags = (IEnumerable<TeduShop.Web.Models.TagViewModel>)ViewBag.TagProducts;
 }

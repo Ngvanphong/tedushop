@@ -31,6 +31,7 @@ namespace TeduShop.Data
         public DbSet<ProductImage> ProductImages { set; get; }
         public DbSet<ProductQuantity> ProductQuantities { set; get; }
 
+        public DbSet<SystemConfig> SystemConfigs { set; get; }
 
         public DbSet<Slide> Slides { get; set; }
         public DbSet<SupportOnline> SupportOnlines { get; set; }

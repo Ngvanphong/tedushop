@@ -13,7 +13,7 @@ namespace TeduShop.Service
     {
         IEnumerable<SystemConfig> GetAll();
         SystemConfig Detail(int id);
-        SystemConfig GetByCode(string code);
+        string GetByCode(string code);
         void Delete(int id);
         void Update(SystemConfig systemConfig);
         void Add(SystemConfig systemConfig);
@@ -48,9 +48,9 @@ namespace TeduShop.Service
             return _systemConfigRepository.GetAll();
         }
 
-        public SystemConfig GetByCode(string code)
+        public string GetByCode(string code)
         {
-            return _systemConfigRepository.GetSingleByCondition(x => x.Code == code);
+           return _systemConfigRepository.GetSingleByCondition(x => x.Code == code).ValueString;
         }
 
         public void SaveChange()

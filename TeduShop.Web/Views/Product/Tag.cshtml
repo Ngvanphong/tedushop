@@ -2,9 +2,13 @@
 @model TeduShop.Web.Infrastructure.Core.PaginationClient<TeduShop.Web.Models.ProductViewModel>
 
 @{
-    ViewBag.Title = "Tag";
-    Layout = "~/Views/Shared/Layouts.cshtml";
     var ProductTag = (TeduShop.Web.Models.TagViewModel)ViewBag.ProductTag;
+    var pageIndex = Model.PageIndex;
+    ViewBag.Title = pageIndex == 1 ? ProductTag.Name: ProductTag.Name + "-trang=" + pageIndex;
+    ViewBag.MetaKeyword = pageIndex == 1 ? ProductTag.Name : ProductTag.Name + "-trang=" + pageIndex;
+    ViewBag.MetaDiscription = pageIndex == 1 ? ProductTag.Name+"-thời trang nữ" : ProductTag.Name + "-thời trang nữ-trang=" + pageIndex;
+    Layout = "~/Views/Shared/Layouts.cshtml";
+
 }
 
 <div id="all">
