@@ -28,6 +28,7 @@ namespace TeduShop.Web.Controllers
             this._productQuantityService = productQuantityService;
         }
         // GET: ProductCategory
+      
         public ActionResult Index(int id, int page = 1, string sort = "")
         {
             ProductCategory category = _productCategoryService.GetById(id);
@@ -98,6 +99,8 @@ namespace TeduShop.Web.Controllers
             IEnumerable<Tag> listTagDb = _tagService.GetTagByProductId(id);
             IEnumerable<TagViewModel> listTagVm = Mapper.Map<IEnumerable<TagViewModel>>(listTagDb);
             ViewBag.TagProducts = listTagVm;
+            ViewBag.ProductCategory = productDb.ProductCategory;
+
             ProductDetailViewModel ProductDetail = new ProductDetailViewModel()
             {
                 ListProductImageVm = listProductImageVm,

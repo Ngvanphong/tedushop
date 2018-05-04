@@ -200,7 +200,7 @@ namespace TeduShop.Service
 
         public Product GetById(int id)
         {
-            return _productRepository.GetSingleById(id);
+            return _productRepository.GetSingleByCondition(x=>x.ID==id, new string[] { "ProductCategory" });
         }
 
         public IEnumerable<Product> GetHotProduct()

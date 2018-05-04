@@ -7,9 +7,7 @@ namespace TeduShop.Web.Models
 {
     public class HeaderViewModel
     {
-        public IEnumerable<ProductCategoryViewModel> productCategoryVm;
-
-        public IEnumerable<PostCategoryViewModel> postCategoryVm;
+    
         public LoginViewModel LoginModel;
 
         public int CountShopping;

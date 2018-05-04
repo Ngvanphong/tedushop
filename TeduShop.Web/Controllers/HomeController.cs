@@ -41,6 +41,8 @@ namespace TeduShop.Web.Controllers
             this._footerService = footerService;
             this._systemConfigService = systemConfigService;
         }
+
+  
         public ActionResult Index()
         {
                      
@@ -78,6 +80,7 @@ namespace TeduShop.Web.Controllers
         }
         
         [ChildActionOnly]
+        [OutputCache(Duration = 3600)]
         public ActionResult Footer()
         {
             FooterCommon footVm = new FooterCommon();
@@ -117,7 +120,7 @@ namespace TeduShop.Web.Controllers
             return PartialView(footVm);
         }
 
-        [ChildActionOnly]
+        [ChildActionOnly]      
         public ActionResult Header()
         {
             int countShopping = 0;
@@ -135,15 +138,25 @@ namespace TeduShop.Web.Controllers
 
             };
             headerVm.CountShopping = countShopping;
+            
+
+            return PartialView(headerVm);
+        }
+
+        [ChildActionOnly]
+        [OutputCache(Duration = 3600)]
+        public ActionResult CategoryHeader()
+        {
+            CategoryHeaderViewModel categogyHeaderVm = new CategoryHeaderViewModel();
             IEnumerable<ProductCategory> productCategoryDb = _productCategoryService.GetAll();
             IEnumerable<ProductCategoryViewModel> productCategoryVm = Mapper.Map<IEnumerable<ProductCategoryViewModel>>(productCategoryDb);
             IEnumerable<PostCategory> postCategoryDb = _postCategoryService.GetAll();
-            IEnumerable<PostCategoryViewModel> postCategoryVm = Mapper.Map < IEnumerable<PostCategoryViewModel>>(postCategoryDb);
-                      
-            headerVm.productCategoryVm = productCategoryVm;
-            headerVm.postCategoryVm = postCategoryVm;
+            IEnumerable<PostCategoryViewModel> postCategoryVm = Mapper.Map<IEnumerable<PostCategoryViewModel>>(postCategoryDb);
 
-            return PartialView(headerVm);
+            categogyHeaderVm.productCategoryVm = productCategoryVm;
+            categogyHeaderVm.postCategoryVm = postCategoryVm;
+
+            return PartialView(categogyHeaderVm);
         }
 
     }

@@ -1,22 +1,36 @@
 ﻿@model TeduShop.Web.Models.ProductDetailViewModel
 @{
     ViewBag.Title = Model.ProductVm.Name;
-    ViewBag.MetaKeyword =Model.ProductVm.MetaKeyword ;
+    ViewBag.MetaKeyword = Model.ProductVm.MetaKeyword;
     ViewBag.MetaDiscription = Model.ProductVm.MetaDiscription;
+
     Layout = "~/Views/Shared/Layouts.cshtml";
     var productTags = (IEnumerable<TeduShop.Web.Models.TagViewModel>)ViewBag.TagProducts;
+    var domainurl = "http://localhost:58745";
+    var productCategory = (TeduShop.Model.Models.ProductCategory)ViewBag.ProductCategory;
+    var categoryUrl = "/" + productCategory.Alias + ".pc-" + productCategory.ID + ".html";
 }
 @section JavaScriptLayout {
 
     @Scripts.Render("~/js/shoppingcart");
 }
+
+
 <div id="all">
     <div id="content">
         <div class="container">
 
 
             <div class="col-md-12">
-
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="/index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="@categoryUrl">@productCategory.Name</a>
+                    </li>
+                    <li>@Model.ProductVm.Name</li>
+                </ul>
                 <div class="row" id="productMain">
                     <div class="col-sm-6 col-md-6 col-xs12">
                         <div id="mainImage">
@@ -85,6 +99,25 @@
                     <p>@Html.Raw(Model.ProductVm.Content)</p>
 
                     <hr>
+                    <div class="social">
+                        <h4>Chia sẻ với bạn bè</h4>
+                        @{var urldetail = "/" + Model.ProductVm.Alias + ".p-" + Model.ProductVm.ID + ".html";
+                            var absoluteurl = domainurl + urldetail;
+                            var imageabsolute = domainurl + Model.ProductVm.ThumbnailImage;
+                        }
+
+                        <p>
+                            @*<div id="fb-root"></div>*@
+
+                            <a href="@absoluteurl" class="external facebook fb_share" data-image="@imageabsolute" data-title="@Model.ProductVm.Name"
+                               data-desc="@Model.ProductVm.Description" data-animate-hover="pulse"><i class="fa fa-facebook"></i></a>
+                            <a target="_blank" class="external gplus" data-animate-hover="pulse" href="https://plus.google.com/share?url=<? echo urlencode('@absoluteurl'); ?>"><i class="fa fa-google-plus"></i></a>
+                            <a href="http://www.twitter.com/share?url=<? echo urlencode('@absoluteurl'); ?>" class="external twitter" data-animate-hover="pulse"><i class="fa fa-twitter"></i></a>
+                        </p>
+                    </div>
+
+
+
                 </div>
                 @if (Model.ListProductVm.Count() > 1)
                 {
@@ -137,4 +170,38 @@
         <!-- /.container -->
     </div>
 </div>
+
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: 2145040729051258,
+            status: true,
+            cookie: true,
+            xfbml: true
+        });
+    };
+
+    (function (d, debug) { var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0]; if (d.getElementById(id)) { return; } js = d.createElement('script'); js.id = id; js.async = true; js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js"; ref.parentNode.insertBefore(js, ref); }(document, /*debug*/ false));
+
+    function postToFeed(title, desc, url, image) {
+        var obj = { method: 'feed', link: url, picture: image, name: title, description: desc };
+        function callback(response) { }
+        FB.ui(obj, callback);
+    }
+
+    var fbShareBtn = document.querySelector('.fb_share');
+    fbShareBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        var title = fbShareBtn.getAttribute('data-title'),
+            desc = fbShareBtn.getAttribute('data-desc'),
+            url = fbShareBtn.getAttribute('href'),
+            image = fbShareBtn.getAttribute('data-image');
+        postToFeed(title, desc, url, image);
+
+        return false;
+    });
+</script>
+
+
+
 
