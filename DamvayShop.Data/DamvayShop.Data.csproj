@@ -68,6 +68,10 @@
     <Compile Include="Migrations\201805051445488_changedatadv.Designer.cs">
       <DependentUpon>201805051445488_changedatadv.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805051513482_changemaxlenght.cs" />
+    <Compile Include="Migrations\201805051513482_changemaxlenght.Designer.cs">
+      <DependentUpon>201805051513482_changemaxlenght.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reponsitories\ErrorRepository.cs" />
@@ -115,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805051445488_changedatadv.resx">
       <DependentUpon>201805051445488_changedatadv.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805051513482_changemaxlenght.resx">
+      <DependentUpon>201805051513482_changemaxlenght.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
