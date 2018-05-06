@@ -58,7 +58,7 @@ namespace DamvayShop.Web.Api
         }
 
         [Route("detail/{id}")]
-        [HttpDelete]
+        [HttpGet]
         [Permission(Action = "Read", Function = "USER")]
         //[Authorize(Roles = "ViewUser")]
         public async Task<HttpResponseMessage> Details(HttpRequestMessage request, string id)
@@ -164,7 +164,6 @@ namespace DamvayShop.Web.Api
         [HttpDelete]
         [Route("delete")]
         [Permission(Action = "Delete", Function = "USER")]
-        //[Authorize(Roles ="DeleteUser")]
         public async Task<HttpResponseMessage> Delete(HttpRequestMessage request, string id)
         {
             _userRoleService.DeleteByUserId(id);
