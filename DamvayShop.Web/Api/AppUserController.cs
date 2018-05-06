@@ -58,7 +58,7 @@ namespace DamvayShop.Web.Api
         }
 
         [Route("detail/{id}")]
-        [HttpGet]
+        [HttpDelete]
         [Permission(Action = "Read", Function = "USER")]
         //[Authorize(Roles = "ViewUser")]
         public async Task<HttpResponseMessage> Details(HttpRequestMessage request, string id)

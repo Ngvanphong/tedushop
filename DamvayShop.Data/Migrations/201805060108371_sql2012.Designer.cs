@@ -7,13 +7,13 @@ namespace DamvayShop.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class damvayshop : IMigrationMetadata
+    public sealed partial class sql2012 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(damvayshop));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(sql2012));
         
         string IMigrationMetadata.Id
         {
-            get { return "201805051032467_damvayshop"; }
+            get { return "201805060108371_sql2012"; }
         }
         
         string IMigrationMetadata.Source

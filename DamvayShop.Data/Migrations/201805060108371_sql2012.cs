@@ -3,7 +3,7 @@ namespace DamvayShop.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class damvayshop : DbMigration
+    public partial class sql2012 : DbMigration
     {
         public override void Up()
         {
@@ -427,7 +427,7 @@ namespace DamvayShop.Data.Migrations
                     {
                         ID = c.Int(nullable: false, identity: true),
                         Code = c.String(nullable: false, maxLength: 50, unicode: false),
-                        ValueString = c.String(maxLength: 50),
+                        ValueString = c.String(maxLength: 250),
                         ValueInt = c.Int(),
                     })
                 .PrimaryKey(t => t.ID);

@@ -60,17 +60,9 @@
     <Compile Include="Infrastructure\IUnitOfWork.cs" />
     <Compile Include="Infrastructure\RepositotyBase.cs" />
     <Compile Include="Infrastructure\UnitOfWork.cs" />
-    <Compile Include="Migrations\201805051032467_damvayshop.cs" />
-    <Compile Include="Migrations\201805051032467_damvayshop.Designer.cs">
-      <DependentUpon>201805051032467_damvayshop.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805051445488_changedatadv.cs" />
-    <Compile Include="Migrations\201805051445488_changedatadv.Designer.cs">
-      <DependentUpon>201805051445488_changedatadv.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805051513482_changemaxlenght.cs" />
-    <Compile Include="Migrations\201805051513482_changemaxlenght.Designer.cs">
-      <DependentUpon>201805051513482_changemaxlenght.cs</DependentUpon>
+    <Compile Include="Migrations\201805060108371_sql2012.cs" />
+    <Compile Include="Migrations\201805060108371_sql2012.Designer.cs">
+      <DependentUpon>201805060108371_sql2012.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,7 +92,9 @@
     <Compile Include="DamvayShopDbContext.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -114,14 +108,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805051032467_damvayshop.resx">
-      <DependentUpon>201805051032467_damvayshop.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805051445488_changedatadv.resx">
-      <DependentUpon>201805051445488_changedatadv.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805051513482_changemaxlenght.resx">
-      <DependentUpon>201805051513482_changemaxlenght.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201805060108371_sql2012.resx">
+      <DependentUpon>201805060108371_sql2012.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

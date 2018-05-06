@@ -6,7 +6,7 @@
 
     Layout = "~/Views/Shared/Layouts.cshtml";
     var productTags = (IEnumerable<DamvayShop.Web.Models.TagViewModel>)ViewBag.TagProducts;
-    var domainurl = "http://localhost:58745";
+    var domainurl = "http://damvay.vn";
     var productCategory = (DamvayShop.Model.Models.ProductCategory)ViewBag.ProductCategory;
     var categoryUrl = "/" + productCategory.Alias + ".pc-" + productCategory.ID + ".html";
 }

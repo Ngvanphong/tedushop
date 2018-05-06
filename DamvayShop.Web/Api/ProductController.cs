@@ -198,7 +198,6 @@ namespace DamvayShop.Web.Api
         }
 
         [Route("thumnailImage")]
-        [HttpPut]
         [Permission(Action = "Update", Function = "PRODUCT")]
         public HttpResponseMessage UpdateThumbnail(HttpRequestMessage request, int productId)
         {

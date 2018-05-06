@@ -48,7 +48,6 @@ namespace DamvayShop.Web.Api
         }
 
         [Route("markAsRead")]
-        [HttpGet]
         public HttpResponseMessage MarkAsRead(HttpRequestMessage request, int orderId)
         {
 
