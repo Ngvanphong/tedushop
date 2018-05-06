@@ -172,9 +172,12 @@ namespace DamvayShop.Web.Api
             var result = await AppUserManager.DeleteAsync(user);
             if (result.Succeeded)
             {
-                DeleteElementImage(user.Avatar);
+                if (user.Avatar != null)
+                {
+                    DeleteElementImage(user.Avatar);
+                }              
                 return request.CreateResponse(HttpStatusCode.OK, id);
-            }
+            }        
             else
                 return request.CreateErrorResponse(HttpStatusCode.BadRequest, string.Join(",", result.Errors));
         }
