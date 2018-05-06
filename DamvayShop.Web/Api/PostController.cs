@@ -116,7 +116,7 @@ namespace DamvayShop.Web.Api
         }
 
         [Route("delete")]
-        [HttpDelete]
+         [HttpDelete]
         public HttpResponseMessage Delete(HttpRequestMessage request, string id)
         {
             HttpResponseMessage response = null;

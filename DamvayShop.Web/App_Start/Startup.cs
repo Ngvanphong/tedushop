@@ -26,6 +26,8 @@ namespace DamvayShop.Web.App_Start
             // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=316888
             ConfigAutofac(app);
             ConfigureAuth(app);
+            
+          
         }
 
         private void ConfigAutofac(IAppBuilder app)
