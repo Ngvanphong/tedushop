@@ -57,7 +57,7 @@ namespace DamvayShop.Web.Controllers
             IEnumerable<ProductViewModel> listPromotionVm = Mapper.Map<IEnumerable<ProductViewModel>>(listPromotionProductDb);
             indexVm.productPromotionVm = listPromotionVm;
 
-            IEnumerable<Slide> listSlideDb = _slideService.GetAll();
+            IEnumerable<Slide> listSlideDb = _slideService.GetAll().Where(x=>x.Status==true);
             IEnumerable<SlideViewModel> listSlideVm = Mapper.Map<IEnumerable<SlideViewModel>>(listSlideDb);
             indexVm.slideVm = listSlideVm;
 
@@ -148,7 +148,7 @@ namespace DamvayShop.Web.Controllers
         public ActionResult CategoryHeader()
         {
             CategoryHeaderViewModel categogyHeaderVm = new CategoryHeaderViewModel();
-            IEnumerable<ProductCategory> productCategoryDb = _productCategoryService.GetAll();
+            IEnumerable<ProductCategory> productCategoryDb = _productCategoryService.GetAll().OrderBy(x=>x.HomeOrder);
             IEnumerable<ProductCategoryViewModel> productCategoryVm = Mapper.Map<IEnumerable<ProductCategoryViewModel>>(productCategoryDb);
             IEnumerable<PostCategory> postCategoryDb = _postCategoryService.GetAll();
             IEnumerable<PostCategoryViewModel> postCategoryVm = Mapper.Map<IEnumerable<PostCategoryViewModel>>(postCategoryDb);
