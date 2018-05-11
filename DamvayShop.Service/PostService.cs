@@ -16,7 +16,7 @@ namespace DamvayShop.Service
         void Delete(string id);
 
         IEnumerable<Post> GetAll();
-
+  
         IEnumerable<Post> GetAllPaging(int page, int pageSize, out int totalRow);
 
         IEnumerable<Post> GetByCategoryPaging(int id,int page, int pageSize, out int totalRow);
@@ -101,6 +101,7 @@ namespace DamvayShop.Service
             query = query.Skip((page - 1) * pageSize).Take(pageSize);
             return query;
         }
+
 
         public Post GetById(string id)
         {

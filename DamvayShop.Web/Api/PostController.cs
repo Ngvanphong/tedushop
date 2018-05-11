@@ -31,13 +31,19 @@ namespace DamvayShop.Web.Api
 
         [Route("getall")]
         [HttpGet]
-        public HttpResponseMessage get(HttpRequestMessage request, int page, int pageSize=10)
+        public HttpResponseMessage get(HttpRequestMessage request, int page, int pageSize=10, string keyword="")
         {
             return CreateHttpResponse(request, () =>
             {
+
                 int totalRows = 0;
                 IEnumerable<Post> listPostDb = _postService.GetAll();
+                if (!string.IsNullOrEmpty(keyword))
+                {
+                    listPostDb = listPostDb.Where(x => x.Name.Contains(keyword));
+                }
                 totalRows = listPostDb.Count();
+                
                 listPostDb = listPostDb.OrderByDescending(x => x.UpdatedDate).Skip((page - 1) * pageSize).Take(pageSize);
                 IEnumerable<PostViewModel> listPostVm = Mapper.Map<List<PostViewModel>>(listPostDb);
                 PaginationSet<PostViewModel> pagination = new PaginationSet<PostViewModel>()
@@ -51,6 +57,7 @@ namespace DamvayShop.Web.Api
                 return response;
             });
         }
+
 
         [Route("detail")]
         [HttpGet]
