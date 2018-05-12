@@ -74,7 +74,6 @@ namespace DamvayShop.Web.Api
                 Slide slideDb = _slideService.GetById(slideVm.ID);
                 if (slideDb.Image != slideVm.Image&&slideDb.Image!=null)
                  DeleteElementImage(slideDb.Image);
-
                 slideDb.UpdateSlide(slideVm);
                 _slideService.Update(slideDb);
                 _slideService.SaveChange();
