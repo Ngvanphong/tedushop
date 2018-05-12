@@ -72,7 +72,7 @@ namespace DamvayShop.Web.Api
             if (ModelState.IsValid)
             {
                 Slide slideDb = _slideService.GetById(slideVm.ID);
-                if (slideDb.Image != slideVm.Image)
+                if (slideDb.Image != slideVm.Image&&slideDb.Image!=null)
                  DeleteElementImage(slideDb.Image);
 
                 slideDb.UpdateSlide(slideVm);
@@ -93,7 +93,10 @@ namespace DamvayShop.Web.Api
                Slide slideDb = _slideService.GetById(id);               
                 _slideService.Delete(id);             
                 _slideService.SaveChange();
-                DeleteElementImage(slideDb.Image);
+                if (slideDb.Image != null)
+                {
+                    DeleteElementImage(slideDb.Image);
+                }              
                 return request.CreateResponse(HttpStatusCode.OK, id);
             }
             else

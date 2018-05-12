@@ -130,7 +130,7 @@ namespace DamvayShop.Web.Api
                 AppUser userDb = await AppUserManager.FindByIdAsync(applicationUserViewModel.Id);
                 try
                 {
-                    if(userDb.Avatar!=applicationUserViewModel.Avatar)
+                    if(userDb.Avatar!=applicationUserViewModel.Avatar&&userDb.Avatar!=null)
                     DeleteElementImage(userDb.Avatar);
                     userDb.UpdateUser(applicationUserViewModel);                 
                     var result = await AppUserManager.UpdateAsync(userDb);
