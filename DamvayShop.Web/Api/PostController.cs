@@ -106,7 +106,7 @@ namespace DamvayShop.Web.Api
                 if (ModelState.IsValid)
                 {
                     Post postDb = _postService.GetById(postVm.ID);
-                    if (postDb.Image!=postVm.Image)
+                    if (postDb.Image!=postVm.Image&&postDb.Image!=null)
                     {
                         DeleteElementImage(postDb.Image.ToString());
                     }
@@ -138,7 +138,11 @@ namespace DamvayShop.Web.Api
                         DeleteElementImage(item.Path);
                     }
                     //delete ThubnailImage
-                    DeleteElementImage(_postService.GetById(id).Image.ToString());                   
+                    if (_postService.GetById(id).Image!= null)
+                    {
+                        DeleteElementImage(_postService.GetById(id).Image.ToString());
+                    }
+                                   
                     //deletePostImage
                     _postImageService.DeleteMultiByPostId(id);
                     _postImageService.SaveChange();
