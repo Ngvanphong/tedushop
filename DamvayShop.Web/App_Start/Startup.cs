@@ -14,6 +14,7 @@ using DamvayShop.Data.Inframestructure;
 using DamvayShop.Data.Reponsitories;
 using DamvayShop.Model.Models;
 using DamvayShop.Service;
+using Microsoft.ApplicationInsights.Extensibility.Implementation;
 
 [assembly: OwinStartup(typeof(DamvayShop.Web.App_Start.Startup))]
 
@@ -26,8 +27,9 @@ namespace DamvayShop.Web.App_Start
             // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=316888
             ConfigAutofac(app);
             ConfigureAuth(app);
-            
-          
+            //TelemetryDebugWriter.IsTracingDisabled = true;
+
+
         }
 
         private void ConfigAutofac(IAppBuilder app)

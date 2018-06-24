@@ -45,11 +45,8 @@ namespace DamvayShop.Web.Controllers
   
         public ActionResult Index()
         {
-                     
-            IndexViewModel indexVm = new IndexViewModel()
-            {
 
-            };
+            IndexViewModel indexVm = new IndexViewModel();         
             IEnumerable<Product> listHotProductDb = _productService.GetHotProduct();
             IEnumerable<ProductViewModel> listHotProductVm = Mapper.Map<IEnumerable<ProductViewModel>>(listHotProductDb);
             indexVm.productHotVm = listHotProductVm;
@@ -80,7 +77,7 @@ namespace DamvayShop.Web.Controllers
         }
         
         [ChildActionOnly]
-        [OutputCache(Duration = 3600)]
+        //[OutputCache(Duration = 3600)]
         public ActionResult Footer()
         {
             FooterCommon footVm = new FooterCommon();
@@ -144,7 +141,7 @@ namespace DamvayShop.Web.Controllers
         }
 
         [ChildActionOnly]
-        [OutputCache(Duration = 3600)]
+        //[OutputCache(Duration = 3600)]
         public ActionResult CategoryHeader()
         {
             CategoryHeaderViewModel categogyHeaderVm = new CategoryHeaderViewModel();
