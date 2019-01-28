@@ -430,7 +430,9 @@
     <None Include="Properties\PublishProfiles\CustomProfile16.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile17.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile18.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile19.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile2.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile20.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile3.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile4.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile5.pubxml" />

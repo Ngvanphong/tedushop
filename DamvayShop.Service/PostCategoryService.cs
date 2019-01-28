@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using DamvayShop.Data.Inframestructure;
 using DamvayShop.Data.Reponsitories;
 using DamvayShop.Model.Models;
@@ -48,7 +49,7 @@ namespace DamvayShop.Service
 
         public IEnumerable<PostCategory> GetAll()
         {
-            return this._postCategoryRepository.GetAll();
+            return this._postCategoryRepository.GetAll().OrderBy(x=>x.ParentID);
         }
 
         public IEnumerable<PostCategory> GetAllByParentID(int parentID)
