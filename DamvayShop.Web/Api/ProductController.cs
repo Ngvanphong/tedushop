@@ -56,7 +56,7 @@ namespace DamvayShop.Web.Api
                 int totalRow = 0;
                 IEnumerable<Product> listProductDb = _productService.GetAll(categoryId, filterHotPromotion, keyword);
                 totalRow = listProductDb.Count();
-                IEnumerable<Product> query = listProductDb.OrderByDescending(x => x.UpdatedDate).Skip(pageSize * (page - 1)).Take(pageSize);
+                IEnumerable<Product> query = listProductDb.OrderByDescending(x => x.CreateDate).Skip(pageSize * (page - 1)).Take(pageSize);
                 IEnumerable<ProductViewModel> listProduct = Mapper.Map<IEnumerable<ProductViewModel>>(query);
                 PaginationSet<ProductViewModel> pagination = new PaginationSet<ProductViewModel>()
                 {

@@ -44,7 +44,7 @@ namespace DamvayShop.Web.Api
                 }
                 totalRows = listPostDb.Count();
                 
-                listPostDb = listPostDb.OrderByDescending(x => x.UpdatedDate).Skip((page - 1) * pageSize).Take(pageSize);
+                listPostDb = listPostDb.OrderByDescending(x => x.CreateDate).Skip((page - 1) * pageSize).Take(pageSize);
                 IEnumerable<PostViewModel> listPostVm = Mapper.Map<List<PostViewModel>>(listPostDb);
                 PaginationSet<PostViewModel> pagination = new PaginationSet<PostViewModel>()
                 {

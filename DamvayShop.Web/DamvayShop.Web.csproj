@@ -440,6 +440,7 @@
     <None Include="Properties\PublishProfiles\CustomProfile7.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile8.pubxml" />
     <None Include="Properties\PublishProfiles\CustomProfile9.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />

@@ -240,7 +240,7 @@ namespace DamvayShop.Service
 
         public IEnumerable<Product> GetPromotionProduct()
         {
-            IEnumerable<Product> listProduct = _productRepository.GetMulti(x => x.Status == true && x.PromotionPrice.HasValue).OrderByDescending(x => x.UpdatedDate).Take(7);
+            IEnumerable<Product> listProduct = _productRepository.GetMulti(x => x.Status == true && x.PromotionPrice.HasValue).OrderByDescending(x => x.CreateDate).Take(7);
             return listProduct;
         }
 

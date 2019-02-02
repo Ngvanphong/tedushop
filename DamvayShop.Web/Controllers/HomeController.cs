@@ -58,7 +58,7 @@ namespace DamvayShop.Web.Controllers
             IEnumerable<SlideViewModel> listSlideVm = Mapper.Map<IEnumerable<SlideViewModel>>(listSlideDb);
             indexVm.slideVm = listSlideVm;
 
-            IEnumerable<Post> listPostDb = _postService.GetAll().Where(x => x.HomeFlag == true).OrderByDescending(x => x.UpdatedDate).Take(3);
+            IEnumerable<Post> listPostDb = _postService.GetAll().Where(x => x.HomeFlag == true).OrderByDescending(x => x.CreateDate).Take(3);
             IEnumerable<PostViewModel> listPostVm = Mapper.Map<IEnumerable<PostViewModel>>(listPostDb);
 
             try
